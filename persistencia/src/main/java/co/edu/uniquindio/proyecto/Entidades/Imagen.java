@@ -1,14 +1,15 @@
 package co.edu.uniquindio.proyecto.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Imagen implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "url", nullable =false)
     private String url;
 
     @ManyToOne

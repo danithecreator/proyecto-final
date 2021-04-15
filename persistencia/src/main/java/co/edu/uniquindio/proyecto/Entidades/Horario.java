@@ -1,18 +1,23 @@
 package co.edu.uniquindio.proyecto.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Horario implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private LocalTime horaApertura;
-    private LocalTime horaCierre;
+    @Temporal(TemporalType.TIME)
+    @Column(name="hora_apertura", nullable = false)
+    private Date horaApertura;
+    @Temporal(TemporalType.TIME)
+    @Column(name="hora_cierre", nullable = false)
+    private Date horaCierre;
 
     @ManyToMany
     private List<Lugar> horarioLugares;
@@ -29,19 +34,19 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
-    public LocalTime getHoraApertura() {
+    public Date getHoraApertura() {
         return horaApertura;
     }
 
-    public void setHoraApertura(LocalTime horaApertura) {
+    public void setHoraApertura(Date horaApertura) {
         this.horaApertura = horaApertura;
     }
 
-    public LocalTime getHoraCierre() {
+    public Date getHoraCierre() {
         return horaCierre;
     }
 
-    public void setHoraCierre(LocalTime horaCierre) {
+    public void setHoraCierre(Date horaCierre) {
         this.horaCierre = horaCierre;
     }
 

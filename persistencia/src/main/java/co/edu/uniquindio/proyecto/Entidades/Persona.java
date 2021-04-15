@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.Entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -8,9 +9,15 @@ import java.io.Serializable;
 public class Persona implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Email
+    @Column(name = "email", nullable =false)
     private String email;
+    @Column(name = "password", nullable =false)
     private String password;
+    @Column(name = "nombre", nullable =false)
     private String nombre;
 
     public Persona(){

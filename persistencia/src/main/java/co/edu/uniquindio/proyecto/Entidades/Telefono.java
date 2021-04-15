@@ -1,15 +1,16 @@
 package co.edu.uniquindio.proyecto.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 public class Telefono implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "numero_telefono", nullable =false)
     private String numeroTelefono;
     //constructor getter y setter y hashcode y equals
     @ManyToOne

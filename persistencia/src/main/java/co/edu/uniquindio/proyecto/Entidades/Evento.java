@@ -1,17 +1,22 @@
 package co.edu.uniquindio.proyecto.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 public class Evento implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private int codigo;
+    @Column(name = "nombre", length = 200, nullable =false)
     private String nombre;
+    @Column(name = "descripcion", length = 1000, nullable =false)
     private String descripcion;
+    @Temporal(TemporalType.DATE)
+    @Column(name="fecha", nullable = false)
     private Date fecha;
 
     @ManyToOne

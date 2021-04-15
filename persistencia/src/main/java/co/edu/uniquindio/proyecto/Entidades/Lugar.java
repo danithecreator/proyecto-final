@@ -9,9 +9,12 @@ import java.util.List;
 public class Lugar implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private int codigo;
+    @Column(name = "descripcion", length = 1000, nullable =false)
     private String descripcion;
-
+    @Column(name = "nombre", length = 200, nullable =false)
     private String nombre;
 
 

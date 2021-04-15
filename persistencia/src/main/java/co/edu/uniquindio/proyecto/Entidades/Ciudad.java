@@ -1,15 +1,16 @@
 package co.edu.uniquindio.proyecto.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 public class Ciudad implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private int codigo;
+    @Column(name = "nombre", length = 200, nullable =false)
     private String nombre;
 
     @OneToMany(mappedBy = "ciudadUsuario")
