@@ -2,7 +2,9 @@ package co.edu.uniquindio.proyecto.Entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Telefono implements Serializable {
@@ -10,6 +12,8 @@ public class Telefono implements Serializable {
     private int id;
     private String numeroTelefono;
     //constructor getter y setter y hashcode y equals
+    @ManyToOne
+    private Lugar telefonoLugar;
 
     public Telefono(){
         super();
