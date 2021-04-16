@@ -62,5 +62,20 @@ public class Usuario extends Persona implements Serializable {
         this.ciudadUsuario = ciudadUsuario;
     }
 
+    public List<Favorito> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(List<Favorito> favoritos) {
+        this.favoritos = favoritos;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
     //constructor getter y setter y hashcode y equals
 }

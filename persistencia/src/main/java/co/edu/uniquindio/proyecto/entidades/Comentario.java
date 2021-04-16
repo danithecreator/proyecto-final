@@ -12,7 +12,7 @@ public class Comentario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "comentario", length = 1000, nullable =true)
+    @Column(name = "comentario", length = 1000, nullable =false)
     private String comentario;
     @Positive
     @Column(name = "calificacion",nullable =true)
@@ -21,7 +21,7 @@ public class Comentario implements Serializable {
     @Column(name = "respuesta", length = 1000, nullable =true)
     private String respuesta;
     @Temporal(TemporalType.DATE)
-    @Column(name="fecha", nullable = true)
+    @Column(name="fecha", nullable = false)
     private Date fecha;
 
     @ManyToOne
@@ -72,6 +72,22 @@ public class Comentario implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Usuario getUsuarioComentario() {
+        return usuarioComentario;
+    }
+
+    public void setUsuarioComentario(Usuario usuarioComentario) {
+        this.usuarioComentario = usuarioComentario;
+    }
+
+    public Lugar getLugarComentario() {
+        return lugarComentario;
+    }
+
+    public void setLugarComentario(Lugar lugarComentario) {
+        this.lugarComentario = lugarComentario;
     }
     //constructor getter y setter y hashcode y equals
 }

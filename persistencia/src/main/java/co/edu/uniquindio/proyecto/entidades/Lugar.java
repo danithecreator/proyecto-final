@@ -45,6 +45,8 @@ public class Lugar implements Serializable {
     @OneToMany(mappedBy = "lugarComentario")
     private List<Comentario> comentarios;
 
+
+
     public Lugar(){
         super();
     }
