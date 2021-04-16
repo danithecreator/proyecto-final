@@ -11,6 +11,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class HorarioTest {
@@ -32,7 +38,35 @@ public class HorarioTest {
         Horario buscado=horarioRepo.findById(2).orElse(null);
         Assertions.assertNull(buscado);
     }
-    
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:horario.sql"})
+    public void actualizarHorarioTest(){
+        Horario registrado=horarioRepo.getOne(2);
+
+        String horaNueva = "19:00:00";
+
+
+        try {
+            Date hora= new SimpleDateFormat("HH:mm:ss").parse(horaNueva);
+            registrado.setHoraCierre(hora);
+            horarioRepo.save(registrado);
+
+            Horario buscado=horarioRepo.findById(2).orElse(null);
+            Assertions.assertEquals(hora,buscado.getHoraCierre());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:horario.sql"})
+    public void listaHorariosTest(){
+        List<Horario> lista = horarioRepo.findAll();
+        System.out.println("Listado de Horarios"+"\n"+lista);
+    }
+
 
 
 
