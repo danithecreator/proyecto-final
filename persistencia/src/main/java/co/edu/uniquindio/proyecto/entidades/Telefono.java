@@ -1,8 +1,7 @@
-package co.edu.uniquindio.proyecto.Entidades;
+package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Telefono implements Serializable {

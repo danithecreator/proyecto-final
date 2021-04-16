@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.Entidades;
+package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -23,6 +23,12 @@ public class Comentario implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha", nullable = true)
     private Date fecha;
+
+    @ManyToOne
+    private Usuario usuarioComentario;
+
+    @ManyToOne
+    private Lugar lugarComentario;
 
     public Comentario(){
         super();

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.Entidades;
+package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +23,12 @@ public class Usuario extends Persona implements Serializable {
 
     @ManyToOne
     private Ciudad ciudadUsuario;
+
+    @OneToMany(mappedBy = "usuarioFavorito")
+    private List<Favorito> favoritos;
+
+    @OneToMany(mappedBy = "usuarioComentario")
+    private List<Comentario> comentarios;
 
     public float getLatitud() {
         return latitud;
