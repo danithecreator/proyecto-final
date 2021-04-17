@@ -12,12 +12,20 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad comentario
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ComentarioTest {
     @Autowired
     private ComentarioRepo comentarioRepo;
 
+    /**
+     * metodo para verificar si se ha agregado una comentario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void agregarComentarioTest(){
@@ -26,6 +34,10 @@ public class ComentarioTest {
         Assertions.assertNotNull(comentarioGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un comentario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public  void eliminarComentarioTest(){
@@ -34,6 +46,10 @@ public class ComentarioTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un comentario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void actualizarComentarioTest(){
@@ -45,6 +61,10 @@ public class ComentarioTest {
         Assertions.assertEquals("Gracias por comentar",buscado.getRespuesta());
     }
 
+    /**
+     * metodo para listar los comentarios
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void listarComentarioTest(){

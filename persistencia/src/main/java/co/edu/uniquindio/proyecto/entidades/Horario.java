@@ -5,8 +5,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Esta clase define la entidad Horario de la base de datos
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Horario implements Serializable {
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,10 +26,16 @@ public class Horario implements Serializable {
     @ManyToMany
     private List<Lugar> horarioLugares;
 
+    /**
+     * constructor
+     */
     public Horario(){
         super();
     }
 
+    /**
+     *getters y setters
+     */
     public int getId() {
         return id;
     }
@@ -55,5 +66,23 @@ public class Horario implements Serializable {
 
     public void setHorarioLugares(List<Lugar> horarioLugares) {
         this.horarioLugares = horarioLugares;
+    }
+
+    /**
+     * Hascode and equals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Horario horario = (Horario) o;
+
+        return id == horario.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }

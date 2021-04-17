@@ -13,12 +13,20 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad telefono
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase
 public class TelefonoTest {
     @Autowired
     private TelefonoRepo telefonoRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un telefono correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:telefono.sql"})
     public void agregarTelefonoTest(){
@@ -27,6 +35,10 @@ public class TelefonoTest {
         Assertions.assertNotNull(telefonoGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un telefono correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:telefono.sql"})
     public void eliminarTelefonoTest(){
@@ -34,6 +46,11 @@ public class TelefonoTest {
         Telefono buscado=telefonoRepo.findById(2).orElse(null);
         Assertions.assertNull(buscado);
     }
+
+    /**
+     * metodo para verificar si se ha actualizado un telefono correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:telefono.sql"})
     public void actulizarTelefonoTest(){
@@ -44,6 +61,11 @@ public class TelefonoTest {
         Telefono buscado=telefonoRepo.findById(2).orElse(null);
         Assertions.assertEquals("7350001",buscado.getNumeroTelefono());
     }
+
+    /**
+     * metodo para listar los telefonos
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:telefono.sql"})
     public void listaTelefonoTest(){

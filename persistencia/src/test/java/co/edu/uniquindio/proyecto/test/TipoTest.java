@@ -11,6 +11,10 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad tipo de lugar
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TipoTest {
@@ -18,6 +22,10 @@ public class TipoTest {
     @Autowired
     private TipoRepo tipoRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un tipo de lugar correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql("classpath:tipo.sql")
     public void registrarTipoTest(){
@@ -26,6 +34,10 @@ public class TipoTest {
         Assertions.assertNotNull(tipoGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un tipo correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql("classpath:tipo.sql")
     public void eliminarTipoTest(){
@@ -34,6 +46,10 @@ public class TipoTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un tipo de lugar correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql("classpath:tipo.sql")
     public void actualizarTipoTest(){
@@ -46,6 +62,10 @@ public class TipoTest {
         Assertions.assertEquals("Hotel",buscado.getNombre());
     }
 
+    /**
+     * metodo para listar los tipos
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:tipo.sql"})
     public void listarTiposTest(){

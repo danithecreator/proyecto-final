@@ -3,8 +3,13 @@ package co.edu.uniquindio.proyecto.entidades;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Esta clase define la entidad Favorito de la base de datos
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Favorito implements Serializable {
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -16,10 +21,16 @@ public class Favorito implements Serializable {
     @ManyToOne
     private  Lugar lugarFavorito;
 
+    /**
+     * constructor vacio
+     */
     public Favorito() {
         super();
     }
 
+    /**
+     * getters y setters
+     */
     public int getId() {
         return id;
     }
@@ -44,6 +55,9 @@ public class Favorito implements Serializable {
         this.lugarFavorito = lugarFavorito;
     }
 
+    /**
+     * Hascode and equals
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

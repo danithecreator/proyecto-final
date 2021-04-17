@@ -13,12 +13,20 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad moderador
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ModeradorTest {
     @Autowired
     private ModeradorRepo moderadorRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un moderador correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql"})
     public void registrarModeradorTest(){
@@ -27,6 +35,10 @@ public class ModeradorTest {
         Assertions.assertNotNull(moderadorGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un moderador correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql"})
     public void eliminarModeradorTest(){
@@ -35,6 +47,10 @@ public class ModeradorTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un moderador correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql"})
     public void actulizarModeradorTest(){
@@ -45,6 +61,10 @@ public class ModeradorTest {
         Assertions.assertEquals("Angy",buscado.getNombre());
     }
 
+    /**
+     * metodo para listar los moderadores
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql"})
     public void listarModeradorTest(){

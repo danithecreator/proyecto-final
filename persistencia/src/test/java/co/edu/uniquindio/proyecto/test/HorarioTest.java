@@ -16,13 +16,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Esta clase permite testear la entidad Horario
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class HorarioTest {
     @Autowired
     private HorarioRepo horarioRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un horario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:horario.sql"})
     public void agregarHorarioTest(){
@@ -31,6 +38,10 @@ public class HorarioTest {
         Assertions.assertNotNull(horarioGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un horario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:horario.sql"})
     public void eliminarHorarioTest(){
@@ -39,6 +50,10 @@ public class HorarioTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un horario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:horario.sql"})
     public void actualizarHorarioTest(){
@@ -60,6 +75,10 @@ public class HorarioTest {
 
     }
 
+    /**
+     * metodo para listar los horarios
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:horario.sql"})
     public void listaHorariosTest(){

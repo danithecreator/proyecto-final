@@ -12,6 +12,10 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad imagen
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ImagenTest {
@@ -19,6 +23,10 @@ public class ImagenTest {
     @Autowired
     private ImagenRepo imagenRepo;
 
+    /**
+     * metodo para verificar si se ha agregado una imagen correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql( {"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:imagen.sql"})
     public void registrarImagenTest(){
@@ -27,6 +35,10 @@ public class ImagenTest {
         Assertions.assertNotNull(imagenGuardada);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado una imagen correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:imagen.sql"})
     public void eliminarImagenTest(){
@@ -35,6 +47,10 @@ public class ImagenTest {
         Assertions.assertNull(buscada);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado una imagen correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:imagen.sql"})
     public void actualizarImagenTest(){
@@ -47,6 +63,10 @@ public class ImagenTest {
         Assertions.assertEquals("url2",buscada.getUrl());
     }
 
+    /**
+     * metodo para listar las imagenes
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:imagen.sql"})
     public void listarImagenTest(){

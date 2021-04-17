@@ -4,9 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Esta clase define la entidad evento de la base de datos
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Evento implements Serializable {
-
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
@@ -22,10 +26,16 @@ public class Evento implements Serializable {
     @ManyToOne
     private Lugar eventoLugar;
 
+    /**
+     * constructor
+     */
     public Evento(){
         super();
     }
 
+    /**
+     * getters y setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -66,5 +76,21 @@ public class Evento implements Serializable {
         this.eventoLugar = eventoLugar;
     }
 
-    //constructor getter y setter y hashcode y equals
+    /**
+     * Hascode and equals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Evento evento = (Evento) o;
+
+        return codigo == evento.codigo;
+    }
+
+    @Override
+    public int hashCode() {
+        return codigo;
+    }
 }

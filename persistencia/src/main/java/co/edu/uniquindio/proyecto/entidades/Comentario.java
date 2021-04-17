@@ -6,8 +6,13 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Esta clase define la entidad comentario de la base de datos
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Comentario implements Serializable {
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,10 +35,16 @@ public class Comentario implements Serializable {
     @ManyToOne
     private Lugar lugarComentario;
 
+    /**
+     * constructor
+     */
     public Comentario(){
         super();
     }
 
+    /**
+     * getters y setters
+     */
     public int getId() {
         return id;
     }
@@ -89,5 +100,22 @@ public class Comentario implements Serializable {
     public void setLugarComentario(Lugar lugarComentario) {
         this.lugarComentario = lugarComentario;
     }
-    //constructor getter y setter y hashcode y equals
+
+    /**
+     * Hascode and equals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Comentario that = (Comentario) o;
+
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

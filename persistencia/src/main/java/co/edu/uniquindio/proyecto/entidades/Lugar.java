@@ -4,10 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-
+/**
+ * Esta clase define la entidad lugar de la base de datos
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Lugar implements Serializable {
-
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
@@ -45,8 +48,9 @@ public class Lugar implements Serializable {
     @OneToMany(mappedBy = "lugarComentario")
     private List<Comentario> comentarios;
 
-
-
+    /**
+            * Constructor de la clase
+     */
     public Lugar(){
         super();
     }
@@ -84,5 +88,21 @@ public class Lugar implements Serializable {
         this.imagenes = imagenes;
     }
 
-    //Hashcode y equals
+    /**
+     * Hascode and equals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Lugar lugar = (Lugar) o;
+
+        return codigo == lugar.codigo;
+    }
+
+    @Override
+    public int hashCode() {
+        return codigo;
+    }
 }

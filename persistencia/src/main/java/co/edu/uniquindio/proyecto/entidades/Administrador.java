@@ -6,13 +6,19 @@ import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Esta clase define la entidad administrador
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Administrador extends Persona implements Serializable {
-    //constructor getter y setter y hashcode y equals
-
+    //Campos o atributos de la clase
     @OneToMany(mappedBy ="administrador")
     private List<Moderador>moderadoresCreados;
 
+    /**
+     * constructor
+     */
     public Administrador(){
         super();
     }

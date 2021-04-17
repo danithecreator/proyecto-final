@@ -12,12 +12,20 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad administrador
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AdministradorTest {
     @Autowired
     private AdministradorRepo administradorRepo;
 
+    /**
+     * metodo para verificar si se ha registrado un administrador correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql"})
     public void registrarAdministradorTest(){
@@ -26,6 +34,10 @@ public class AdministradorTest {
         Assertions.assertNotNull(administradorGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un administrador correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql"})
     public void eliminarAdministradorTest(){
@@ -34,6 +46,10 @@ public class AdministradorTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un administrador correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql"})
     public void actualizarAdministradorTest(){
@@ -46,6 +62,10 @@ public class AdministradorTest {
         Assertions.assertEquals("Paola",buscado.getNombre());
     }
 
+    /**
+     * metodo para listar los administradores
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql","classpath:administrador.sql"})
     public void listarAdministradorTest(){

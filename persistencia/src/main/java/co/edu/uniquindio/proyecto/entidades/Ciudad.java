@@ -4,8 +4,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Esta clase define la entidad ciudad de la base de datos
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Ciudad implements Serializable {
+
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
@@ -18,11 +24,17 @@ public class Ciudad implements Serializable {
 
     @OneToMany(mappedBy = "ciudadLugar")
     private List<Lugar> lugares;
-    //constructor getter y setter y hashcode y equals
+
+    /**
+     * constructor
+     */
     public Ciudad(){
         super();
     }
 
+    /**
+     * getters y setters
+     */
     public int getCodigo() {
         return codigo;
     }
@@ -55,6 +67,9 @@ public class Ciudad implements Serializable {
         this.lugares = lugares;
     }
 
+    /**
+     * Hascode and equals
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,6 +85,9 @@ public class Ciudad implements Serializable {
         return codigo;
     }
 
+    /**
+     * metodo toString
+     */
     @Override
     public String toString() {
         return "Ciudad{" +

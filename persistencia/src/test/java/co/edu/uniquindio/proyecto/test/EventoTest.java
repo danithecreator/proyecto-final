@@ -11,6 +11,10 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad evento
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class EventoTest {
@@ -18,6 +22,10 @@ public class EventoTest {
     @Autowired
     private EventoRepo eventoRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un evento correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
     public void registrarEventoTest(){
@@ -26,6 +34,10 @@ public class EventoTest {
         Assertions.assertNotNull(eventoGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un evento correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
     public void eliminarEventoTest(){
@@ -34,6 +46,10 @@ public class EventoTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un evento correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
     public void actualizarEventoTest(){
@@ -46,6 +62,10 @@ public class EventoTest {
         Assertions.assertEquals("tarde de cafe",buscado.getNombre());
     }
 
+    /**
+     * metodo para listar los eventos
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
     public void listarEventosTest(){

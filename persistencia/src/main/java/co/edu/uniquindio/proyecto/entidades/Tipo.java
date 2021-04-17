@@ -4,8 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Esta clase define la entidad Tipo de lugar de la base de datos
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Entity
 public class Tipo implements Serializable {
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,10 +21,16 @@ public class Tipo implements Serializable {
     @OneToMany(mappedBy = "tipo")
     private List<Lugar> lugares;
 
+    /**
+     * Constructor de la clase vacio
+     */
     public Tipo(){
         super();
     }
 
+    /**
+     * getters y setters
+     */
     public int getId() {
         return id;
     }
@@ -43,5 +54,22 @@ public class Tipo implements Serializable {
     public void setLugares(List<Lugar> lugares) {
         this.lugares = lugares;
     }
-    //constructor getter y setter y hashcode y equals
+
+    /**
+     * Hashcode and equals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tipo tipo = (Tipo) o;
+
+        return id == tipo.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

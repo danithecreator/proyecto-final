@@ -14,6 +14,10 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad favorito
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class FavoritoTest {
@@ -22,6 +26,10 @@ public class FavoritoTest {
     @Autowired
     private LugarRepo lugarRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un favorito correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:favorito.sql"})
     public void agregarFavoritoTest(){
@@ -30,6 +38,10 @@ public class FavoritoTest {
         Assertions.assertNotNull(favoritoGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un favorito correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:favorito.sql"})
     public void eliminarFavoritoTest(){
@@ -38,6 +50,10 @@ public class FavoritoTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un favorito correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:favorito.sql"})
     public void actualizarFavoritoTest(){
@@ -49,6 +65,11 @@ public class FavoritoTest {
         Favorito buscado=favoritoRepo.findById(2).orElse(null);
         Assertions.assertEquals(lugar,buscado.getLugarFavorito());
     }
+
+    /**
+     * metodo para listar los favoritos
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:favorito.sql"})
     public void listaFavoritoTest(){

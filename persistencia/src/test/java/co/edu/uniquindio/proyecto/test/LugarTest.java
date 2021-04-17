@@ -12,12 +12,20 @@ import org.springframework.test.context.jdbc.SqlGroup;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad lugar
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class LugarTest {
     @Autowired
     private LugarRepo lugarRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un lugar correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
     public void registrarLugarTest(){
@@ -26,6 +34,10 @@ public class LugarTest {
         Assertions.assertNotNull(lugarGuardado);
     }
 
+    /**
+     * metodo para verificar si se ha eliminado un lugar correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
     public void eliminarLugarTest(){
@@ -34,6 +46,10 @@ public class LugarTest {
         Assertions.assertNull(buscado);
     }
 
+    /**
+     * metodo para verificar si se ha actualizado un lugar correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
     public void actualizarLugarTest(){
@@ -46,6 +62,10 @@ public class LugarTest {
         Assertions.assertEquals("Bar React",buscado.getNombre());
     }
 
+    /**
+     * metodo para listar los lugares
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
     public void listarLugarTest(){

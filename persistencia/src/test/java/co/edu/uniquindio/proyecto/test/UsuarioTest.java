@@ -12,12 +12,20 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/**
+ * Esta clase permite testear la entidad usuario
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UsuarioTest {
     @Autowired
     private UsuarioRepo usuarioRepo;
 
+    /**
+     * metodo para verificar si se ha agregado un usuario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
     public void registrarUsuarioTest(){
@@ -25,6 +33,11 @@ public class UsuarioTest {
         Usuario usuarioGuardado=usuarioRepo.save(usuarioNuevo);
         Assertions.assertNotNull(usuarioGuardado);
     }
+
+    /**
+     * metodo para verificar si se ha eliminado un usuario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
     public void eliminarUsuarioTest(){
@@ -32,6 +45,11 @@ public class UsuarioTest {
         Usuario buscado=usuarioRepo.findById(2).orElse(null);
         Assertions.assertNull(buscado);
     }
+
+    /**
+     * metodo para verificar si se ha actualizado un usuario correctamente
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
     public void actualizarUsuarioTest(){
@@ -42,6 +60,10 @@ public class UsuarioTest {
         Assertions.assertEquals("Paola",buscado.getNombre());
     }
 
+    /**
+     * metodo para listar los usuarios
+     * se añaden a la anotacion  sql los archivos necesarios para este test
+     */
     @Test
     @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
     public void listarUsuarioTest(){

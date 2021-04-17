@@ -4,10 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 
+/**
+ * Esta clase define la entidad Persona que es una superclase
+ * @author: Daniel Ceballos, Angy Tabares
+ */
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
 public class Persona implements Serializable {
-
+    //Campos o atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,10 +24,16 @@ public class Persona implements Serializable {
     @Column(name = "nombre", nullable =false)
     private String nombre;
 
+    /**
+     * Constructor de la clase
+     */
     public Persona(){
         super();
     }
 
+    /**
+     * getters y setters
+     */
     public int getId() {
         return id;
     }
@@ -55,6 +65,22 @@ public class Persona implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    //getters y setters
-    //hashcode equals
+
+    /**
+     * Hashcode and equals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Persona persona = (Persona) o;
+
+        return id == persona.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }
