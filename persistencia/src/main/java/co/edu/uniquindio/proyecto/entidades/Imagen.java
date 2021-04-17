@@ -42,4 +42,13 @@ public class Imagen implements Serializable {
     public void setImagenLugar(Lugar imagenLugar) {
         this.imagenLugar = imagenLugar;
     }
+
+    @Override
+    public String toString() {
+        return "Imagen{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", imagenLugar=" + imagenLugar +
+                '}';
+    }
 }

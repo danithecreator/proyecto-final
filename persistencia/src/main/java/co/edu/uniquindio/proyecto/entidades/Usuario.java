@@ -78,4 +78,5 @@ public class Usuario extends Persona implements Serializable {
         this.comentarios = comentarios;
     }
     //constructor getter y setter y hashcode y equals
+
 }

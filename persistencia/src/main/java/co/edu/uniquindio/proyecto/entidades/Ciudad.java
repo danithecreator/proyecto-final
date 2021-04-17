@@ -69,4 +69,14 @@ public class Ciudad implements Serializable {
     public int hashCode() {
         return codigo;
     }
+
+    @Override
+    public String toString() {
+        return "Ciudad{" +
+                "codigo=" + codigo +
+                ", nombre='" + nombre + '\'' +
+                ", usuarios=" + usuarios +
+                ", lugares=" + lugares +
+                '}';
+    }
 }
