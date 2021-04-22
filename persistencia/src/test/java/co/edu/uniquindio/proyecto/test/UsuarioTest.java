@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -72,5 +73,44 @@ public class UsuarioTest {
         System.out.println("Listado de usuarios"+"\n"+ lista);
     }
 
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
+    public void listarUsuarioDadoUnNombreTest(){
+        List<Usuario> lista = usuarioRepo.findByNombre("Angy");
 
+        System.out.println("Listado de usuarios"+"\n"+ lista);
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
+    public void listarUsuarioPaginableTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuarios(PageRequest.of(0,2));
+
+        System.out.println("Listado de usuarios"+"\n"+ lista);
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:usuario.sql","classpath:lugar.sql","classpath:favoritos.sql"})
+    public void obtenerLugaresFavoritosTest(){
+
+        List<Lugar> lugares= usuarioRepo.obtenerLugaresFavoritos(1);
+
+        for (Lugar l: lugares) {
+            System.out.println(l);
+        }
+
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:usuario.sql","classpath:lugar.sql","classpath:favoritos.sql"})
+    public void obtenerUsuariosYLugaresPublicadosTest(){
+
+        List<Object[]> lugaresUsuario= usuarioRepo.obtenerLugaresPublicadosUsuarios();
+
+        for (Object[] l: lugaresUsuario) {
+            System.out.println(l[0]+""+l[1]);
+        }
+
+    }
 }

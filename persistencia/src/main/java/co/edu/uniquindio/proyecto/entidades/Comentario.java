@@ -118,4 +118,15 @@ public class Comentario implements Serializable {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Comentario{" +
+                "id=" + id +
+                ", comentario='" + comentario + '\'' +
+                ", calificacion=" + calificacion +
+                ", respuesta='" + respuesta + '\'' +
+                ", fecha=" + fecha +
+                '}';
+    }
 }

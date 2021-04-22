@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
+import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
 import org.junit.jupiter.api.Assertions;
@@ -74,5 +75,35 @@ public class LugarTest {
         System.out.println("Listado de lugares"+"\n"+lista);
     }
 
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void obtenerTipoLugarTest(){
 
+        String nombreTipoLugar= lugarRepo.obtenerTiposLugares(1);
+        System.out.println(nombreTipoLugar);
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void obtenerInfoTest(){
+
+        List<Object[]> infoLugar= lugarRepo.obtenerInfo(1);
+
+        for (int i=0; i<infoLugar.get(0).length;i++) {
+
+            System.out.println(infoLugar.get(0)[i]);
+        }
+
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerComentariosLugaresTest(){
+
+        List<ComentariosLugarDTO> lugaresComentarios= lugarRepo.obtenerComentariosLugares();
+        for (ComentariosLugarDTO l: lugaresComentarios) {
+            System.out.println(l.getLugar().getNombre()+" "+l.getComentario().getComentario());
+        }
+
+    }
 }

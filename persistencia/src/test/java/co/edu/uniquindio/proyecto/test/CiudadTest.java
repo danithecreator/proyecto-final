@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
+import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -72,5 +74,27 @@ public class CiudadTest {
         System.out.println("Listado de ciudades"+"\n"+lista);
     }
 
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
+    public void obtenerCiudadesConUsuariosTest(){
 
+        List<Usuario> usuarios= ciudadRepo.obtenerListaUsuarios("pereira");
+
+        for (Usuario u: usuarios) {
+            System.out.println(u);
+        }
+
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
+    public void obtenerCiudadesConUsuariosJoinLeftTest(){
+
+        List<Object[]> usuarios= ciudadRepo.obtenerListaUsuariosJoinLeft();
+
+        for (Object[] u: usuarios) {
+            System.out.println(u[0]+","+u[1]);
+        }
+
+    }
 }

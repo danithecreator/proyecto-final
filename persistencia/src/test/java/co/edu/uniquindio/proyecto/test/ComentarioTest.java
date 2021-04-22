@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Moderador;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -72,4 +73,15 @@ public class ComentarioTest {
         System.out.println("Listado de comentarios"+"\n"+ lista);
     }
 
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerUsuariosComentariosTest(){
+
+        List<Usuario> lugaresComentarios=comentarioRepo.usuariosComentarios(1);
+
+        for (Usuario l: lugaresComentarios) {
+            System.out.println(l);
+        }
+
+    }
 }

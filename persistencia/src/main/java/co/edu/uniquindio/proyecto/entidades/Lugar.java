@@ -19,10 +19,15 @@ public class Lugar implements Serializable {
     private String descripcion;
     @Column(name = "nombre", length = 200, nullable =false)
     private String nombre;
-
-
+    @Column(name = "latitud",nullable =false)
+    private float latitud;
+    @Column(name = "longitud",nullable =false)
+    private float longitud;
     @OneToMany(mappedBy = "imagenLugar")
     private List<Imagen> imagenes;
+
+    @Column(name = "estado",nullable =false)
+    private boolean estado;
 
     @ManyToOne
     private Ciudad ciudadLugar;
@@ -41,6 +46,9 @@ public class Lugar implements Serializable {
 
     @ManyToMany(mappedBy = "horarioLugares")
     private  List<Horario> horarios;
+
+    @ManyToMany(mappedBy = "lugaresFavoritos")
+    private  List<Usuario> usuariosFavoritos;
 
     @ManyToOne
     private Moderador moderador;
@@ -88,6 +96,30 @@ public class Lugar implements Serializable {
         this.imagenes = imagenes;
     }
 
+    public float getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(float latitud) {
+        this.latitud = latitud;
+    }
+
+    public float getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     /**
      * Hascode and equals
      */
@@ -104,5 +136,21 @@ public class Lugar implements Serializable {
     @Override
     public int hashCode() {
         return codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "Lugar{" +
+                "codigo=" + codigo +
+                ", descripcion='" + descripcion + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", ciudadLugar=" + ciudadLugar +
+                ", usuario=" + usuario +
+                ", tipo=" + tipo +
+                ", moderador=" + moderador +
+                ", estado=" + estado +
+                '}';
     }
 }

@@ -93,8 +93,6 @@ public class Ciudad implements Serializable {
         return "Ciudad{" +
                 "codigo=" + codigo +
                 ", nombre='" + nombre + '\'' +
-                ", usuarios=" + usuarios +
-                ", lugares=" + lugares +
                 '}';
     }
 }

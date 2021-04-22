@@ -1,7 +1,5 @@
 package co.edu.uniquindio.proyecto.test;
 
-import co.edu.uniquindio.proyecto.entidades.Favorito;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Telefono;
 import co.edu.uniquindio.proyecto.repositorios.TelefonoRepo;
 import org.junit.jupiter.api.Assertions;

@@ -19,6 +19,8 @@ public class Persona implements Serializable {
     @Email
     @Column(name = "email", nullable =false)
     private String email;
+    @Column(name = "nickname", nullable =false)
+    private String nickname;
     @Column(name = "password", nullable =false)
     private String password;
     @Column(name = "nombre", nullable =false)
@@ -66,6 +68,14 @@ public class Persona implements Serializable {
         this.nombre = nombre;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     /**
      * Hashcode and equals
      */
@@ -82,5 +92,16 @@ public class Persona implements Serializable {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
     }
 }

@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,8 +20,9 @@ public class Usuario extends Persona implements Serializable {
     private List<Lugar> lugares;
     @ManyToOne
     private Ciudad ciudadUsuario;
-    @OneToMany(mappedBy = "usuarioFavorito")
-    private List<Favorito> favoritos;
+    @ManyToMany
+    private List<Lugar> lugaresFavoritos;
+
     @OneToMany(mappedBy = "usuarioComentario")
     private List<Comentario> comentarios;
 
@@ -70,13 +68,13 @@ public class Usuario extends Persona implements Serializable {
         this.ciudadUsuario = ciudadUsuario;
     }
 
-    public List<Favorito> getFavoritos() {
-        return favoritos;
-    }
+    //public List<Favorito> getFavoritos() {
+    //    return favoritos;
+   // }
 
-    public void setFavoritos(List<Favorito> favoritos) {
-        this.favoritos = favoritos;
-    }
+    //public void setFavoritos(List<Favorito> favoritos) {
+     //   this.favoritos = favoritos;
+    //}
 
     public List<Comentario> getComentarios() {
         return comentarios;
@@ -105,5 +103,12 @@ public class Usuario extends Persona implements Serializable {
         int result = super.hashCode();
         result = 31 * result + (latitud != +0.0f ? Float.floatToIntBits(latitud) : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "ciudadUsuario=" + ciudadUsuario +
+                "} " + super.toString();
     }
 }
