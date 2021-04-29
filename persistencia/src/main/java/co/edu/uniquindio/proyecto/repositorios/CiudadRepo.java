@@ -20,4 +20,5 @@ public interface CiudadRepo extends JpaRepository<Ciudad, Integer> {
 
     @Query("select c.nombre, u from Ciudad c left join c.usuarios u")
     List<Object[]> obtenerListaUsuariosJoinLeft();
+
 }

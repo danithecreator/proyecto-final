@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
+import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Telefono;
 import co.edu.uniquindio.proyecto.repositorios.TelefonoRepo;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author: Daniel Ceballos, Angy Tabares
  */
 @DataJpaTest
-@AutoConfigureTestDatabase
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TelefonoTest {
     @Autowired
     private TelefonoRepo telefonoRepo;
@@ -71,5 +72,11 @@ public class TelefonoTest {
         System.out.println("Listado de telefonos"+"\n"+lista);
     }
 
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:telefono.sql"})
+    public void obtenerLugarPorNumeroTelefonoTest(){
+        Lugar lugar = telefonoRepo.obtenerLugarPorNumeroTelefono("3160025489");
+        System.out.println(lugar);
+    }
 
 }

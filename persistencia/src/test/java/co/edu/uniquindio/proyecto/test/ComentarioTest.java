@@ -84,4 +84,16 @@ public class ComentarioTest {
         }
 
     }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void cantidadComentariosDeUnLugarEspecificoTest(){
+
+        List<Object[]> c=comentarioRepo.cantidadComentariosDeUnLugarEspecifico(1);
+
+        for (Object[] l: c) {
+            System.out.println(l[0]+" "+l[1]+" "+l[2]);
+        }
+
+    }
 }

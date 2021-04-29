@@ -30,9 +30,11 @@ public class Comentario implements Serializable {
     private Date fecha;
 
     @ManyToOne
+    @JoinColumn(nullable = true)
     private Usuario usuarioComentario;
 
     @ManyToOne
+    @JoinColumn(nullable = true)
     private Lugar lugarComentario;
 
     /**

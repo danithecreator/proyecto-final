@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Administrador;
+import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Moderador;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
@@ -72,4 +73,6 @@ public class ModeradorTest {
 
         System.out.println("Listado de Moderadores"+"\n"+ lista);
     }
+
+
 }

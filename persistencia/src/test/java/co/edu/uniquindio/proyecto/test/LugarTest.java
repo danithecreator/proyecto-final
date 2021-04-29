@@ -1,7 +1,9 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
+import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Moderador;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -103,6 +108,96 @@ public class LugarTest {
         List<ComentariosLugarDTO> lugaresComentarios= lugarRepo.obtenerComentariosLugares();
         for (ComentariosLugarDTO l: lugaresComentarios) {
             System.out.println(l.getLugar().getNombre()+" "+l.getComentario().getComentario());
+        }
+
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadComentariosLugarTest(){
+
+        int cantidad= lugarRepo.obtenerCantidadComentarios(1);
+
+            System.out.println(cantidad);
+        }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadLugaresPorCategoriaTest(){
+
+        List<NumeroLugaresPorCategoriaDTO> cantLugares= lugarRepo.obtenerCantidadLugaresPorCategoria();
+
+        for (NumeroLugaresPorCategoriaDTO l: cantLugares) {
+            System.out.println(l);
+        }
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql","classpath:horario.sql"})
+    public void obtenerLugaresSinHorariosTest(){
+
+        List<Lugar> lugares= lugarRepo.obtenerLugaresSinHorarios();
+
+        for (Lugar l: lugares) {
+            System.out.println(l);
+        }
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerModeradorConMasLugaresAprobadosTest(){
+        List<Object[]> lista = lugarRepo.obtenerModeradorConMasAprobados();
+
+        for (Object[] l: lista) {
+            System.out.println(l[0]+""+l[1]);
+        }
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerLugarCalificacionMasAltaPorCiudadTest(){
+        List<Object[]> lista = lugarRepo.obtenerLugarCalificacionMasAltaPorCiudad(2);
+
+        for (Object[] l: lista) {
+            System.out.println(l[0]+""+l[1]);
+        }
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCalificacionPromedioTest(){
+        float promedio = lugarRepo.obtenerCalificacionPromedio(1);
+
+        System.out.println(promedio);
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadLugaresNoAprobadosPorCiudadTest(){
+        List<Object[]> lista = lugarRepo.obtenerCantidadLugaresNoAprobadosPorCiudad();
+
+        for (Object[] l: lista) {
+            System.out.println(l[0]+" "+l[1]);
+        }
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadLugaresAbiertosPorCategoriaTest(){
+
+        String horaNueva = "08:00:00";
+
+        try {
+            Date hora = new SimpleDateFormat("HH:mm:ss").parse(horaNueva);
+
+            List<Object[]> lista = lugarRepo.obtenerCantidadLugaresAbiertosPorCategoria("martes", hora);
+
+            for (Object[] l: lista) {
+                System.out.println(l[0]+" "+l[1]);
+            }
+        }catch (ParseException e)
+        {
+            e.printStackTrace();
         }
 
     }

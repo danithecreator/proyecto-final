@@ -18,6 +18,7 @@ public class Telefono implements Serializable {
     private String numeroTelefono;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Lugar telefonoLugar;
 
     /**

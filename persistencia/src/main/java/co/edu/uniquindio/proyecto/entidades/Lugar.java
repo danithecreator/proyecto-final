@@ -30,12 +30,15 @@ public class Lugar implements Serializable {
     private boolean estado;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Ciudad ciudadLugar;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Tipo tipo;
 
     @OneToMany(mappedBy = "eventoLugar")
@@ -44,7 +47,7 @@ public class Lugar implements Serializable {
     @OneToMany(mappedBy = "telefonoLugar")
     private  List<Telefono> telefonos;
 
-    @ManyToMany(mappedBy = "horarioLugares")
+    @OneToMany(mappedBy = "horarioLugar")
     private  List<Horario> horarios;
 
     @ManyToMany(mappedBy = "lugaresFavoritos")

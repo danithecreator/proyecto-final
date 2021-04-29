@@ -24,6 +24,7 @@ public class Evento implements Serializable {
     private Date fecha;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Lugar eventoLugar;
 
     /**

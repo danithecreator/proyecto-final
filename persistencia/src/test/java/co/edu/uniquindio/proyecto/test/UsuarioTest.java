@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -91,10 +92,10 @@ public class UsuarioTest {
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:usuario.sql","classpath:lugar.sql","classpath:favoritos.sql"})
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:usuario.sql","classpath:lugar.sql","classpath:favorito.sql"})
     public void obtenerLugaresFavoritosTest(){
 
-        List<Lugar> lugares= usuarioRepo.obtenerLugaresFavoritos(1);
+        List<Lugar> lugares= usuarioRepo.obtenerLugaresFavoritos(2);
 
         for (Lugar l: lugares) {
             System.out.println(l);
@@ -103,7 +104,7 @@ public class UsuarioTest {
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:usuario.sql","classpath:lugar.sql","classpath:favoritos.sql"})
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:usuario.sql","classpath:lugar.sql","classpath:favorito.sql"})
     public void obtenerUsuariosYLugaresPublicadosTest(){
 
         List<Object[]> lugaresUsuario= usuarioRepo.obtenerLugaresPublicadosUsuarios();
@@ -113,4 +114,14 @@ public class UsuarioTest {
         }
 
     }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
+    public void listarUsuarioAlfabeticamenteTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuariosAlfabeticamente(Sort.by("nombre"));
+
+        System.out.println("Listado de usuarios"+"\n"+ lista);
+    }
+
 }

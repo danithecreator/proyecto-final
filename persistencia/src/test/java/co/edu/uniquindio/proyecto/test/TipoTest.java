@@ -9,6 +9,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,5 +75,15 @@ public class TipoTest {
         List<Tipo> lista = tipoRepo.findAll();
         System.out.println("Listado de Tipos de lugar"+"\n"+lista);
     }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void categoriaCalificacionPromedioCiudadEspecificaTest(){
+        List<Object[]> lista = tipoRepo.categoriaCalificacionPromedioCiudadEspecifica(1);
+        for (Object[] l: lista) {
+            System.out.println(l[0]+" "+l[1]);
+        }
+    }
+
 
 }

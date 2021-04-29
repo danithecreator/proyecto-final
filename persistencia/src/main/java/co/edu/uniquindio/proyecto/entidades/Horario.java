@@ -22,9 +22,10 @@ public class Horario implements Serializable {
     @Temporal(TemporalType.TIME)
     @Column(name="hora_cierre", nullable = false)
     private Date horaCierre;
-
-    @ManyToMany
-    private List<Lugar> horarioLugares;
+    @Column(name="dia_semana", nullable = false)
+    private String dia;
+    @ManyToOne
+    private Horario horarioLugar;
 
     /**
      * constructor
@@ -60,12 +61,12 @@ public class Horario implements Serializable {
         this.horaCierre = horaCierre;
     }
 
-    public List<Lugar> getHorarioLugares() {
-        return horarioLugares;
+    public String getDia() {
+        return dia;
     }
 
-    public void setHorarioLugares(List<Lugar> horarioLugares) {
-        this.horarioLugares = horarioLugares;
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
     /**

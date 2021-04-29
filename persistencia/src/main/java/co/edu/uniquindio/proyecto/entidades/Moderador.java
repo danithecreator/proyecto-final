@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
@@ -13,7 +14,9 @@ import java.util.List;
 @Entity
 public class Moderador extends Persona implements Serializable {
     //Campos o atributos de la clase
+
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Administrador administrador;
     @OneToMany(mappedBy = "moderador")
     private List<Lugar> lugaresAutorizados;

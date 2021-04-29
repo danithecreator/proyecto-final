@@ -18,7 +18,9 @@ public class Usuario extends Persona implements Serializable {
 
     @OneToMany(mappedBy = "usuario")
     private List<Lugar> lugares;
+
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Ciudad ciudadUsuario;
     @ManyToMany
     private List<Lugar> lugaresFavoritos;

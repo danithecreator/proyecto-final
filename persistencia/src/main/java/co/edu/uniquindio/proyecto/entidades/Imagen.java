@@ -18,6 +18,7 @@ public class Imagen implements Serializable {
     private String url;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Lugar imagenLugar;
 
     /**
