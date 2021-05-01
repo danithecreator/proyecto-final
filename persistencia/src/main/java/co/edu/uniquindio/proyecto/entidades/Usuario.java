@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.List;
 
@@ -33,6 +34,11 @@ public class Usuario extends Persona implements Serializable {
      */
     public Usuario(){
         super();
+    }
+
+    public Usuario(@Email String email, String nickname, String password, String nombre, Ciudad ciudadUsuario) {
+        super( email, nickname, password, nombre);
+        this.ciudadUsuario = ciudadUsuario;
     }
 
     /**

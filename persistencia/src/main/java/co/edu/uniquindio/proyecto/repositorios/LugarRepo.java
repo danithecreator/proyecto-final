@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
+import co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
@@ -54,7 +55,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select l.moderador,count(l) as total from Lugar l where l.estado=true group by l.moderador order by total desc ")
     List<Object[]> obtenerModeradorConMasAprobados();
 
-    @Query("select l,avg (c.calificacion) as total  from Lugar l join l.comentarios c where l.ciudadLugar.codigo= :codigo group by l order by total desc")
+    @Query("select l.tipo.nombre,avg (c.calificacion) as total  from Lugar l join l.comentarios c where l.ciudadLugar.codigo= :codigo group by l order by total desc")
     List<Object[]> obtenerLugarCalificacionMasAltaPorCiudad(Integer codigo);
 
     @Query("select l.ciudadLugar.nombre ,count(l)  from Lugar l  where l.estado=false group by l.ciudadLugar")
@@ -62,4 +63,38 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
 
     @Query("select l.tipo.nombre,count(l)  from Lugar l join l.horarios h where h.dia= :diaSemana and  :horaActual between h.horaApertura and h.horaCierre group by l.tipo")
     List<Object[]> obtenerCantidadLugaresAbiertosPorCategoria(String diaSemana, Date horaActual);
+
+    /**
+     * Query que permite traer los lugares creados por un usuario especifico
+     */
+    @Query("select l from Lugar l where l.usuario.email = :emailUsuario")
+    List<Object> obtenerLugaresCreadosPorUsuario(String emailUsuario);
+
+    /**
+     * Query que permite traer un listado de todos los lugares y la información del usuario que los creó
+     */
+    @Query("select new co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO(u,l) from Usuario u left join u.lugares l")
+    List<LugaresPorUsuarioDTO> obtenerListaLugaresEinformacionUsuarioCreador();
+
+    /**
+     * Query que permite traer un listado los comentarios de un lugar especifico
+     */
+    @Query("select c from Comentario c where c.lugarComentario.codigo = :id_lugar")
+    List<Object> obtenerComentariosPorLugar(int id_lugar);
+    /**
+     * Query que permite traer un listado los comentarios sin respuesta de un usuario que ha creado lugares
+     */
+    @Query("select c from Lugar l join l.comentarios c where l.usuario.id=:id_usuario and c.respuesta is null")
+    List<Object> obtenerComentarioSinRespuestaPorUsuario(int id_usuario);
+
+    /**
+     * Query que permite traer un listado con la cantidad de comentarios de 1,2,3,4,5 estrellas por lugar
+     */
+    @Query("select c.calificacion, count(c.calificacion)from Lugar l join l.comentarios c where l.codigo=:codigo_lugar group by c.calificacion")
+    List<Object[]> obtenerCantComentariosPorCalificacionLugar(int codigo_lugar);
+
+    @Query("select l from Lugar l ")
+    List<Object[]> ensayo(int ciudad);
+
+
 }

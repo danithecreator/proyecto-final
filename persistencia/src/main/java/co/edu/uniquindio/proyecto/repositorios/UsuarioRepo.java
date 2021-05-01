@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Esta interface define el deposito de datos de usuario
@@ -56,6 +57,8 @@ public interface UsuarioRepo  extends JpaRepository<Usuario,Integer> {
     @Query("select u from Usuario u where u.email like concat('%',:dominio, '%') ")
     List<Usuario> obtenerUsuariosDeDominio(String dominio);
 
+    Optional<Usuario> findByNickname(String nickname);
+    Optional<Usuario>  findByEmail(String email);
 
 
 }

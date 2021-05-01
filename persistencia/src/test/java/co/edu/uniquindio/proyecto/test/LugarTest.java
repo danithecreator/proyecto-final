@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
+import co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Moderador;
@@ -156,7 +157,7 @@ public class LugarTest {
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void obtenerLugarCalificacionMasAltaPorCiudadTest(){
-        List<Object[]> lista = lugarRepo.obtenerLugarCalificacionMasAltaPorCiudad(2);
+        List<Object[]> lista = lugarRepo.obtenerLugarCalificacionMasAltaPorCiudad(1);
 
         for (Object[] l: lista) {
             System.out.println(l[0]+""+l[1]);
@@ -174,11 +175,12 @@ public class LugarTest {
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void obtenerCantidadLugaresNoAprobadosPorCiudadTest(){
-        List<Object[]> lista = lugarRepo.obtenerCantidadLugaresNoAprobadosPorCiudad();
 
+        List<Object[]> lista = lugarRepo.obtenerCantidadLugaresNoAprobadosPorCiudad();
         for (Object[] l: lista) {
             System.out.println(l[0]+" "+l[1]);
         }
+
     }
 
     @Test
@@ -201,4 +203,52 @@ public class LugarTest {
         }
 
     }
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerLugaresCreadosPorUsuarioTest(){
+        List<Object> listado=lugarRepo.obtenerLugaresCreadosPorUsuario("daniel@gmail.com");
+        for(Object l:listado){
+            System.out.println(l);
+            System.out.println();
+        }
+    }
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void  obtenerListaLugaresEinformacionUsuarioCreador(){
+        List<LugaresPorUsuarioDTO> listado=lugarRepo. obtenerListaLugaresEinformacionUsuarioCreador();
+        for(LugaresPorUsuarioDTO u: listado){
+                System.out.println(u);
+                System.out.println();
+
+        }
+    }
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerComentariosPorLugarTest(){
+        List<Object> listado=lugarRepo.obtenerComentariosPorLugar(1);
+        for(Object l:listado){
+            System.out.println(l);
+        }
+    }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerComentarioSinRespuestaPorUsuarioTest(){
+        List<Object> listado=lugarRepo.obtenerComentarioSinRespuestaPorUsuario(1);
+        for(Object l:listado){
+            System.out.println(l);
+        }
+    }
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantComentariosPorCalificacionLugarTest(){
+        List<Object[]> listado=lugarRepo.obtenerCantComentariosPorCalificacionLugar(1);
+        for(Object[] l:listado){
+
+            for(Object c:l){
+                System.out.println(c);
+            }
+        }
+    }
+
 }

@@ -86,4 +86,9 @@ public class Horario implements Serializable {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Horario{" + "horaApertura=" + horaApertura + ", horaCierre=" + horaCierre + ", dia='" + dia + '\'' + '}';
+    }
 }

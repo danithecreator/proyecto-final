@@ -7,13 +7,14 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
-public class PersistenciaApplication {
+public class NegocioApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PersistenciaApplication.class, args);
+        SpringApplication.run(NegocioApplication.class, args);
     }
     @PostConstruct
     public void init(){
         // Setting Spring Boot SetTimeZone
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
+
 }

@@ -32,6 +32,11 @@ public class Ciudad implements Serializable {
         super();
     }
 
+    public Ciudad(String nombre) {
+
+        this.nombre = nombre;
+    }
+
     /**
      * getters y setters
      */

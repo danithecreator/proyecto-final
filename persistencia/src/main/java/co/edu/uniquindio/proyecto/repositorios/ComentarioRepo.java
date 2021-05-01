@@ -24,4 +24,5 @@ public interface ComentarioRepo extends JpaRepository<Comentario,Integer> {
     @Query("select c.lugarComentario,c.calificacion,count(c.calificacion) as total from Comentario c where c.lugarComentario.codigo= :codigo group by c.calificacion ")
     List<Object[]> cantidadComentariosDeUnLugarEspecifico(Integer codigo);
 
+
 }

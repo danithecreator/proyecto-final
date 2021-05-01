@@ -97,4 +97,14 @@ public class CiudadTest {
         }
 
     }
+
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerListaLugaresTest(){
+        List<Object[]> lugares = ciudadRepo.obtenerListaLugares();
+
+        for (Object[] u: lugares) {
+            System.out.println(u[0]+","+u[1]);
+        }
+    }
 }

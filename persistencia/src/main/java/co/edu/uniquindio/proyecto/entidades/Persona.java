@@ -33,6 +33,14 @@ public class Persona implements Serializable {
         super();
     }
 
+    public Persona(@Email String email, String nickname, String password, String nombre) {
+
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.nombre = nombre;
+    }
+
     /**
      * getters y setters
      */
