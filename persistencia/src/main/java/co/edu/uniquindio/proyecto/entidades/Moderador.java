@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class Moderador extends Persona implements Serializable {
      */
     public Moderador(){
         super();
+    }
+
+    public Moderador(@Email String email, String nickname, String password, String nombre, Administrador administrador) {
+        super(email, nickname, password, nombre);
+        this.administrador = administrador;
     }
 
     /**

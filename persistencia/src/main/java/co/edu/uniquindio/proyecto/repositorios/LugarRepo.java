@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Esta interface define el deposito de datos de lugar
@@ -96,5 +97,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select l from Lugar l ")
     List<Object[]> ensayo(int ciudad);
 
+    Optional<Lugar> findByNombre(String nombre);
+    Optional<Lugar> findByCodigo(int codigo);
 
 }

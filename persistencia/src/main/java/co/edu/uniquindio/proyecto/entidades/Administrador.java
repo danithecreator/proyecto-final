@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class Administrador extends Persona implements Serializable {
         super();
     }
 
-
-
+    public Administrador(@Email String email, String nickname, String password, String nombre) {
+        super(email, nickname, password, nombre);
+    }
 }

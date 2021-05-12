@@ -66,6 +66,15 @@ public class Lugar implements Serializable {
         super();
     }
 
+    public Lugar(String descripcion, String nombre, Ciudad ciudadLugar, Usuario usuario, Tipo tipo, Moderador moderador) {
+        this.descripcion = descripcion;
+        this.nombre = nombre;
+        this.ciudadLugar = ciudadLugar;
+        this.usuario = usuario;
+        this.tipo = tipo;
+        this.moderador = moderador;
+    }
+
     //getter del codigo
     public int getCodigo() {
         return codigo;

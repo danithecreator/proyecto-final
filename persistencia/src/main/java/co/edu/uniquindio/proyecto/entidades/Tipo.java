@@ -28,6 +28,10 @@ public class Tipo implements Serializable {
         super();
     }
 
+    public Tipo(String nombre) {
+        this.nombre = nombre;
+    }
+
     /**
      * getters y setters
      */

@@ -56,7 +56,6 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
         return usuarioRepo.findById(id);
     }
 
-
     /**
      * Metodo que permite guardar un usuario en la bd
      * @param u
@@ -96,8 +95,6 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
         }
         usuarioRepo.delete(u);
     }
-
-
 
 
     /**
