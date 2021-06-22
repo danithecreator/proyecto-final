@@ -44,7 +44,7 @@ public class LugarServicioTest {
             usuarioServicio.registrarUsuario(usuario);
 
             Tipo tipo = new Tipo("disco");
-            tipoServicio.registrarTipo(tipo);
+            tipoServicio.registrarTipoLugar(tipo);
 
             Administrador administrador = new Administrador("CamilaAdmin@gmail.com", "admin321", "147852", "Camila");
             administradorServicio.registrarAdmin(administrador);

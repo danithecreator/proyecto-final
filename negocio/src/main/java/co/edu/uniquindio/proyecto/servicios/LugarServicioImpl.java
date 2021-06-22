@@ -17,6 +17,13 @@ public class LugarServicioImpl implements LugarServicio{
         this.lugarRepo = lugarRepo;
     }
 
+    /**
+     * Metodo que permite crear un lugar en la bd
+     * @param l
+     * @return lugar guardado
+     * @throws Exception
+     */
+
     @Override
     public Lugar crearLugar(Lugar l) throws Exception{
 
@@ -40,6 +47,12 @@ public class LugarServicioImpl implements LugarServicio{
         return lugarRepo.save(l);
     }
 
+    /**
+     * Metodo que permite eliminar un lugar de la bd
+     * @param l
+     * @throws Exception
+     */
+
     @Override
     public void eliminarLugar(Lugar l) throws Exception {
         if(estaLugar(l.getCodigo())){
@@ -47,6 +60,13 @@ public class LugarServicioImpl implements LugarServicio{
         }
         lugarRepo.delete(l);
     }
+
+    /**
+     * Metodo que permite actualizar la info de un lugar de la bd
+     * @param l
+     * @return
+     * @throws Exception
+     */
 
     @Override
     public Lugar actualizarLugar(Lugar l) throws Exception {
@@ -69,16 +89,11 @@ public class LugarServicioImpl implements LugarServicio{
 
     }
 
-    public boolean estaLugar(int id){
-        Optional<Lugar> usuario=lugarRepo.findByCodigo(id);
-        return usuario.isEmpty();
-    }
-
-    public boolean existeNombreLugar(String nombre){
-        Optional<Lugar> usuario=lugarRepo.findByNombre(nombre);
-        return usuario.isEmpty();
-    }
-
+    /**
+     * Metodo que permite obtener un lugar
+     * @param codigo
+     * @return lugar
+     */
     @Override
     public Lugar obtenerLugar(int codigo) throws Exception {
         Optional<Lugar> lugar =obtenerLugarPorId(codigo);
@@ -89,12 +104,47 @@ public class LugarServicioImpl implements LugarServicio{
         return lugar.get();
     }
 
-    public Optional<Lugar> obtenerLugarPorId(int codigo){
-        return lugarRepo.findByCodigo(codigo);
-    }
+    /**
+     * Metodo que permite listar los lugares de la bd
+     * @return lugares
+     * @throws Exception
+     */
 
     @Override
     public List<Lugar> listarLugares() throws Exception {
         return lugarRepo.findAll();
     }
+
+    /**
+     * Metodo que permite validar si un lugar se encuentra en la bd
+     * @param id
+     * @return true si el lugar no esta
+     */
+    public boolean estaLugar(int id){
+        Optional<Lugar> lugar=lugarRepo.findByCodigo(id);
+        return lugar.isEmpty();
+    }
+
+    /**
+     * Metodo que permite validar si ya existe un nombre de un lugar en la bd
+     * @param nombre
+     * @return true si el lugar no esta
+     */
+
+    public boolean existeNombreLugar(String nombre){
+        Optional<Lugar> lugar=lugarRepo.findByNombre(nombre);
+        return lugar.isEmpty();
+    }
+
+    /**
+     * Metodo que permite obtener un lugar dado su id
+     * @param codigo
+     * @return lugar
+     */
+
+    public Optional<Lugar> obtenerLugarPorId(int codigo){
+        return lugarRepo.findByCodigo(codigo);
+    }
+
+
 }
