@@ -16,9 +16,10 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
         this.usuarioRepo = usuarioRepo;
     }
 
-    public boolean longitudValida(String cadena){
+    public boolean longitudValida(String c){
+        String cadena=c.trim().replace(" ","");
 
-        return (cadena.length()>255)?true:false;
+        return (cadena.length()>255 || cadena.length()<=0)?true:false;
 
     }
 
@@ -71,13 +72,16 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
            throw new Exception("El email no esta disponible" );
        }
       if(longitudValida(u.getNombre())){
-          throw new Exception("El nombre debe ser menor a 255 caracteres");
+          throw new Exception("El nombre debe contener al menos un caracter y debe ser menor a 255 caracteres");
       }
       if(longitudValida(u.getEmail())){
-          throw new Exception("El email debe ser menor a 255 caracteres");
+          throw new Exception("El email debe contener al menos un caracter y debe ser menor a 255 caracteres");
       }
       if(longitudValida(u.getNickname())){
-          throw new Exception("El nickname debe ser menor a 255 caracteres");
+          throw new Exception("El nickname debe contener al menos un caracter y debe ser menor a 255 caracteres");
+      }
+      if(u.getCiudadUsuario()==null){
+          throw new Exception("La ciudad no puede ser nula ");
       }
 
        return  usuarioRepo.save(u);

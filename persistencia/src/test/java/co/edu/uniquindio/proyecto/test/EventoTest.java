@@ -27,7 +27,7 @@ public class EventoTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql", "classpath:eventos.sql"})
     public void registrarEventoTest(){
         Evento eventoNuevo=eventoRepo.getOne(1);
         Evento eventoGuardado=eventoRepo.save(eventoNuevo);
@@ -39,7 +39,7 @@ public class EventoTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql", "classpath:eventos.sql"})
     public void eliminarEventoTest(){
         eventoRepo.delete(eventoRepo.getOne(2));
         Evento buscado=eventoRepo.findById(2).orElse(null);
@@ -51,7 +51,7 @@ public class EventoTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql", "classpath:eventos.sql"})
     public void actualizarEventoTest(){
         Evento registrado=eventoRepo.getOne(2);
 
@@ -67,7 +67,7 @@ public class EventoTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:evento.sql"})
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql", "classpath:eventos.sql"})
     public void listarEventosTest(){
         List<Evento> lista = eventoRepo.findAll();
         System.out.println("Listado de eventos"+"\n"+lista);

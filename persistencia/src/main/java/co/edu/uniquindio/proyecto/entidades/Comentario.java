@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.Date;
@@ -17,24 +18,28 @@ public class Comentario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "comentario", length = 1000, nullable =false)
+
+    @Column(name = "comentario", length = 1000)
     private String comentario;
+
     @Positive
-    @Column(name = "calificacion",nullable =true)
+    @Column(name = "calificacion",nullable =false)
     @Max(5)
+    @Min(1)
     private int calificacion;
-    @Column(name = "respuesta", length = 1000, nullable =true)
+
+    @Column(name = "respuesta", length = 1000)
     private String respuesta;
     @Temporal(TemporalType.DATE)
     @Column(name="fecha", nullable = false)
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(nullable = true)
+    @JoinColumn(nullable = false)
     private Usuario usuarioComentario;
 
     @ManyToOne
-    @JoinColumn(nullable = true)
+    @JoinColumn(nullable = false)
     private Lugar lugarComentario;
 
     /**
@@ -42,6 +47,18 @@ public class Comentario implements Serializable {
      */
     public Comentario(){
         super();
+    }
+
+    /**
+     *
+     */
+    public Comentario(String comentario, @Positive @Max(5) @Min(1) int calificacion, String respuesta, Date fecha, Usuario usuarioComentario, Lugar lugarComentario) {
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.respuesta = respuesta;
+        this.fecha = fecha;
+        this.usuarioComentario = usuarioComentario;
+        this.lugarComentario = lugarComentario;
     }
 
     /**

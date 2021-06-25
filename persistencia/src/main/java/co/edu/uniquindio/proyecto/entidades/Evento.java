@@ -22,6 +22,9 @@ public class Evento implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha", nullable = false)
     private Date fecha;
+    @Temporal(TemporalType.TIME)
+    @Column(name="hora",nullable = false)
+    private Date hora;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -32,6 +35,14 @@ public class Evento implements Serializable {
      */
     public Evento(){
         super();
+    }
+
+    public Evento(String nombre, String descripcion, Date fecha,Lugar eventoLugar,Date hora) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.eventoLugar = eventoLugar;
     }
 
     /**
@@ -93,5 +104,10 @@ public class Evento implements Serializable {
     @Override
     public int hashCode() {
         return codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "Evento{" + "codigo=" + codigo + ", nombre='" + nombre + '\'' + ", descripcion='" + descripcion + '\'' + ", fecha=" + fecha + ", hora=" + hora + ", eventoLugar=" + eventoLugar + '}';
     }
 }

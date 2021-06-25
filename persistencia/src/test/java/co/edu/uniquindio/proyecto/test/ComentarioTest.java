@@ -32,6 +32,7 @@ public class ComentarioTest {
     public void agregarComentarioTest(){
         Comentario comentarioNuevo=comentarioRepo.getOne(1);
         Comentario comentarioGuardado=comentarioRepo.save(comentarioNuevo);
+        System.out.println(comentarioGuardado);
         Assertions.assertNotNull(comentarioGuardado);
     }
 

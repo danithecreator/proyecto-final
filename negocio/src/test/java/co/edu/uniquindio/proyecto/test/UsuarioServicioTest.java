@@ -68,6 +68,17 @@ public class UsuarioServicioTest {
         }
 
     }
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:usuario.sql"})
+    public void listarUsuarioTest(){
+        try{
+            for(Usuario user: usuarioServicio.listarUsuario()){
+                System.out.println(user);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 
