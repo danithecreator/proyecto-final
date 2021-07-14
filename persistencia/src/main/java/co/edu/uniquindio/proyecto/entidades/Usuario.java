@@ -21,7 +21,6 @@ public class Usuario extends Persona implements Serializable {
     private List<Lugar> lugares;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Ciudad ciudadUsuario;
     @ManyToMany
     private List<Lugar> lugaresFavoritos;
@@ -36,7 +35,7 @@ public class Usuario extends Persona implements Serializable {
         super();
     }
 
-    public Usuario(@Email String email, String nickname, String password, String nombre, Ciudad ciudadUsuario) {
+    public Usuario(String email, String nickname, String password, String nombre, Ciudad ciudadUsuario) {
         super( email, nickname, password, nombre);
         this.ciudadUsuario = ciudadUsuario;
     }

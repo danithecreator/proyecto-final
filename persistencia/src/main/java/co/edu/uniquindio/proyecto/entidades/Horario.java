@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,14 +17,21 @@ public class Horario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
     @Temporal(TemporalType.TIME)
     @Column(name="hora_apertura", nullable = false)
+    @NotBlank
     private Date horaApertura;
+
     @Temporal(TemporalType.TIME)
     @Column(name="hora_cierre", nullable = false)
+    @NotBlank
     private Date horaCierre;
+
     @Column(name="dia_semana", nullable = false)
+    @NotBlank
     private String dia;
+
     @ManyToOne
     private Horario horarioLugar;
 

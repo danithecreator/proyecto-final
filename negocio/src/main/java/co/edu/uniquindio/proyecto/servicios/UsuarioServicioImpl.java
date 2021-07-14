@@ -80,9 +80,6 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
       if(longitudValida(u.getNickname())){
           throw new Exception("El nickname debe contener al menos un caracter y debe ser menor a 255 caracteres");
       }
-      if(u.getCiudadUsuario()==null){
-          throw new Exception("La ciudad no puede ser nula ");
-      }
 
        return  usuarioRepo.save(u);
     }
@@ -143,4 +140,5 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
     public List<Usuario> listarUsuario() throws Exception {
         return usuarioRepo.findAll();
     }
+
 }

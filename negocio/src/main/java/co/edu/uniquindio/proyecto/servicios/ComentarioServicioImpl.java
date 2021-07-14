@@ -43,8 +43,6 @@ public class ComentarioServicioImpl implements ComentarioServicio{
         return true;
     }
 
-
-
     /**
      * Metodo que retorna un comentario que corresponda a un id pasado
      * @param codigo id del comentario

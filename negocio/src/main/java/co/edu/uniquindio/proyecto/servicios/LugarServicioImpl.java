@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,9 @@ public class LugarServicioImpl implements LugarServicio{
             throw new Exception("El nombre debe ser menor de 200 caracteres");
         }
 
+        l.setEstado(false);
+        l.setFecha_creacion(new Date());
+        //if(l.getImagenes().isEmpty())
         return lugarRepo.save(l);
     }
 
@@ -115,6 +119,11 @@ public class LugarServicioImpl implements LugarServicio{
         return lugarRepo.findAll();
     }
 
+    @Override
+    public List<Lugar> buscarLugares(String nombre) {
+        return lugarRepo.buscarLugares(nombre);
+    }
+
     /**
      * Metodo que permite validar si un lugar se encuentra en la bd
      * @param id
@@ -145,6 +154,7 @@ public class LugarServicioImpl implements LugarServicio{
     public Optional<Lugar> obtenerLugarPorId(int codigo){
         return lugarRepo.findByCodigo(codigo);
     }
+
 
 
 }

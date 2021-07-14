@@ -2,6 +2,8 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -16,14 +18,27 @@ public class Persona implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+
+    @Column(name = "email", nullable =false, unique = true)
+    @NotBlank
     @Email
-    @Column(name = "email", nullable =false)
+    @Size(max=255)
     private String email;
-    @Column(name = "nickname", nullable =false)
+
+    @Column(name = "nickname", nullable =false, unique = true)
+    @NotBlank
+    @Size(max=255)
     private String nickname;
+
     @Column(name = "password", nullable =false)
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Size(max=255)
     private String password;
+
     @Column(name = "nombre", nullable =false)
+    @NotBlank
+    @Size(max=255)
     private String nombre;
 
     /**

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Esta interface define el deposito de datos de ciudad
@@ -27,6 +28,9 @@ public interface CiudadRepo extends JpaRepository<Ciudad, Integer> {
 
     @Query("select c.nombre,count(l)  from Ciudad c LEFT JOIN c.lugares l ON l.estado=false group by  c" )
     List<Object[]> obtenerListaLugares();
+
+    Optional<Ciudad> findByCodigo(int codigo);
+  //  Optional<Ciudad>  findByEmail(String email);
 
 
 }

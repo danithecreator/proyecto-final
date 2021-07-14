@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.entidades.Moderador;
 import co.edu.uniquindio.proyecto.repositorios.AdministradorRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import java.util.Optional;
 public class AdministradorServicioImpl implements AdministradorServicio{
 
     private final AdministradorRepo administradorRepo;
+    private ModeradorServicio moderadorServicio;
+    private TipoServicio tipoServicio;
 
     public AdministradorServicioImpl(AdministradorRepo administradorRepo) {
         this.administradorRepo = administradorRepo;

@@ -144,7 +144,7 @@ public class LugarTest {
         }
     }
 
-    @Test
+  /*  @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void obtenerModeradorConMasLugaresAprobadosTest(){
         List<Object[]> lista = lugarRepo.obtenerModeradorConMasAprobados();
@@ -152,7 +152,7 @@ public class LugarTest {
         for (Object[] l: lista) {
             System.out.println(l[0]+""+l[1]);
         }
-    }
+    }*/
 
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})

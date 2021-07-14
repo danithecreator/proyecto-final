@@ -53,8 +53,6 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select avg (c.calificacion) from Lugar l join l.comentarios c where l.codigo = :codigo")
     Float obtenerCalificacionPromedio(Integer codigo);
 
-    @Query("select l.moderador,count(l) as total from Lugar l where l.estado=true group by l.moderador order by total desc ")
-    List<Object[]> obtenerModeradorConMasAprobados();
 
     @Query("select l.tipo.nombre,avg (c.calificacion) as total  from Lugar l join l.comentarios c where l.ciudadLugar.codigo= :codigo group by l order by total desc")
     List<Object[]> obtenerLugarCalificacionMasAltaPorCiudad(Integer codigo);
@@ -100,4 +98,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     Optional<Lugar> findByNombre(String nombre);
     Optional<Lugar> findByCodigo(int codigo);
 
+    //lugares que esten aprobados por algun moderador
+    @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') ")
+    List<Lugar> buscarLugares(String nombre);
 }

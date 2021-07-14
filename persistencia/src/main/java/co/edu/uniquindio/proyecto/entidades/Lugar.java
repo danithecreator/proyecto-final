@@ -1,7 +1,11 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,14 +19,31 @@ public class Lugar implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private int codigo;
+
     @Column(name = "descripcion", length = 1000, nullable =false)
+    @NotBlank
+    @Size(max=1000)
     private String descripcion;
+
     @Column(name = "nombre", length = 200, nullable =false)
+    @NotBlank
+    @Size(max=200)
     private String nombre;
+
     @Column(name = "latitud",nullable =false)
+    @NotNull(message = "La latitud es obligatoria")
     private float latitud;
+
     @Column(name = "longitud",nullable =false)
+    @NotNull(message = "La longitud es obligatoria")
     private float longitud;
+
+    @Column(name = "fecha_creacion",nullable =false)
+    private Date fecha_creacion;
+
+    @Column(name = "fecha_aprobacion")
+    private Date fecha_aprobacion;
+
     @OneToMany(mappedBy = "imagenLugar")
     private List<Imagen> imagenes;
 
@@ -31,14 +52,17 @@ public class Lugar implements Serializable {
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotBlank
     private Ciudad ciudadLugar;
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotBlank
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotBlank
     private Tipo tipo;
 
     @OneToMany(mappedBy = "eventoLugar")
@@ -130,6 +154,46 @@ public class Lugar implements Serializable {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public Date getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public Date getFecha_aprobacion() {
+        return fecha_aprobacion;
+    }
+
+    public void setFecha_aprobacion(Date fecha_aprobacion) {
+        this.fecha_aprobacion = fecha_aprobacion;
+    }
+
+    public Ciudad getCiudadLugar() {
+        return ciudadLugar;
+    }
+
+    public void setCiudadLugar(Ciudad ciudadLugar) {
+        this.ciudadLugar = ciudadLugar;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
     /**

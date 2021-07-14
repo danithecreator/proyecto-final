@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,26 +21,33 @@ public class Comentario implements Serializable {
     private int id;
 
     @Column(name = "comentario", length = 1000)
+    @NotBlank
     private String comentario;
 
     @Positive
     @Column(name = "calificacion",nullable =false)
+    @NotBlank
+    @Positive
     @Max(5)
     @Min(1)
     private int calificacion;
 
     @Column(name = "respuesta", length = 1000)
     private String respuesta;
+
     @Temporal(TemporalType.DATE)
     @Column(name="fecha", nullable = false)
+    @NotBlank
     private Date fecha;
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotBlank
     private Usuario usuarioComentario;
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotBlank
     private Lugar lugarComentario;
 
     /**
