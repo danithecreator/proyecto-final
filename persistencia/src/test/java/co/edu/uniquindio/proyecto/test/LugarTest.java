@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.test;
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
 import co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
+import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Moderador;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
@@ -225,7 +226,7 @@ public class LugarTest {
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void obtenerComentariosPorLugarTest(){
-        List<Object> listado=lugarRepo.obtenerComentariosPorLugar(1);
+        List<Comentario> listado=lugarRepo.obtenerComentariosPorLugar(1);
         for(Object l:listado){
             System.out.println(l);
         }

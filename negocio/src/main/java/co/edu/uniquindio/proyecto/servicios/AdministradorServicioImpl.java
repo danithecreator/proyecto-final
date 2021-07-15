@@ -123,6 +123,15 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         return administradorRepo.findAll();
     }
 
+    @Override
+    public boolean existenAdmins() throws Exception {
+        if(administradorRepo.findAll().isEmpty())
+        {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Metodo que permite validar si un admin se encuentra en la bd
      * @param id
@@ -155,5 +164,6 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         Optional<Administrador> administradorEmail= administradorRepo.findByEmail(email);
         return administradorEmail.isEmpty();
     }
+
 
 }

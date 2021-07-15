@@ -15,4 +15,6 @@ public interface AdministradorServicio {
     Administrador obtenerAdmin(int codigo) throws Exception;
 
     List<Administrador> listarAdmins() throws Exception;
+
+    boolean existenAdmins() throws Exception;
 }

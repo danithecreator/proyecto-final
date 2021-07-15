@@ -96,7 +96,7 @@ public class TipoServicioImpl implements TipoServicio{
      */
 
     @Override
-    public List<Tipo> listarTiposLugares() throws Exception {
+    public List<Tipo> listarTiposLugares()  {
        return tipoRepo.findAll();
     }
 

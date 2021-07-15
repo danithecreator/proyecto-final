@@ -22,12 +22,26 @@
             <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true" requiredMessage="El nombre es obligatorio"/>
             <p:message for="nombre_lugar" />
 
+            <p:outputLabel for="ciudad_lugar" value="Ciudad: " />
+            <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudadLugar}" converter="#{ciudadConverter}" required="true" requiredMessage="La ciudad es obligatoria" >
+                <f:selectItem  itemLabel="Seleccione la ciudad" noSelectionOption="true"/>
+                <f:selectItems  var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}" />
+            </p:selectOneMenu>
+            <p:message for="ciudad_lugar" />
+
+            <p:outputLabel for="tipo_lugar" value="Tipo lugar: " />
+            <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipo}" converter="#{tipoLugarConverter}" required="true" requiredMessage="El tipo de lugar es obligatorio" >
+                <f:selectItem  itemLabel="Seleccione el tipo de lugar" noSelectionOption="true"/>
+                <f:selectItems  var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipoLugares}" />
+            </p:selectOneMenu>
+            <p:message for="tipo_lugar" />
+
             <p:outputLabel for="latitud_lugar" value="Latitud:" />
-            <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}" required="true" requiredMessage="La latitud es obligatoria"/>
+            <p:inputText id="latitud_lugar" value="#{lugarBean.lugar.latitud}" required="true" />
             <p:message for="latitud_lugar" />
 
             <p:outputLabel for="Longitud_lugar" value="Longitud:" />
-            <p:inputText id="Longitud_lugar" value="#{lugarBean.lugar.longitud}" required="true" requiredMessage="La longitud es obligatoria"/>
+            <p:inputText id="Longitud_lugar" value="#{lugarBean.lugar.longitud}" required="true" />
             <p:message for="Longitud_lugar" />
 
             <p:outputLabel for="descripcion_lugar" value="Descripcion:" />
@@ -36,7 +50,7 @@
 
         </h:panelGrid>
         <p:commandButton action="#{lugarBean.crearLugar}" value="Crear nuevo lugar" update="@form"/>
-        <p:growl for="mensaje-p" showDetail="true" />
+        <p:growl for="mensaje_bean" showDetail="true" />
     </h:form>
 
 </h:body>

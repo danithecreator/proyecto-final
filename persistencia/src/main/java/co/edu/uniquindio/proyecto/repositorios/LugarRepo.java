@@ -3,6 +3,8 @@ package co.edu.uniquindio.proyecto.repositorios;
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
 import co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
+import co.edu.uniquindio.proyecto.entidades.Comentario;
+import co.edu.uniquindio.proyecto.entidades.Horario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -79,7 +81,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
      * Query que permite traer un listado los comentarios de un lugar especifico
      */
     @Query("select c from Comentario c where c.lugarComentario.codigo = :id_lugar")
-    List<Object> obtenerComentariosPorLugar(int id_lugar);
+    List<Comentario> obtenerComentariosPorLugar(int id_lugar);
     /**
      * Query que permite traer un listado los comentarios sin respuesta de un usuario que ha creado lugares
      */
@@ -101,4 +103,8 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     //lugares que esten aprobados por algun moderador
     @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
+
+    @Query("select h from Horario h where h.horarioLugar.codigo  = :id_lugar")
+    List<Horario> obtenerHorariosPorLugar(int id_lugar);
+
 }

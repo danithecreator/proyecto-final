@@ -1,5 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -33,7 +36,7 @@ public class Horario implements Serializable {
     private String dia;
 
     @ManyToOne
-    private Horario horarioLugar;
+    private Lugar horarioLugar;
 
     /**
      * constructor

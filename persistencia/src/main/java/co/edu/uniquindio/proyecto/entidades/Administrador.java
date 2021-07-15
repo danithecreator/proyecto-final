@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
@@ -12,6 +15,8 @@ import java.util.List;
  * @author: Daniel Ceballos, Angy Tabares
  */
 @Entity
+@AllArgsConstructor
+@Builder
 public class Administrador extends Persona implements Serializable {
     //Campos o atributos de la clase
     @OneToMany(mappedBy ="administrador")

@@ -14,5 +14,6 @@ public interface ComentarioServicio {
     List<Comentario> listarComentarios() throws Exception;
     Comentario actualizarComentario(Comentario comentario) throws Exception;
 
+
 }
 

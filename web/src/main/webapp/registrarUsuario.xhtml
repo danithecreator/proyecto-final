@@ -11,12 +11,19 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+
     <title>Registrar nuevo usuario</title>
 </h:head>
 
 
 <h:body>
+    <div class="container">
+    <p:panel header="Registrar usuario">
     <h:form>
+
         <h:panelGrid columns="3" cellpadding="5">
             <p:outputLabel for="nombre_usuario" value="Nombre: " />
             <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" required="true" requiredMessage="El nombre es obligatorio"/>
@@ -30,15 +37,23 @@
             <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" required="true" requiredMessage="El email es obligatorio" />
             <p:message for="email_usuario" />
 
+            <p:outputLabel for="ciudad_usuario" value="Ciudad: " />
+            <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudadUsuario}" converter="#{ciudadConverter}" required="true" requiredMessage="La ciudad es obligatoria" >
+                <f:selectItem  itemLabel="Seleccione la ciudad" noSelectionOption="true"/>
+                <f:selectItems  var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}" />
+            </p:selectOneMenu>
+            <p:message for="ciudad_usuario" />
+
             <p:outputLabel for="password_usuario" value="Contraseña: " />
             <p:password id="password_usuario" value="#{usuarioBean.usuario.password}" required="true" requiredMessage="La contraseña es obligatoria" />
             <p:message for="password_usuario" />
 
         </h:panelGrid>
 
-        <p:commandButton value="Registrar Usuario" action="#{usuarioBean.registrarUsuario}" update="@form" />
+        <p:commandButton styleClass="mt-4" value="Registrar Usuario" action="#{usuarioBean.registrarUsuario}" update="@form" />
         <p:growl for="mensaje-p" showDetail="true" />
     </h:form>
-
+    </p:panel>
+    </div>
 </h:body>
 </html>

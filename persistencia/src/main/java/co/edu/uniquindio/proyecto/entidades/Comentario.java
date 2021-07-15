@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -26,7 +28,6 @@ public class Comentario implements Serializable {
 
     @Positive
     @Column(name = "calificacion",nullable =false)
-    @NotBlank
     @Positive
     @Max(5)
     @Min(1)
@@ -37,17 +38,14 @@ public class Comentario implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(name="fecha", nullable = false)
-    @NotBlank
     private Date fecha;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotBlank
     private Usuario usuarioComentario;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotBlank
     private Lugar lugarComentario;
 
     /**
@@ -65,6 +63,14 @@ public class Comentario implements Serializable {
         this.calificacion = calificacion;
         this.respuesta = respuesta;
         this.fecha = fecha;
+        this.usuarioComentario = usuarioComentario;
+        this.lugarComentario = lugarComentario;
+    }
+
+    @Builder
+    public Comentario( String comentario,  int calificacion,Lugar lugarComentario,  Usuario usuarioComentario) {
+        this.comentario = comentario;
+        this.calificacion = calificacion;
         this.usuarioComentario = usuarioComentario;
         this.lugarComentario = lugarComentario;
     }

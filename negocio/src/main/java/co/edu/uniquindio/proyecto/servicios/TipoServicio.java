@@ -10,7 +10,7 @@ public interface TipoServicio {
     void eliminarTipoLugar(Tipo t) throws Exception;
     Tipo actualizarTipoLugar(Tipo t) throws Exception;
     Tipo obtenerTipoLugar(int id) throws Exception;
-    List<Tipo> listarTiposLugares() throws Exception;
+    List<Tipo> listarTiposLugares() ;
 
 
 }

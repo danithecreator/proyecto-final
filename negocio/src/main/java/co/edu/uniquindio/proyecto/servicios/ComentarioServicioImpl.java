@@ -78,7 +78,7 @@ public class ComentarioServicioImpl implements ComentarioServicio{
             throw new Exception("El comentario ya existe");
         }
 
-
+         comentario.setFecha( new Date());
         return comentarioRepo.save(comentario);
     }
 
@@ -120,6 +120,8 @@ public class ComentarioServicioImpl implements ComentarioServicio{
 
         return comentarioRepo.save(comentario);
     }
+
+
 
 
 }

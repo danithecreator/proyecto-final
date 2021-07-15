@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -31,12 +33,10 @@ public class Lugar implements Serializable {
     private String nombre;
 
     @Column(name = "latitud",nullable =false)
-    @NotNull(message = "La latitud es obligatoria")
-    private float latitud;
+    private Float latitud;
 
     @Column(name = "longitud",nullable =false)
-    @NotNull(message = "La longitud es obligatoria")
-    private float longitud;
+    private Float longitud;
 
     @Column(name = "fecha_creacion",nullable =false)
     private Date fecha_creacion;
@@ -44,32 +44,33 @@ public class Lugar implements Serializable {
     @Column(name = "fecha_aprobacion")
     private Date fecha_aprobacion;
 
-    @OneToMany(mappedBy = "imagenLugar")
-    private List<Imagen> imagenes;
+    @ElementCollection
+    @JoinColumn(nullable = false)
+    @Column(name="url_imagen")
+    private List<String> imagenes;
 
-    @Column(name = "estado",nullable =false)
+    @Column(name = "estado")
     private boolean estado;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotBlank
     private Ciudad ciudadLugar;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotBlank
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotBlank
     private Tipo tipo;
 
     @OneToMany(mappedBy = "eventoLugar")
     private List<Evento> eventos;
 
-    @OneToMany(mappedBy = "telefonoLugar")
-    private  List<Telefono> telefonos;
+    @ElementCollection
+    @JoinColumn(nullable = false)
+    @Column(name="numero_telefonos")
+    private  List<String> telefonos;
 
     @OneToMany(mappedBy = "horarioLugar")
     private  List<Horario> horarios;
@@ -90,13 +91,27 @@ public class Lugar implements Serializable {
         super();
     }
 
-    public Lugar(String descripcion, String nombre, Ciudad ciudadLugar, Usuario usuario, Tipo tipo, Moderador moderador) {
+
+    public Lugar( String nombre,String descripcion, Ciudad ciudadLugar,Usuario usuario,Tipo tipo,  Moderador moderador) {
         this.descripcion = descripcion;
         this.nombre = nombre;
         this.ciudadLugar = ciudadLugar;
         this.usuario = usuario;
         this.tipo = tipo;
         this.moderador = moderador;
+   }
+
+   @Builder
+    public Lugar(@NotBlank @Size(max = 1000) String descripcion, @Size(max = 200) String nombre, Float latitud, Float longitud, List<String> imagenes, Ciudad ciudadLugar, @NotBlank Usuario usuario, @NotBlank Tipo tipo, List<Horario> horarios) {
+        this.descripcion = descripcion;
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.imagenes = imagenes;
+        this.ciudadLugar = ciudadLugar;
+        this.usuario = usuario;
+        this.tipo = tipo;
+        this.horarios = horarios;
     }
 
     //getter del codigo
@@ -124,27 +139,27 @@ public class Lugar implements Serializable {
         this.nombre = nombre;
     }
     //getter de la lista de imagenes
-    public List<Imagen> getImagenes() {
+    public List<String> getImagenes() {
         return imagenes;
     }
     //setter de la lista de imagenes
-    public void setImagenes(List<Imagen> imagenes) {
+    public void setImagenes(List<String> imagenes) {
         this.imagenes = imagenes;
     }
 
-    public float getLatitud() {
+    public Float getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(float latitud) {
+    public void setLatitud(Float latitud) {
         this.latitud = latitud;
     }
 
-    public float getLongitud() {
+    public Float getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(float longitud) {
+    public void setLongitud(Float longitud) {
         this.longitud = longitud;
     }
 
@@ -194,6 +209,22 @@ public class Lugar implements Serializable {
 
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     /**

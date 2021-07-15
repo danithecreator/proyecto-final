@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
+import co.edu.uniquindio.proyecto.entidades.Comentario;
+import co.edu.uniquindio.proyecto.entidades.Horario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
@@ -122,6 +124,16 @@ public class LugarServicioImpl implements LugarServicio{
     @Override
     public List<Lugar> buscarLugares(String nombre) {
         return lugarRepo.buscarLugares(nombre);
+    }
+
+    @Override
+    public List<Comentario> listarComentariosDeUnLugar(int codigoLugar) {
+        return lugarRepo.obtenerComentariosPorLugar(codigoLugar);
+    }
+
+    @Override
+    public List<Horario> listarHorariosDeUnLugar(int codigoLugar) {
+        return lugarRepo.obtenerHorariosPorLugar(codigoLugar);
     }
 
     /**
