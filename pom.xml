@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
@@ -21,8 +19,7 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <artifactId>proyecto-final</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Proyecto Final</name>
-    <description>Proyecto que agrupa todos los módulos correspondientes al
-        aplicativo</description>
+    <description>Proyecto que agrupa todos los módulos correspondientes al aplicativo</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -32,6 +29,11 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
 
         <dependency>

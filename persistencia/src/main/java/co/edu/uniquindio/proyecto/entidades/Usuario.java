@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
@@ -7,9 +9,15 @@ import java.util.List;
 
 /**
  * Esta clase define la entidad Usuario de la base de datos
+ *
  * @author: Daniel Ceballos, Angy Tabares
  */
 @Entity
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
     //Campos o atributos de la clase
     @Column(name = "latitud")
@@ -18,104 +26,25 @@ public class Usuario extends Persona implements Serializable {
     private float longitud;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Lugar> lugares;
 
     @ManyToOne
     private Ciudad ciudadUsuario;
     @ManyToMany
+    @ToString.Exclude
     private List<Lugar> lugaresFavoritos;
 
     @OneToMany(mappedBy = "usuarioComentario")
+    @ToString.Exclude
     private List<Comentario> comentarios;
 
-    /**
-     * Constructor de la clase vacio
-     */
-    public Usuario(){
-        super();
-    }
 
+    @Builder
     public Usuario(String email, String nickname, String password, String nombre, Ciudad ciudadUsuario) {
-        super( email, nickname, password, nombre);
+        super(email, nickname, password, nombre);
         this.ciudadUsuario = ciudadUsuario;
     }
 
-    /**
-     * getters y setters
-     */
-    public float getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(float latitud) {
-        this.latitud = latitud;
-    }
-
-    public float getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(float longitud) {
-        this.longitud = longitud;
-    }
-
-    public List<Lugar> getLugares() {
-        return lugares;
-    }
-
-    public void setLugares(List<Lugar> lugares) {
-        this.lugares = lugares;
-    }
-
-    public Ciudad getCiudadUsuario() {
-        return ciudadUsuario;
-    }
-
-    public void setCiudadUsuario(Ciudad ciudadUsuario) {
-        this.ciudadUsuario = ciudadUsuario;
-    }
-
-    //public List<Favorito> getFavoritos() {
-    //    return favoritos;
-   // }
-
-    //public void setFavoritos(List<Favorito> favoritos) {
-     //   this.favoritos = favoritos;
-    //}
-
-    public List<Comentario> getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(List<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
-
-    /**
-     * Hashcode and equals
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        Usuario usuario = (Usuario) o;
-
-        return Float.compare(usuario.latitud, latitud) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (latitud != +0.0f ? Float.floatToIntBits(latitud) : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "ciudadUsuario=" + ciudadUsuario +
-                "} " + super.toString();
-    }
+    
 }

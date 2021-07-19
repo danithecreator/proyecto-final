@@ -8,22 +8,33 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
-<h:head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="mapbox-gl.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <h:outputScript library="js" name="mapbox-gl.js"/>
-    <h:outputScript library="js" name="script_detalle.js"/>
-    <h:outputStylesheet library="css" name="detalleLugar.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <h:outputScript library="js" name="script_home.js"/>
+    <script src="./resources/js/animations.js"></script>
 
 
-    <title>Unilocal | Detalle lugar</title>
-</h:head>
-
+    <title><ui:insert name="title">Titulo</ui:insert></title>
+</head>
 <h:body>
-    <h2>Hola</h2>
+    <div id="header">
+        <ui:insert name="header">
 
+        </ui:insert>
+    </div>
+    <div id="contenido">
+        <ui:insert name="header">Contenido</ui:insert>
+    </div>
+    <div id="footer">
+        <ui:insert name="header">Pie</ui:insert>
+    </div>
 </h:body>
 </html>

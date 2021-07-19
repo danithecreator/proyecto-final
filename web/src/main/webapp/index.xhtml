@@ -11,20 +11,36 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css" />
-    <h:outputStylesheet library="css" name="mapbox-gl.css" />
-    <h:outputStylesheet library="css" name="style.css" />
-    <h:outputScript library="js" name="bootstrap.bundle.min.js" />
-    <h:outputScript library="js" name="mapbox-gl.js" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
+    <h:outputScript library="js" name="mapbox-gl.js"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <h:outputScript library="js" name="script_home.js"/>
+    <script src="./resources/js/animations.js"></script>
     <title>Unilocal</title>
 </h:head>
-<h:body>
+<h:body styleClass="position-relative overflow-hidden">
 
     <div id="header">
-        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark ">
             <div class="container">
-                <a class="navbar-brand" href="/"><i class="pi pi-map-marker"></i> Unilocal</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <lord-icon
+                            src="https://cdn.lordicon.com/zzcjjxew.json"
+                            trigger="loop"
+                            delay="5000"
+                            colors="primary:#ffffff,secondary:#ffc107"
+                            style="width:40px;height:40px;margin-left: 5px">
+
+                    </lord-icon>
+                    Unilocal</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor02">
@@ -40,91 +56,67 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <h:form class="d-flex me-2">
-                            <p:inputText styleClass="form-control me-2 input-search" placeholder="¿Qué está buscando?" value="#{busquedaBean.busqueda}" />
-                            <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar" action="#{busquedaBean.buscar}"  />
-                        </h:form>
-                        <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Login" action="#{busquedaBean.buscar}"  />
+                        <p:commandLink>
+                            <lord-icon
+                                    src="https://cdn.lordicon.com/dxjqoygy.json"
+                                    trigger="hover"
+                                    colors="primary:#FFFFFF,secondary:#ffc107"
+                                    style="width:50px;height:50px">
+                            </lord-icon>
+                        </p:commandLink>
+
                     </div>
                 </div>
             </div>
         </nav>
     </div>
 
-    <div id="content"  >
-        <div id="mapa" >
-            <div id='map' ></div>
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiY2FmbG9yZXp2aSIsImEiOiJja2EwZWF0YnEwMm82M2ZtazBvZWV3dHM1In0.YpYaeS5Y1RSvwBgVFvDMyA';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11'
-                });
-            </script>
+    <div id="content" class="mapContainer h-100 position-relative">
+        <div id="mapaHome" class="mapaHome"></div>
+        <div id="lateralPanel" class="lateralPanel position-absolute top-0">
+
+            <h:form styleClass="d-flex me-2 p-4 ">
+
+                <p:inputText styleClass="input-search" placeholder="¿Qué está buscando?"
+                             value="#{busquedaBean.busqueda}"/>
+                <p:commandButton styleClass="btnSearch" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
+
+
+            </h:form>
+
+            <h:form>
+
+                <p:dataScroller styleClass="listaLugares" value="#{inicioBean.lugares}" var="lugar" chunkSize="10"
+                                mode="inline"
+                >
+                    <div class="itemList">
+                        <div class="detailsContainer">
+                            <div class="itemDetails ">
+                                <h3>#{lugar.nombre}</h3>
+                                <p>#{lugar.tipo.nombre}</p>
+                                <p>#{lugar.descripcion}</p>
+
+                            </div>
+                            <p:graphicImage styleClass="imagenLugar "
+                                            url="https://media-cdn.tripadvisor.com/media/photo-s/11/b9/c6/d2/en-la-mejor-ubicacion.jpg">
+                            </p:graphicImage>
+                        </div>
+
+                        <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.codigo)}"
+                                         styleClass="ui-button-raised btnVerDetalle" icon="pi pi-arrow-right"
+                                         iconPos="right"/>
+                    </div>
+
+                </p:dataScroller>
+
+            </h:form>
         </div>
-        <div class="container">
-            <div class="" >
-                <div>
-                    <h2>Categorías</h2>
-                </div>
-                <div>
-                    <p>Lista categorías</p>
-                </div>
-            </div>
-            <div class="" >
-                <div>
-                    <h2>Lugares más populares</h2>
-                </div>
-                <div>
+        <button id="btnLateralPanel" class="btn btn-warning position-absolute btnLateralPanel">
+            <i id="iconBtnLateralPanel" class="pi pi-caret-right"></i>
+        </button>
 
-                    <h:form>
-                        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
-
-                            <p:dataViewGridItem>
-                                <div class="card" style="width: 18rem;">
-                                    <img src="" class="card-img-top" alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="card-title">#{lugar.nombre}</h5>
-                                        <p class="card-text">#{lugar.descripcion}</p>
-                                        <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
-                                    </div>
-                                </div>
-                            </p:dataViewGridItem>
-
-                            <p:dataViewListItem>
-                                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-                                    <p:graphicImage  styleClass="imagen-lugar" />
-                                    <p:outputPanel>
-                                        <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="Nombre:" />
-                                            <h:outputText value="#{lugar.nombre}" style="font-weight: bold" />
-                                            <h:outputText value="Tipo:" />
-                                            <h:outputText value="#{lugar.tipo.nombre}" />
-                                            <h:outputText value="Descripción:" />
-                                            <h:outputText value="#{lugar.descripcion}" />
-                                        </h:panelGrid>
-                                    </p:outputPanel>
-                                    <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" />
-                                </h:panelGrid>
-                            </p:dataViewListItem>
-
-                        </p:dataView>
-                    </h:form>
-
-                </div>
-            </div>
-        </div>
     </div>
 
-    <div class="footer">
-        <div class="py-4 bg-light" align="center">
-            <div class="justify-content-center" >
-                <div class="col-10" >
-                    <span>Universidad del Quindío - Programación avanzada - 2021</span>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </h:body>
 </html>
