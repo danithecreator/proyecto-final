@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 window.onload = function () {
     const imagenInicial = document.getElementById("imagenInicial")
     let lng = document.getElementById("lng").value;
@@ -44,16 +43,3 @@ function crearMarkerLugar(lng, lat, tipo, map) {
 
     let marker = new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(map)
 }
-=======
-console.log("hola")
-
-function testMap(lugar) {
-
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaXRoZWNyZWF0b3IiLCJhIjoiY2tyMnZkbzd4MXJ1cDJ1bzdlNHpmdnNxYyJ9.789aY-Czm5oJfDpOtj-8eA';
-    let map = new mapboxgl.Map({
-        container: "mapDetalleLugar",
-        style: 'mapbox://styles/mapbox/streets-v11'
-    });
-
-}
->>>>>>> cd30829744840c7ce455d9647b888043b5914fcf

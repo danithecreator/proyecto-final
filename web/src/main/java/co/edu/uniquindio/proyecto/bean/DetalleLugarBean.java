@@ -48,35 +48,26 @@ public class DetalleLugarBean implements Serializable {
     public void inicializar() {
 
         try {
-<<<<<<< HEAD
+            images = new ArrayList<String>();
 
+            images.add("https://www.eltiempo.com/files/image_640_428/uploads/2019/03/30/5ca02668e04df.jpeg");
+            images.add("https://www.revistalabarra.com/wp-content/uploads/2019/02/Potada-nota-enano-1500x800.jpg");
+            images.add("https://www.entornoturistico.com/wp-content/uploads/2016/06/clientes-en-un-bar-660x330.jpg");
 
             int id = Integer.parseInt(idLugar);
-            this.images = lugarServicio.obtenerLugar(id).getImagenes();
             this.lugar = lugarServicio.obtenerLugar(id);
             this.comentarios = lugarServicio.listarComentariosDeUnLugar(id);
 
 //            LugarDTO markerLugar = new LugarDTO(this.lugar.getCodigo(), this.lugar.getNombre(), this.lugar.getDescripcion(), this.lugar.getLatitud(), this.lugar.getLongitud(), this.lugar.getTipo().getNombre());
-=======
-            int id = Integer.parseInt(idLugar);
-            this.lugar = lugarServicio.obtenerLugar(id);
-
-            LugarDTO markerLugar = new LugarDTO(this.lugar.getCodigo(), this.lugar.getNombre(), this.lugar.getDescripcion(), this.lugar.getLatitud(), this.lugar.getLongitud(), this.lugar.getTipo().getNombre());
-
-            PrimeFaces.current().executeScript("testMap(" + new Gson().toJson(markerLugar) + ")");
->>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-<<<<<<< HEAD
     }
 
     public List<String> getImages() {
         return images;
-=======
->>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
     }
 
 

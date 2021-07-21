@@ -6,11 +6,7 @@ window.onload = function () {
     let flag = false
     mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaXRoZWNyZWF0b3IiLCJhIjoiY2tyMnZkbzd4MXJ1cDJ1bzdlNHpmdnNxYyJ9.789aY-Czm5oJfDpOtj-8eA';
     let map = new mapboxgl.Map({
-<<<<<<< HEAD
         container: "mapLugar",
-=======
-        container: "mapaLugar",
->>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
         style: 'mapbox://styles/mapbox/streets-v11',
 
     });
@@ -78,11 +74,6 @@ window.onload = function () {
 
 function setLtnLng(lat, lng) {
     console.log(lat + " - " + lng)
-<<<<<<< HEAD
-    document.getElementById("j_idt24:latidudLugar").value = lat;
-    document.getElementById("j_idt24:longitudLugar").value = lng;
-=======
-    document.getElementById("j_idt14:latidudLugar").value = lat;
-    document.getElementById("j_idt14:longitudLugar").value = lng;
->>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
+    document.getElementById("latidudLugar").value = lat;
+    document.getElementById("longitudLugar").value = lng;
 }

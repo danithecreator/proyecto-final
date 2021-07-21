@@ -82,7 +82,6 @@ public class InformacionPorDefecto implements CommandLineRunner {
 //        }
 //
 //        if (comentarioServicio.listarComentarios().isEmpty()) {
-<<<<<<< HEAD
 //        Comentario co1 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
 //        Comentario co2 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
 //        Comentario co3 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
@@ -100,16 +99,6 @@ public class InformacionPorDefecto implements CommandLineRunner {
 //        comentarioServicio.crearComentario(co5);
 //        comentarioServicio.crearComentario(co6);
         //  }
-=======
-//            Comentario co1 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
-//
-//            Comentario co2 = Comentario.builder().comentario("Este lugar es genial").calificacion(4).lugarComentario(lugarServicio.obtenerLugar(6)).usuarioComentario(usuarioServicio.obtenerUsuario(3)).build();
-//
-//
-//            comentarioServicio.crearComentario(co1);
-//            comentarioServicio.crearComentario(co2);
-//        }
->>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
 //    }
     }
 }
