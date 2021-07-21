@@ -17,6 +17,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -41,21 +42,29 @@ public class DetalleLugarBean implements Serializable {
     @Setter
     private List<Horario> horarios;
 
+    private List<String> images;
+
     @PostConstruct
     public void inicializar() {
 
         try {
+
+
             int id = Integer.parseInt(idLugar);
+            this.images = lugarServicio.obtenerLugar(id).getImagenes();
             this.lugar = lugarServicio.obtenerLugar(id);
+            this.comentarios = lugarServicio.listarComentariosDeUnLugar(id);
 
-            LugarDTO markerLugar = new LugarDTO(this.lugar.getCodigo(), this.lugar.getNombre(), this.lugar.getDescripcion(), this.lugar.getLatitud(), this.lugar.getLongitud(), this.lugar.getTipo().getNombre());
-
-            PrimeFaces.current().executeScript("testMap(" + new Gson().toJson(markerLugar) + ")");
+//            LugarDTO markerLugar = new LugarDTO(this.lugar.getCodigo(), this.lugar.getNombre(), this.lugar.getDescripcion(), this.lugar.getLatitud(), this.lugar.getLongitud(), this.lugar.getTipo().getNombre());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    public List<String> getImages() {
+        return images;
     }
 
 

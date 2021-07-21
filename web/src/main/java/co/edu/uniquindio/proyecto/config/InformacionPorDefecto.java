@@ -82,14 +82,23 @@ public class InformacionPorDefecto implements CommandLineRunner {
 //        }
 //
 //        if (comentarioServicio.listarComentarios().isEmpty()) {
-//            Comentario co1 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
+//        Comentario co1 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
+//        Comentario co2 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
+//        Comentario co3 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
+//        Comentario co4 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
+//        Comentario co5 = Comentario.builder().comentario("Este lugar es bueno").calificacion(5).lugarComentario(lugarServicio.obtenerLugar(5)).usuarioComentario(usuarioServicio.obtenerUsuario(2)).build();
 //
-//            Comentario co2 = Comentario.builder().comentario("Este lugar es genial").calificacion(4).lugarComentario(lugarServicio.obtenerLugar(6)).usuarioComentario(usuarioServicio.obtenerUsuario(3)).build();
+//
+//        Comentario co6 = Comentario.builder().comentario("Este lugar es genial").calificacion(4).lugarComentario(lugarServicio.obtenerLugar(6)).usuarioComentario(usuarioServicio.obtenerUsuario(3)).build();
 //
 //
-//            comentarioServicio.crearComentario(co1);
-//            comentarioServicio.crearComentario(co2);
-//        }
+//        comentarioServicio.crearComentario(co1);
+//        comentarioServicio.crearComentario(co2);
+//        comentarioServicio.crearComentario(co3);
+//        comentarioServicio.crearComentario(co4);
+//        comentarioServicio.crearComentario(co5);
+//        comentarioServicio.crearComentario(co6);
+        //  }
 //    }
     }
 }

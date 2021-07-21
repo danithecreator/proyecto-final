@@ -7,7 +7,12 @@
     padding: 2em 2em;
 }
 
-#mapaLugar {
+.ui-fileupload-content {
+    max-height: 200px;
+    overflow: scroll;
+}
+
+#mapLugar {
     width: 100% !important;
     height: 400px !important;
 }

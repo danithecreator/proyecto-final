@@ -8,22 +8,89 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
-    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
-    <h:outputScript library="js" name="mapbox-gl.js"/>
-    <h:outputScript library="js" name="script_detalle.js"/>
-    <h:outputStylesheet library="css" name="detalleLugar.css"/>
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="detalleLugar.css"/>
+        <h:outputStylesheet library="css" name="mapbox-gl.css"/>
+        <h:outputScript library="js" name="mapbox-gl.js"/>
+        <h:outputScript library="js" name="script_detalle.js"/>
 
 
-    <title>Unilocal | Detalle lugar</title>
-</h:head>
+    </ui:define>
 
-<h:body>
-    <h2>Hola</h2>
+    <ui:define name="titulo">Unilocal | Detalle Lugar</ui:define>
 
-</h:body>
+    <ui:define name="contenido">
+        <h:inputHidden id="lng" value="#{detalleLugarBean.lugar.longitud}"/>
+        <h:inputHidden id="lat" value="#{detalleLugarBean.lugar.latitud}"/>
+        <h:inputHidden id="tipo" value="#{detalleLugarBean.lugar.tipo.nombre}"/>
+
+        <div class="detalleLugar">
+            <div class="row detalleNombre ">
+                <h1 class="fs-1"><strong>#{detalleLugarBean.lugar.nombre}</strong></h1>
+                <p>#{detalleLugarBean.lugar.tipo.nombre}</p>
+            </div>
+            <div class=" row detalleGaleria">
+
+                <div class="col">
+                    <p:galleria styleClass="col w-100" value="#{detalleLugarBean.images}" var="image"
+                                showCaption="false">
+                        <p:graphicImage styleClass="w-100 h-100" url="/uploads/#{image}"
+                                        alt="Image Description for #{image}"
+                                        title="#{image}"/>
+                    </p:galleria>
+                </div>
+
+                <div class="col">
+                    <p class="fs-2">Informacion</p>
+                    <div class="mt-4">
+                        <label class="fs-5"> Descripcion</label>
+                        <p class="ms-2">#{detalleLugarBean.lugar.descripcion}.</p>
+                    </div>
+                    <div class="mt-4">
+                        <label class="fs-5"> Horarios</label>
+                        <p class="ms-2">No hay horarios para mostrar.</p>
+                    </div>
+                    <div class="mt-4">
+                        <label class="fs-5"> Telefonos</label>
+                        <p class="ms-2">No hay telefonos para mostrar.</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="row mt-4">
+                <p class="fs-2">Ubicacion</p>
+                <div class="mapDetalleLugarContainer">
+                    <div id="mapDetalleLugar" class="w-100 h-100"></div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <p class="fs-2">Comentarios</p>
+                <div class="mt-4 comentarios justify-content-center ">
+                    <p:repeat value="#{detalleLugarBean.comentarios}" var="comentario">
+                        <div class="comentario col ">
+                            <div class="d-flex align-items-center align-content-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="pi pi-user iconoUsuario"></i>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <p>#{comentario.usuarioComentario.nombre}</p>
+                                    <p>#{comentario.fecha}</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                #{comentario.comentario}
+                            </div>
+                        </div>
+
+                    </p:repeat>
+                </div>
+            </div>
+
+        </div>
+    </ui:define>
+</ui:composition>
 </html>

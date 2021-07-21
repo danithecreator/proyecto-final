@@ -8,33 +8,73 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
-<head>
+<h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
-    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
-    <h:outputScript library="js" name="mapbox-gl.js"/>
     <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
     <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-    <h:outputScript library="js" name="script_home.js"/>
-    <script src="./resources/js/animations.js"></script>
 
+    <ui:insert name="head"></ui:insert>
 
-    <title><ui:insert name="title">Titulo</ui:insert></title>
-</head>
+    <title><ui:insert name="titulo">Titulo</ui:insert></title>
+</h:head>
 <h:body>
-    <div id="header">
-        <ui:insert name="header">
+    <div id="encabezado">
+        <ui:insert name="encabezado">
+            <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark ">
+                <div class="container">
+
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <lord-icon
+                                src="https://cdn.lordicon.com/zzcjjxew.json"
+                                trigger="loop"
+                                delay="5000"
+                                colors="primary:#ffffff,secondary:#ffc107"
+                                style="width:40px;height:40px;margin-left: 5px">
+
+                        </lord-icon>
+                        Unilocal</a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarColor02"
+                            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarColor02">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/registrarUsuario.xhtml">Registrarse</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/crearLugar.xhtml">Crear Lugar</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex">
+                            <p:commandLink>
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/dxjqoygy.json"
+                                        trigger="hover"
+                                        colors="primary:#FFFFFF,secondary:#ffc107"
+                                        style="width:50px;height:50px">
+                                </lord-icon>
+                            </p:commandLink>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
 
         </ui:insert>
     </div>
-    <div id="contenido">
-        <ui:insert name="header">Contenido</ui:insert>
+    <div id="contenido" class="h-100">
+        <ui:insert name="contenido">Contenido</ui:insert>
     </div>
-    <div id="footer">
-        <ui:insert name="header">Pie</ui:insert>
-    </div>
+
 </h:body>
 </html>

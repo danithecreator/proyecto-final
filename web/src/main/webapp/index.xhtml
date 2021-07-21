@@ -8,115 +8,70 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
-    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
-    <h:outputScript library="js" name="mapbox-gl.js"/>
-    <h:outputStylesheet library="css" name="style.css"/>
-    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-    <h:outputScript library="js" name="script_home.js"/>
-    <script src="./resources/js/animations.js"></script>
-    <title>Unilocal</title>
-</h:head>
-<h:body styleClass="position-relative overflow-hidden">
+<ui:composition template="/WEB-INF/template.xhtml">
 
-    <div id="header">
-        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark ">
-            <div class="container">
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="mapbox-gl.css"/>
+        <h:outputStylesheet library="css" name="home.css"/>
+        <h:outputScript library="js" name="mapbox-gl.js"/>
+        <h:outputScript library="js" name="script_home.js"/>
+        <script src="./resources/js/animations.js"></script>
+    </ui:define>
+    <ui:define name="titulo">Unilocal | Home</ui:define>
 
-                <a class="navbar-brand d-flex align-items-center" href="/">
-                    <lord-icon
-                            src="https://cdn.lordicon.com/zzcjjxew.json"
-                            trigger="loop"
-                            delay="5000"
-                            colors="primary:#ffffff,secondary:#ffc107"
-                            style="width:40px;height:40px;margin-left: 5px">
+    <ui:define name="contenido">
+        <div class="position-relative h-100">
+            <div class="mapContainer h-100 position-relative">
+                <div id="mapaHome" class="mapaHome"></div>
+                <div id="lateralPanel" class="lateralPanel position-absolute top-0">
 
-                    </lord-icon>
-                    Unilocal</a>
+                    <h:form styleClass="d-flex me-2 p-4 ">
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="registrarUsuario.xhtml">Registrarse</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <p:commandLink>
-                            <lord-icon
-                                    src="https://cdn.lordicon.com/dxjqoygy.json"
-                                    trigger="hover"
-                                    colors="primary:#FFFFFF,secondary:#ffc107"
-                                    style="width:50px;height:50px">
-                            </lord-icon>
-                        </p:commandLink>
-
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <div id="content" class="mapContainer h-100 position-relative">
-        <div id="mapaHome" class="mapaHome"></div>
-        <div id="lateralPanel" class="lateralPanel position-absolute top-0">
-
-            <h:form styleClass="d-flex me-2 p-4 ">
-
-                <p:inputText styleClass="input-search" placeholder="¿Qué está buscando?"
-                             value="#{busquedaBean.busqueda}"/>
-                <p:commandButton styleClass="btnSearch" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
+                        <p:inputText styleClass="input-search" placeholder="¿Qué está buscando?"
+                                     value="#{busquedaBean.busqueda}"/>
+                        <p:commandButton styleClass="btnSearch" icon="pi pi-search"
+                                         action="#{busquedaBean.buscar}"/>
 
 
-            </h:form>
+                    </h:form>
 
-            <h:form>
+                    <h:form>
 
-                <p:dataScroller styleClass="listaLugares" value="#{inicioBean.lugares}" var="lugar" chunkSize="10"
-                                mode="inline"
-                >
-                    <div class="itemList">
-                        <div class="detailsContainer">
-                            <div class="itemDetails ">
-                                <h3>#{lugar.nombre}</h3>
-                                <p>#{lugar.tipo.nombre}</p>
-                                <p>#{lugar.descripcion}</p>
+                        <p:dataScroller styleClass="listaLugares" value="#{inicioBean.lugares}" var="lugar"
+                                        chunkSize="10"
+                                        mode="inline"
+                        >
+                            <div class="itemList">
+                                <div class="detailsContainer">
+                                    <div class="itemDetails ">
+                                        <h3>#{lugar.nombre}</h3>
+                                        <p>#{lugar.tipo.nombre}</p>
+                                        <p>#{lugar.descripcion}</p>
 
+                                    </div>
+                                    <p:graphicImage styleClass="imagenLugar "
+                                                    url="/uploads/#{lugar.imagenPrincipal}">
+                                    </p:graphicImage>
+                                </div>
+
+                                <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.codigo)}"
+                                                 styleClass="ui-button-raised btnVerDetalle"
+                                                 icon="pi pi-arrow-right"
+                                                 iconPos="right"/>
                             </div>
-                            <p:graphicImage styleClass="imagenLugar "
-                                            url="https://media-cdn.tripadvisor.com/media/photo-s/11/b9/c6/d2/en-la-mejor-ubicacion.jpg">
-                            </p:graphicImage>
-                        </div>
 
-                        <p:commandButton value="Ver detalle" action="#{inicioBean.irADetalle(lugar.codigo)}"
-                                         styleClass="ui-button-raised btnVerDetalle" icon="pi pi-arrow-right"
-                                         iconPos="right"/>
-                    </div>
+                        </p:dataScroller>
 
-                </p:dataScroller>
+                    </h:form>
+                </div>
+                <button id="btnLateralPanel" class="btn btn-warning position-absolute btnLateralPanel">
+                    <i id="iconBtnLateralPanel" class="pi pi-caret-right"></i>
+                </button>
 
-            </h:form>
+            </div>
         </div>
-        <button id="btnLateralPanel" class="btn btn-warning position-absolute btnLateralPanel">
-            <i id="iconBtnLateralPanel" class="pi pi-caret-right"></i>
-        </button>
+    </ui:define>
 
-    </div>
+</ui:composition>
 
-
-</h:body>
 </html>

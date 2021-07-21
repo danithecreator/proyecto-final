@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class Lugar implements Serializable {
     @JoinColumn(nullable = false)
     @ToString.Exclude
     @Column(name = "url_imagen")
-    private List<String> imagenes;
+    private List<String> imagenes = new ArrayList<>();
 
     @Column(name = "estado")
     private boolean estado;
@@ -117,5 +118,10 @@ public class Lugar implements Serializable {
         this.usuario = usuario;
         this.tipo = tipo;
         this.moderador = moderador;
+    }
+
+    public String getImagenPrincipal() {
+        if (!imagenes.isEmpty()) return imagenes.get(0);
+        return "defaultLugarImg.svg";
     }
 }
