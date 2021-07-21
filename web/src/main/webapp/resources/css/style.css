@@ -9,6 +9,13 @@
 }
 
 
+<<<<<<< HEAD
+=======
+body {
+    height: 100vh;
+}
+
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
 #header .btn-buscar {
     color: #f8f9fa;
     border-color: #f8f9fa;
@@ -32,6 +39,7 @@
     background: none !important;
     color: black !important;
     border: none !important;
+<<<<<<< HEAD
 }
 
 .mapContainer {
@@ -154,6 +162,130 @@ img {
 
 .detailsContainer {
     width: 100%;
+=======
+}
+
+.mapContainer {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+}
+
+.mapboxgl-popup-content {
+    border-radius: 5px;
+}
+
+.mapboxgl-popup-content p, a {
+    font-size: 14px;
+}
+
+.mapboxgl-popup-content p {
+    margin-bottom: 0;
+    color: #5c636a;
+
+}
+
+
+.mapboxgl-popup-content a {
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
+.mapboxgl-popup-content:hover,
+.mapboxgl-popup-content a:hover {
+    color: #000;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.mapaHome {
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    margin: 0;
+    color: #000;
+    text-decoration: none;
+}
+
+.lateralPanel {
+    z-index: 100;
+    left: -100%;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all ease-in-out 0.5s;
+
+
+}
+
+.slideIn {
+    left: 0;
+    opacity: 1;
+}
+
+.btnLateralPanel {
+    z-index: 100;
+    position: absolute;
+    box-shadow: none !important;
+    transition: all ease-in-out 0.8s;
+    top: 0%;
+}
+
+.btnMoveOut {
+    animation: forwards ease-in-out moveOut 0.5s;
+}
+
+.btnMoveIn {
+    animation: forwards ease-in-out moveIn 0.5s;
+}
+
+.btnVerDetalle {
+    background: #212529 !important;
+
+}
+
+.listaLugares {
+    padding: 0 !important;
+    height: 600px !important;
+}
+
+.ui-datascroller-content {
+    height: 100% !important;
+}
+
+.itemList {
+    display: flex !important;
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 180px !important;
+    box-shadow: 2px 2px 20px 1px rgba(0, 0, 0, 0.2);
+}
+
+.itemList p {
+    margin-bottom: 0;
+}
+
+.imagenLugar {
+    border-radius: 5px;
+    width: 6em;
+    height: 6em;
+}
+
+img {
+    object-fit: cover;
+    object-position: center center;
+}
+
+.detailsContainer {
+    width: 100%;
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
     display: flex;
     flex-direction: row;
 }
@@ -183,6 +315,7 @@ img {
 
 .markerHotel {
     background-image: url("https://image.flaticon.com/icons/png/512/3780/3780959.png");
+<<<<<<< HEAD
 }
 
 .markerRestaurante {
@@ -236,6 +369,61 @@ img {
         width: 100%;
     }
 
+=======
+}
+
+.markerRestaurante {
+    background-image: url("https://image.flaticon.com/icons/png/512/3081/3081347.png");
+}
+
+
+@keyframes moveOut {
+    0% {
+        right: 100%;
+        opacity: 0;
+    }
+
+
+    100% {
+        right: 0;
+        opacity: 1;
+
+    }
+}
+
+@keyframes moveIn {
+    0% {
+        left: 100%;
+        opacity: 0;
+    }
+
+
+    100% {
+        left: 0;
+        opacity: 1;
+
+    }
+}
+
+
+@media (min-width: 576px) {
+    .lateralPanel {
+        width: 100%;
+    }
+
+
+}
+
+@media (min-width: 768px) {
+    .lateralPanel {
+        width: 50%;
+    }
+
+    .input-search {
+        width: 100%;
+    }
+
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
     .btnSearch {
         right: 10%;
     }

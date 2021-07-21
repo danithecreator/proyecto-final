@@ -9,12 +9,16 @@ import co.edu.uniquindio.proyecto.servicios.TipoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
+<<<<<<< HEAD
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.file.UploadedFile;
 
+=======
+import org.primefaces.event.FlowEvent;
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,16 +42,23 @@ public class LugarBean implements Serializable {
     @Getter
     @Setter
     private Lugar lugar;
+<<<<<<< HEAD
 
 
     @Value("${upload.url}")
     private String urlImagenes;
     private ArrayList<String> imagenes;
 
+=======
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
     @Getter
     @Setter
     private boolean skip;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
     private final LugarServicio lugarServicio;
     private final CiudadServicio ciudadServicio;
     private final UsuarioServicio usuarioServicio;
@@ -64,7 +75,10 @@ public class LugarBean implements Serializable {
 
     public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio) {
         this.lugarServicio = lugarServicio;
+<<<<<<< HEAD
         this.imagenes = new ArrayList<>();
+=======
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
         this.ciudadServicio = ciudadServicio;
         this.usuarioServicio = usuarioServicio;
         this.tipoServicio = tipoServicio;
@@ -77,6 +91,7 @@ public class LugarBean implements Serializable {
         this.tipoLugares = tipoServicio.listarTiposLugares();
     }
 
+<<<<<<< HEAD
     public void crearLugar() {
 
         try {
@@ -99,6 +114,23 @@ public class LugarBean implements Serializable {
             }
         } catch (Exception e) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+=======
+    public String crearLugar() {
+
+        try {
+            System.out.println(lugar.getLatitud() + "," + lugar.getLongitud());
+            if (lugar.getLatitud() != null && lugar.getLongitud() != null) {
+
+                lugar.setUsuario(usuarioServicio.obtenerUsuario(2));
+
+
+                lugarServicio.crearLugar(lugar);
+
+                return "lugarCreado?faces-redirect=true";
+            }
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario ubicar el lugar dentro del mapa");
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
 
         }
@@ -138,6 +170,9 @@ public class LugarBean implements Serializable {
             return event.getNewStep();
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
 
 }

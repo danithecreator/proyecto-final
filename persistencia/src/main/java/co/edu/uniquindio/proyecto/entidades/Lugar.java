@@ -56,7 +56,11 @@ public class Lugar implements Serializable {
     @JoinColumn(nullable = false)
     @ToString.Exclude
     @Column(name = "url_imagen")
+<<<<<<< HEAD
     private List<String> imagenes = new ArrayList<>();
+=======
+    private List<String> imagenes;
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
 
     @Column(name = "estado")
     private boolean estado;
@@ -118,10 +122,13 @@ public class Lugar implements Serializable {
         this.usuario = usuario;
         this.tipo = tipo;
         this.moderador = moderador;
+<<<<<<< HEAD
     }
 
     public String getImagenPrincipal() {
         if (!imagenes.isEmpty()) return imagenes.get(0);
         return "defaultLugarImg.svg";
+=======
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
     }
 }

@@ -7,12 +7,16 @@
     padding: 2em 2em;
 }
 
+<<<<<<< HEAD
 .ui-fileupload-content {
     max-height: 200px;
     overflow: scroll;
 }
 
 #mapLugar {
+=======
+#mapaLugar {
+>>>>>>> cd30829744840c7ce455d9647b888043b5914fcf
     width: 100% !important;
     height: 400px !important;
 }
