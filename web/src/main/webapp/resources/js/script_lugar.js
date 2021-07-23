@@ -74,6 +74,6 @@ window.onload = function () {
 
 function setLtnLng(lat, lng) {
     console.log(lat + " - " + lng)
-    document.getElementById("latidudLugar").value = lat;
-    document.getElementById("longitudLugar").value = lng;
+    document.getElementById("crear-lugar:latidudLugar").value = lat;
+    document.getElementById("crear-lugar:longitudLugar").value = lng;
 }

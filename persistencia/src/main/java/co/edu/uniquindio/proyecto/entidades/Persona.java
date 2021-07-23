@@ -14,16 +14,16 @@ import java.io.Serializable;
  * @author: Daniel Ceballos, Angy Tabares
  */
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@MappedSuperclass
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
+@Entity
 public class Persona implements Serializable {
     //Campos o atributos de la clase
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @EqualsAndHashCode.Include
     @Column(name = "id")
     private int id;

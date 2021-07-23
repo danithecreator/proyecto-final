@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.LugarDTO;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Horario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Persona;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import com.google.gson.Gson;
 import lombok.Getter;
@@ -43,6 +44,9 @@ public class DetalleLugarBean implements Serializable {
     private List<Horario> horarios;
 
     private List<String> images;
+
+    @Value(value="#{seguridadBean.persona}")
+    private Persona personaLogin;
 
     @PostConstruct
     public void inicializar() {
