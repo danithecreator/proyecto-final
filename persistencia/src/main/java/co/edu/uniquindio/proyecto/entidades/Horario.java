@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,20 +30,25 @@ public class Horario implements Serializable {
 
     @Temporal(TemporalType.TIME)
     @Column(name = "hora_apertura", nullable = false)
-    @NotBlank
+
     private Date horaApertura;
 
     @Temporal(TemporalType.TIME)
     @Column(name = "hora_cierre", nullable = false)
-    @NotBlank
+
     private Date horaCierre;
 
     @Column(name = "dia_semana", nullable = false)
-    @NotBlank
+
     private String dia;
 
     @ManyToOne
     private Lugar horarioLugar;
+
+    public String obtenerStringHoras(Date horas) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        return sdf.format(horas);
+    }
 
 
 }

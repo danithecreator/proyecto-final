@@ -35,42 +35,42 @@ public class InformacionPorDefecto implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-//
-//        if (usuarioServicio.listarUsuario().isEmpty()) {
-//            Usuario u1 = Usuario.builder().nombre("Daniel").email("daniel@test.com").nickname("dani").password("123").build();
-//            usuarioServicio.registrarUsuario(u1);
-//            Usuario u2 = Usuario.builder().nombre("Angy").email("angyl@test.com").nickname("pao").password("123").build();
-//            usuarioServicio.registrarUsuario(u2);
-//            Usuario u3 = Usuario.builder().nombre("Pepe").email("pepe@test.com").nickname("pep").password("123").build();
-//            usuarioServicio.registrarUsuario(u3);
-//
-//
-//        }
-//
-//        if (ciudadServicio.listarCiudades().isEmpty()) {
-//            Ciudad c1 = new Ciudad("Armenia");
-//            Ciudad c2 = new Ciudad("Cali");
-//            Ciudad c3 = new Ciudad("Pereira");
-//            Ciudad c4 = new Ciudad("Medellin");
-//
-//            ciudadServicio.registrarCiudad(c1);
-//            ciudadServicio.registrarCiudad(c2);
-//            ciudadServicio.registrarCiudad(c3);
-//            ciudadServicio.registrarCiudad(c4);
-//        }
-//
-//        if (tipoServicio.listarTiposLugares().isEmpty()) {
-//            Tipo t1 = new Tipo("Restaurante");
-//            Tipo t2 = new Tipo("Hotel");
-//            Tipo t3 = new Tipo("Cafe");
-//            Tipo t4 = new Tipo("Bar");
-//
-//            tipoServicio.registrarTipoLugar(t1);
-//            tipoServicio.registrarTipoLugar(t2);
-//            tipoServicio.registrarTipoLugar(t3);
-//            tipoServicio.registrarTipoLugar(t4);
-//
-//        }
+
+        if (usuarioServicio.listarUsuario().isEmpty()) {
+            Usuario u1 = Usuario.builder().nombre("Daniel").email("daniel@test.com").nickname("dani").password("123").build();
+            usuarioServicio.registrarUsuario(u1);
+            Usuario u2 = Usuario.builder().nombre("Angy").email("angyl@test.com").nickname("pao").password("123").build();
+            usuarioServicio.registrarUsuario(u2);
+            Usuario u3 = Usuario.builder().nombre("Pepe").email("pepe@test.com").nickname("pep").password("123").build();
+            usuarioServicio.registrarUsuario(u3);
+
+
+        }
+
+        if (ciudadServicio.listarCiudades().isEmpty()) {
+            Ciudad c1 = new Ciudad("Armenia");
+            Ciudad c2 = new Ciudad("Cali");
+            Ciudad c3 = new Ciudad("Pereira");
+            Ciudad c4 = new Ciudad("Medellin");
+
+            ciudadServicio.registrarCiudad(c1);
+            ciudadServicio.registrarCiudad(c2);
+            ciudadServicio.registrarCiudad(c3);
+            ciudadServicio.registrarCiudad(c4);
+        }
+
+        if (tipoServicio.listarTiposLugares().isEmpty()) {
+            Tipo t1 = new Tipo("Restaurante");
+            Tipo t2 = new Tipo("Hotel");
+            Tipo t3 = new Tipo("Cafe");
+            Tipo t4 = new Tipo("Bar");
+
+            tipoServicio.registrarTipoLugar(t1);
+            tipoServicio.registrarTipoLugar(t2);
+            tipoServicio.registrarTipoLugar(t3);
+            tipoServicio.registrarTipoLugar(t4);
+
+        }
 //
 //        if (lugarServicio.listarLugares().isEmpty()) {
 //            Lugar l1 = Lugar.builder().nombre("Cafe de la 25").ciudadLugar(ciudadServicio.obtenerCiudad(1)).descripcion("Es un café muy rico").latitud(1.22F).longitud(1.33F).usuario(usuarioServicio.obtenerUsuario(2)).imagenes(new ArrayList<>()).tipo(tipoServicio.obtenerTipoLugar(3)).horarios(new ArrayList<>()).build();

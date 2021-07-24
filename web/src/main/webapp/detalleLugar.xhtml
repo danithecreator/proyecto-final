@@ -34,7 +34,7 @@
             <div class=" row detalleGaleria">
 
                 <div class="col">
-                    <p:galleria styleClass="col w-100" value="#{detalleLugarBean.images}" var="image"
+                    <p:galleria styleClass="col w-100" value="#{detalleLugarBean.lugar.imagenes}" var="image"
                                 showCaption="false">
                         <p:graphicImage styleClass="w-100 h-100" url="/uploads/#{image}"
                                         alt="Image Description for #{image}"
@@ -50,7 +50,24 @@
                     </div>
                     <div class="mt-4">
                         <label class="fs-5"> Horarios</label>
-                        <p class="ms-2">No hay horarios para mostrar.</p>
+                        <div class="row">
+                            <p class="col ms-2 fw-bold"> Dia </p>
+                            <p class="col ms-2 fw-bold">Abre </p>
+                            <p class="col ms-2 fw-bold">Cierra</p>
+                        </div>
+                        <div class="row">
+
+                            <p:repeat value="#{detalleLugarBean.lugar.horarios}" var="horario">
+                                <div class="row">
+
+                                    <p class=" col ms-2">#{horario.dia} </p>
+                                    <p class="col ms-2"> #{horario.horaApertura} </p>
+                                    <p class="col ms-2">#{horario.horaCierre}</p>
+                                </div>
+                            </p:repeat>
+                        </div>
+
+
                     </div>
                     <div class="mt-4">
                         <label class="fs-5"> Telefonos</label>

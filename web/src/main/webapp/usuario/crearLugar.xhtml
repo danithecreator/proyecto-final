@@ -7,6 +7,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions"
       xml:lang="en" lang="en">
 
 <ui:composition template="/WEB-INF/template.xhtml">
@@ -35,10 +36,6 @@
                         <p:wizard flowListener="#{lugarBean.onFlowProcess}">
                             <p:tab id="informacionPrincipal" title="Informacion">
                                 <p:panel header="Informacion principal">
-                                    <div>
-
-                                    </div>
-
                                     <p:outputLabel styleClass="fw-bold" for="nombre_lugar" value="Nombre: "/>
                                     <p:inputText styleClass="w-100 mb-0" id="nombre_lugar"
                                                  value="#{lugarBean.lugar.nombre}"
@@ -112,6 +109,98 @@
                                                style="width: 100%; margin: 0;border: none;background: none"/>
 
                                     <h:outputText styleClass="fw-bold" value="Horarios"/>
+
+                                    <p:commandButton value="Horario" action="#{lugarBean.nuevoHorario}"
+
+                                                     onclick="PF('Horarios').show()">
+
+                                    </p:commandButton>
+
+                                    <p:dataTable id="dt-products" widgetVar="dtProducts" var="horario"
+                                                 value="#{lugarBean.horarios}"
+                                                 reflow="true" styleClass="products-table"
+                                                 selection="#{lugarBean.horario}"
+                                                 rows="10">
+                                        <p:autoUpdate/>
+                                        <f:facet name="header">
+                                            <div class="products-table-header">
+                                                <span style="font-weight: bold">Horarios</span>
+                                            </div>
+                                        </f:facet>
+
+
+                                        <p:column headerText="Dia"
+                                        >
+                                            <h:outputText value="#{horario.dia}"/>
+                                        </p:column>
+                                        <p:column headerText="Abre"
+                                        >
+                                            <h:outputText
+                                                    value="#{horario.obtenerStringHoras(horario.horaApertura)}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Cierre"
+                                        >
+                                            <h:outputText value="#{horario.obtenerStringHoras(horario.horaCierre)}"/>
+                                        </p:column>
+                                        <p:column headerText="Borrar">
+                                            <p:commandButton icon="pi pi-trash"
+                                                             actionListener="#{lugarBean.eliminarHorario}"
+                                                             process="@this"
+                                            />
+
+                                        </p:column>
+
+                                    </p:dataTable>
+
+
+                                    <p:dialog header="Horarios" showEffect="fade"
+                                              widgetVar="Horarios" modal="true"
+                                              styleClass="">
+
+                                        <p:outputPanel id="panel">
+                                            <p:selectOneMenu styleClass="w-100" id="dias"
+                                                             value="#{lugarBean.horario.dia}"
+
+
+                                            >
+                                                <f:selectItem itemLabel="Seleccione un Dia"
+                                                              noSelectionOption="true"/>
+                                                <f:selectItems var="dia" itemLabel="#{dia}"
+                                                               value="#{lugarBean.dias}"/>
+                                            </p:selectOneMenu>
+
+                                            <p>
+                                                Abre
+                                                <pe:timePicker
+                                                        value="#{lugarBean.horario.horaApertura}"
+                                                        mode="popup"
+                                                        widgetVar="popupTimeWidget2"
+                                                        label="Popup time picker"/>
+                                            </p>
+
+
+                                            <p>
+                                                Cierre
+                                                <pe:timePicker value="#{lugarBean.horario.horaCierre}" mode="popup"
+                                                               widgetVar="popupTimeWidget"
+                                                               label="Popup time picker"/>
+                                            </p>
+                                        </p:outputPanel>
+                                        <f:facet name="footer">
+                                            <p:commandButton
+                                                    styleClass="mt-3 ui-button-raised ui-button-warning fw-bold "
+                                                    value="Guardar"
+                                                    update="panel,dt-products"
+                                                    process="panel,dt-products, @this"
+                                                    onclick="PF('Horarios').hide()"
+
+                                                    action="#{lugarBean.crearHorario}">
+
+                                            </p:commandButton>
+                                        </f:facet>
+
+                                    </p:dialog>
 
 
                                 </p:panel>

@@ -16,3 +16,9 @@
     width: 100% !important;
     height: 400px !important;
 }
+
+#ui-timepicker-div {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
