@@ -5,8 +5,9 @@ import co.edu.uniquindio.proyecto.entidades.Persona;
 import co.edu.uniquindio.proyecto.repositorios.PersonaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.Optional;
 
 @Service

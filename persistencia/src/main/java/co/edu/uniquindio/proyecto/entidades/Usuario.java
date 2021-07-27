@@ -31,7 +31,9 @@ public class Usuario extends Persona implements Serializable {
 
     @ManyToOne
     private Ciudad ciudadUsuario;
-    @ManyToMany
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Lugar> lugaresFavoritos;
 

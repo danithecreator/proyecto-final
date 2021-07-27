@@ -36,7 +36,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        if (usuarioServicio.listarUsuario().isEmpty()) {
+       if (usuarioServicio.listarUsuario().isEmpty()) {
             Usuario u1 = Usuario.builder().nombre("Daniel").email("daniel@test.com").nickname("dani").password("123").build();
             usuarioServicio.registrarUsuario(u1);
             Usuario u2 = Usuario.builder().nombre("Angy").email("angyl@test.com").nickname("pao").password("123").build();

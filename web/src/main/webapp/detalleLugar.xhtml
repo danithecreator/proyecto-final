@@ -43,38 +43,61 @@
                 </div>
 
                 <div class="col">
-                    <p class="fs-2">Informacion</p>
-                    <div class="mt-4">
-                        <label class="fs-5"> Descripcion</label>
-                        <p class="ms-2">#{detalleLugarBean.lugar.descripcion}.</p>
-                    </div>
-                    <div class="mt-4">
-                        <label class="fs-5"> Horarios</label>
-                        <div class="row">
-                            <p class="col ms-2 fw-bold"> Dia </p>
-                            <p class="col ms-2 fw-bold">Abre </p>
-                            <p class="col ms-2 fw-bold">Cierra</p>
+                    <div class="card">
+                        <div class="card-header">
+                            Información
                         </div>
-                        <div class="row">
 
-                            <p:repeat value="#{detalleLugarBean.lugar.horarios}" var="horario">
+                        <div class="card-body">
+                            <div>
+
+
+                            </div>
+                            <div class="mt-4">
+                                <label class="fs-5"> Descripcion</label>
+                                <p class="ms-2">#{detalleLugarBean.lugar.descripcion}.</p>
+                            </div>
+                            <div class="mt-4">
+                                <label class="fs-5"> Horarios</label>
+                                <div class="row">
+                                    <p class="col ms-2 fw-bold"> Dia </p>
+                                    <p class="col ms-2 fw-bold">Abre </p>
+                                    <p class="col ms-2 fw-bold">Cierra</p>
+                                </div>
                                 <div class="row">
 
-                                    <p class=" col ms-2">#{horario.dia} </p>
-                                    <p class="col ms-2"> #{horario.horaApertura} </p>
-                                    <p class="col ms-2">#{horario.horaCierre}</p>
+                                    <p:repeat value="#{detalleLugarBean.lugar.horarios}" var="horario">
+                                        <div class="row">
+
+                                            <p class=" col ms-2">#{horario.dia} </p>
+                                            <p class="col ms-2"> #{horario.horaApertura} </p>
+                                            <p class="col ms-2">#{horario.horaCierre}</p>
+                                        </div>
+                                    </p:repeat>
                                 </div>
-                            </p:repeat>
+
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="fs-5"> Telefonos</label>
+                                <p class="ms-2">No hay telefonos para mostrar.</p>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
+                                </div>
+
+                                <div class="col-sm">
+                                    <h:form id="favorito-lugar" rendered="#{seguridadBean.autenticado}" >
+
+                                        <p:commandButton icon="#{detalleLugarBean.icono}" alt="Marcar como favorito" title="Marcar como favorito" styleClass="rounded-button ui-button-warning ui-button-outlined"  action="#{detalleLugarBean.marcarFavorito}"  update="@form"> </p:commandButton>
+
+                                    </h:form>
+                                </div>
+                            </div>
                         </div>
-
-
                     </div>
-                    <div class="mt-4">
-                        <label class="fs-5"> Telefonos</label>
-                        <p class="ms-2">No hay telefonos para mostrar.</p>
-                    </div>
-
-
                 </div>
             </div>
             <div class="row mt-4">
@@ -83,30 +106,54 @@
                     <div id="mapDetalleLugar" class="w-100 h-100"></div>
                 </div>
             </div>
-            <div class="row mt-4">
-                <p class="fs-2">Comentarios</p>
-                <div class="mt-4 comentarios justify-content-center ">
-                    <p:repeat value="#{detalleLugarBean.comentarios}" var="comentario">
-                        <div class="comentario col ">
-                            <div class="d-flex align-items-center align-content-center">
-                                <div class="d-flex align-items-center">
-                                    <i class="pi pi-user iconoUsuario"></i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <p>#{comentario.usuarioComentario.nombre}</p>
-                                    <p>#{comentario.fecha}</p>
-                                </div>
-                            </div>
 
-                            <div class="mt-4">
-                                #{comentario.comentario}
-                            </div>
-                        </div>
+            <br></br>
 
-                    </p:repeat>
+            <h:form rendered="#{seguridadBean.autenticado}">
+
+
+                <div class="card">
+                    <div class="card-header">
+                        Hacer Comentario
+                    </div>
+                    <div class="card-body">
+                        <p:inputTextarea styleClass="w-100" id="comentario" value="#{detalleLugarBean.nuevoComentario.comentario}" required="true">  </p:inputTextarea>
+                        <p:rating value="#{detalleLugarBean.nuevoComentario.calificacion}" required="true"/>
+                        <br></br>
+
+                        <p:commandButton  action="#{detalleLugarBean.crearComentario}" value="Comentar" update="@form"/>
+                    </div>
                 </div>
-            </div>
+            </h:form>
 
+
+            <h:form id="comentariosF" >
+
+                <div class="row mt-4">
+                    <p class="fs-2">Comentarios</p>
+                    <div class="mt-4 comentarios justify-content-center ">
+
+                        <p:repeat value="#{detalleLugarBean.comentarios}" var="comentario" >
+                            <div class="comentario col ">
+                                <div class="d-flex align-items-center align-content-center">
+                                    <div class="d-flex align-items-center">
+                                        <i class="pi pi-user iconoUsuario"></i>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <p>#{comentario.usuarioComentario.nombre}</p>
+                                        <p>#{comentario.fecha}</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    #{comentario.comentario}
+                                </div>
+                            </div>
+
+                        </p:repeat>
+                    </div>
+                </div>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>

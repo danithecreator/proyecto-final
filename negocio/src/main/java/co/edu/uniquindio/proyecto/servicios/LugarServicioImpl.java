@@ -5,19 +5,25 @@ import co.edu.uniquindio.proyecto.entidades.Horario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
+import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
+
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class LugarServicioImpl implements LugarServicio{
 
     private final LugarRepo lugarRepo;
+    private final UsuarioRepo usuarioRepo;
 
-    public LugarServicioImpl(LugarRepo lugarRepo) {
+    public LugarServicioImpl(LugarRepo lugarRepo,UsuarioRepo usuarioRepo) {
+
         this.lugarRepo = lugarRepo;
+        this.usuarioRepo=usuarioRepo;
     }
 
     /**
@@ -134,6 +140,40 @@ public class LugarServicioImpl implements LugarServicio{
     @Override
     public List<Horario> listarHorariosDeUnLugar(int codigoLugar) {
         return lugarRepo.obtenerHorariosPorLugar(codigoLugar);
+    }
+
+    @Override
+    public Integer obtenerCalificacionPromedio(int lugarId) throws Exception {
+       if(estaLugar(lugarId))
+       {
+           throw new Exception("El id no existe");
+       }
+       return  lugarRepo.obtenerCalificacionPromedio(lugarId);
+    }
+
+    @Override
+    public void marcarFavorito(Lugar l, Usuario u) {
+
+        if(u.getLugaresFavoritos().contains(l))
+        {
+            u.getLugaresFavoritos().remove(l);
+        }else{
+            u.getLugaresFavoritos().add(l);
+       }
+
+        usuarioRepo.save(u);
+
+    }
+
+    @Override
+    public boolean esFavorito(Lugar l, Usuario u) {
+
+        if(u.getLugaresFavoritos().contains(l))
+        {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     /**

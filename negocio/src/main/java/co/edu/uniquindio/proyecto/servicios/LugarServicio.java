@@ -17,5 +17,7 @@ public interface LugarServicio {
     List<Lugar> buscarLugares(String nombre);
     List<Comentario> listarComentariosDeUnLugar(int codigoLugar);
     List<Horario> listarHorariosDeUnLugar(int codigoLugar);
-
+    Integer obtenerCalificacionPromedio(int lugarId) throws Exception;
+    void marcarFavorito(Lugar l, Usuario u) ;
+    boolean esFavorito(Lugar l, Usuario u);
 }
