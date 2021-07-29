@@ -69,7 +69,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
      * Query que permite traer los lugares creados por un usuario especifico
      */
     @Query("select l from Lugar l where l.usuario.email = :emailUsuario")
-    List<Object> obtenerLugaresCreadosPorUsuario(String emailUsuario);
+    List<Lugar> obtenerLugaresCreadosPorUsuario(String emailUsuario);
 
     /**
      * Query que permite traer un listado de todos los lugares y la información del usuario que los creó

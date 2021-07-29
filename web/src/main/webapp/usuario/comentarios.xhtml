@@ -15,26 +15,21 @@
         <h:outputStylesheet library="css" name="mapbox-gl.css"/>
         <h:outputScript library="js" name="mapbox-gl.js"/>
         <h:outputScript library="js" name="script_detalle.js"/>
-
-
     </ui:define>
 
-    <ui:define name="titulo">Unilocal | Detalle Lugar</ui:define>
+    <ui:define name="titulo">Unilocal | Comentarios</ui:define>
 
-    <ui:define name="contenido">
-        <h:inputHidden id="lng" value="#{detalleLugarBean.lugar.longitud}"/>
-        <h:inputHidden id="lat" value="#{detalleLugarBean.lugar.latitud}"/>
-        <h:inputHidden id="tipo" value="#{detalleLugarBean.lugar.tipo.nombre}"/>
+    <ui:define name="contenido" >
 
-        <div class="detalleLugar">
+        <div class="container " >
             <div class="row detalleNombre ">
-                <h1 class="fs-1"><strong>#{detalleLugarBean.lugar.nombre}</strong></h1>
+                <h1 class="fs-1"><strong>#{comentariosBean.lugar.nombre}</strong></h1>
                 <p>#{detalleLugarBean.lugar.tipo.nombre}</p>
             </div>
             <div class=" row detalleGaleria">
 
                 <div class="col">
-                    <p:galleria styleClass="col w-100" value="#{detalleLugarBean.lugar.imagenes}" var="image"
+                    <p:galleria styleClass="col w-100" value="#{comentariosBean.lugar.imagenes}" var="image"
                                 showCaption="false">
                         <p:graphicImage styleClass="w-100 h-100" url="/uploads/#{image}"
                                         alt="Image Description for #{image}"
@@ -55,7 +50,7 @@
                             </div>
                             <div class="mt-4">
                                 <label class="fs-5"> Descripcion</label>
-                                <p class="ms-2">#{detalleLugarBean.lugar.descripcion}.</p>
+                                <p class="ms-2">#{comentariosBean.lugar.descripcion}.</p>
                             </div>
                             <div class="mt-4">
                                 <label class="fs-5"> Horarios</label>
@@ -66,7 +61,7 @@
                                 </div>
                                 <div class="row">
 
-                                    <p:repeat value="#{detalleLugarBean.lugar.horarios}" var="horario">
+                                    <p:repeat value="#{comentariosBean.lugar.horarios}" var="horario">
                                         <div class="row">
 
                                             <p class=" col ms-2">#{horario.dia} </p>
@@ -83,57 +78,25 @@
                                 <p class="ms-2">No hay telefonos para mostrar.</p>
                             </div>
                             <br/>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <p:rating value="#{detalleLugarBean.calificacionPromedio}" readonly="true"/>
-                                </div>
 
-                                <div class="col-sm">
-                                    <h:form id="favorito-lugar" rendered="#{seguridadBean.autenticado}" >
 
-                                        <p:commandButton icon="#{detalleLugarBean.icono}" alt="Marcar como favorito" title="Marcar como favorito" styleClass="rounded-button ui-button-warning ui-button-outlined"  action="#{detalleLugarBean.marcarFavorito}"  update="@form"> </p:commandButton>
-
-                                    </h:form>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <p class="fs-2">Ubicacion</p>
-                <div class="mapDetalleLugarContainer">
-                    <div id="mapDetalleLugar" class="w-100 h-100"></div>
                 </div>
             </div>
 
             <br></br>
 
-            <h:form rendered="#{seguridadBean.autenticado}">
 
 
-                <div class="card">
-                    <div class="card-header">
-                        Hacer Comentario
-                    </div>
-                    <div class="card-body">
-                        <p:inputTextarea styleClass="w-100" id="comentario" value="#{detalleLugarBean.nuevoComentario.comentario}" required="true">  </p:inputTextarea>
-                        <p:rating value="#{detalleLugarBean.nuevoComentario.calificacion}" required="true"/>
-                        <br></br>
 
-                        <p:commandButton  action="#{detalleLugarBean.crearComentario}" value="Comentar" update="@form"/>
-                    </div>
-                </div>
-            </h:form>
-
-
-            <h:form id="comentariosF" >
+            <h:form id="comentariosF"  >
 
                 <div class="row mt-4">
                     <p class="fs-2">Comentarios</p>
                     <div class="mt-4 comentarios justify-content-center ">
 
-                        <p:repeat value="#{detalleLugarBean.comentarios}" var="comentario" >
+                        <p:repeat value="#{comentariosBean.comentarios}" var="comentario" >
                             <div class="comentario col ">
                                 <div class="d-flex align-items-center align-content-center">
                                     <div class="d-flex align-items-center">
@@ -148,28 +111,40 @@
                                 <div class="mt-4">
                                     #{comentario.comentario}
                                 </div>
-                                <br/>
+
+
+                                    <p:inputText  id="respuesta" value="#{comentariosBean.respuesta}"  placeholder="Respuesta" rendered="#{!comentariosBean.hayRespuesta(comentario)}">  </p:inputText>
+                                    <br/>
+                                    <br/>
+                                    <p:commandButton  action="#{comentariosBean.responderComentario(comentario)}"  rendered="#{!comentariosBean.hayRespuesta(comentario)}" value="Responder" update="@form"/>
+
                                 <h:form rendered="#{comentariosBean.hayRespuesta(comentario)}">
                                     <div class="card">
                                         <div class="card-header">
                                             Respuesta de: #{comentariosBean.lugar.usuario.nickname}
                                         </div>
                                         <div class="card-body">
-                                            #{comentario.respuesta}
+                                           #{comentario.respuesta}
                                         </div>
                                     </div>
                                 </h:form>
+
                             </div>
+
 
                         </p:repeat>
                     </div>
                 </div>
             </h:form>
+
+
         </div>
 
-        <br/>
-        <br/>
-        <br/>
+
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
     </ui:define>
 </ui:composition>
 </html>

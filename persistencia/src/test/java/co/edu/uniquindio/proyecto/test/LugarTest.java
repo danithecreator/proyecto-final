@@ -204,7 +204,7 @@ public class LugarTest {
         }
 
     }
-    @Test
+ /*   @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void obtenerLugaresCreadosPorUsuarioTest(){
         List<Object> listado=lugarRepo.obtenerLugaresCreadosPorUsuario("daniel@gmail.com");
@@ -212,7 +212,7 @@ public class LugarTest {
             System.out.println(l);
             System.out.println();
         }
-    }
+    }*/
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void  obtenerListaLugaresEinformacionUsuarioCreador(){

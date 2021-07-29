@@ -20,4 +20,5 @@ public interface LugarServicio {
     Integer obtenerCalificacionPromedio(int lugarId) throws Exception;
     void marcarFavorito(Lugar l, Usuario u) ;
     boolean esFavorito(Lugar l, Usuario u);
+    List<Lugar> obtenerLugaresUsuario(String email)  throws Exception;
 }

@@ -118,6 +118,11 @@ a {
 
 }
 
+.btnVerComentarios {
+    background: #212529 !important;
+
+}
+
 .listaLugares {
     padding: 0 !important;
     height: 600px !important;

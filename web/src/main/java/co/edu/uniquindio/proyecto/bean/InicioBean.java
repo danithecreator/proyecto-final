@@ -46,5 +46,9 @@ public class InicioBean implements Serializable {
 
     }
 
+    public String irAComentario(int id) {
+        return "/usuario/comentarios?faces-redirect=true&amp;lugar=" + id;
+
+    }
 
 }

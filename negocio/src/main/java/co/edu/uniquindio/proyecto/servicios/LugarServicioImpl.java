@@ -176,6 +176,11 @@ public class LugarServicioImpl implements LugarServicio{
         }
     }
 
+    @Override
+    public List<Lugar> obtenerLugaresUsuario(String email) throws Exception {
+        return lugarRepo.obtenerLugaresCreadosPorUsuario(email);
+    }
+
     /**
      * Metodo que permite validar si un lugar se encuentra en la bd
      * @param id
