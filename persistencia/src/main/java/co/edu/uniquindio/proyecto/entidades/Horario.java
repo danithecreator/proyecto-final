@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -28,15 +29,15 @@ public class Horario implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Temporal(TemporalType.TIME)
+
     @Column(name = "hora_apertura", nullable = false)
 
-    private Date horaApertura;
+    private LocalTime horaApertura;
 
-    @Temporal(TemporalType.TIME)
+
     @Column(name = "hora_cierre", nullable = false)
 
-    private Date horaCierre;
+    private LocalTime horaCierre;
 
     @Column(name = "dia_semana", nullable = false)
 
@@ -44,12 +45,6 @@ public class Horario implements Serializable {
 
     @ManyToOne
     private Lugar horarioLugar;
-
-    public String obtenerStringHoras(Date horas) {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-        return sdf.format(horas);
-        
-    }
 
 
 }

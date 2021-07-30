@@ -51,14 +51,17 @@
                 <p:column headerText="Telefonos">
                     <p:repeat value="#{lugar.telefonos}" var="telefono">
                         <h:outputText value="#{telefono}"/>
+                        <br></br>
                     </p:repeat>
 
                 </p:column>
-
-                <p:column headerText="Estado">
-                    <h:outputText value="Abierto" rendered="#{!lugar.estaAbierto}"/>
+                <p:column headerText="Tipo" sortBy="#{lugar.tipo.nombre}" filterBy="#{lugar.tipo.nombre}">
+                    <h:outputText value="#{lugar.tipo.nombre}"/>
                 </p:column>
 
+                <p:column headerText="Estado">
+                    <h:outputText value="#{busquedaBean.cadenaEstaAbierto(lugar)}"/>
+                </p:column>
 
             </p:dataTable>
         </h:form>

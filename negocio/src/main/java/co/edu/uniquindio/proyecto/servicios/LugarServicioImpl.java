@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class LugarServicioImpl implements LugarServicio {
 
     private final LugarRepo lugarRepo;
@@ -128,9 +129,12 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
-    public List<Lugar> buscarLugares(String nombre) {
-
-        return lugarRepo.buscarLugares(nombre);
+    public List<Lugar> buscarLugares(String nombre) throws Exception {
+        List<Lugar> lista = lugarRepo.buscarLugares(nombre);
+        if (lista.isEmpty()) {
+            throw new Exception("No hay Lugares Aun");
+        }
+        return lista;
     }
 
     @Override
@@ -195,6 +199,11 @@ public class LugarServicioImpl implements LugarServicio {
         }
         System.out.println("sali del for");
         return listaLugarCalificacionDTOS;
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresUsuario(String email) throws Exception {
+        return lugarRepo.obtenerLugaresCreadosPorUsuario(email);
     }
 
     /**

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -195,9 +196,7 @@ public class LugarBean implements Serializable {
 
             this.horarios.add(horario);
             nuevoHorario();
-            for (Horario h : this.horarios) {
-                System.out.println(h);
-            }
+            PrimeFaces.current().executeScript("PF('Horarios    ').hide()");
         } catch (Exception e) {
             e.printStackTrace();
         }

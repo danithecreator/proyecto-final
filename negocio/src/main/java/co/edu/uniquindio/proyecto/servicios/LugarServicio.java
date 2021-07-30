@@ -21,7 +21,7 @@ public interface LugarServicio {
 
     List<Lugar> listarLugares() throws Exception;
 
-    List<Lugar> buscarLugares(String nombre);
+    List<Lugar> buscarLugares(String nombre) throws Exception;
 
     List<Comentario> listarComentariosDeUnLugar(int codigoLugar);
 
@@ -37,4 +37,5 @@ public interface LugarServicio {
 
     List<LugarCalificacionDTO> calificacionesLugarCiudad(int codigoCiudad);
 
+    List<Lugar> obtenerLugaresUsuario(String email) throws Exception;
 }

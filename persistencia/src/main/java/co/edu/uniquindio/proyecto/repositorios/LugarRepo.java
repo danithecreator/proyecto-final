@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -70,13 +71,13 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     List<Object[]> obtenerCantidadLugaresNoAprobadosPorCiudad();
 
     @Query("select l.tipo.nombre,count(l)  from Lugar l join l.horarios h where h.dia= :diaSemana and  :horaActual between h.horaApertura and h.horaCierre group by l.tipo")
-    List<Object[]> obtenerCantidadLugaresAbiertosPorCategoria(String diaSemana, Date horaActual);
+    List<Object[]> obtenerCantidadLugaresAbiertosPorCategoria(String diaSemana, LocalDate horaActual);
 
     /**
      * Query que permite traer los lugares creados por un usuario especifico
      */
     @Query("select l from Lugar l where l.usuario.email = :emailUsuario")
-    List<Object> obtenerLugaresCreadosPorUsuario(String emailUsuario);
+    List<Lugar> obtenerLugaresCreadosPorUsuario(String emailUsuario);
 
     /**
      * Query que permite traer un listado de todos los lugares y la información del usuario que los creó
@@ -110,8 +111,8 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
 
     Optional<Lugar> findByCodigo(int codigo);
 
-    //lugares que esten aprobados por algun moderador
-    @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') ")
+
+    @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') or l.tipo.nombre like concat('%', :nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
 
     @Query("select h from Horario h where h.horarioLugar.codigo  = :id_lugar")

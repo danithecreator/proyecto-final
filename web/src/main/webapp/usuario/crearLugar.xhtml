@@ -94,6 +94,7 @@
                                                   dragDropSupport="true"
                                                   multiple="true" update="messages" sizeLimit="1000000" fileLimit="5"
                                                   allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+
                                     />
 
                                     <p:growl id="messages" showDetail="true" keepAlive="true"/>
@@ -112,7 +113,9 @@
 
                                     <h:outputText styleClass="fw-bold" value="Horarios"/>
 
-                                    <p:commandButton value="Horario" action="#{lugarBean.nuevoHorario}"
+                                    <p:commandButton icon="pi pi-plus"
+                                                     styleClass="rounded-button ui-button-success ui-button-flat"
+                                                     action="#{lugarBean.nuevoHorario}"
 
                                                      onclick="PF('Horarios').show()">
 
@@ -138,19 +141,18 @@
                                         <p:column headerText="Abre"
                                         >
                                             <h:outputText
-                                                    value="#{horario.obtenerStringHoras(horario.horaApertura)}"/>
+                                                    value="#{horario.horaApertura}"/>
                                         </p:column>
 
                                         <p:column headerText="Cierre"
                                         >
-                                            <h:outputText value="#{horario.obtenerStringHoras(horario.horaCierre)}"/>
+                                            <h:outputText value="#{horario.horaCierre}"/>
                                         </p:column>
                                         <p:column headerText="Borrar">
-                                            <p:commandButton icon="pi pi-trash"
+                                            <p:commandButton icon="pi pi-times"
+                                                             styleClass="rounded-button ui-button-danger ui-button-flat"
                                                              actionListener="#{lugarBean.eliminarHorario}"
-                                                             process="@this"
-                                            />
-
+                                                             process="@this"/>
                                         </p:column>
 
                                     </p:dataTable>
@@ -160,34 +162,40 @@
                                               widgetVar="Horarios" modal="true"
                                               styleClass="">
 
-                                        <p:outputPanel id="panel">
-                                            <p:selectOneMenu styleClass="w-100" id="dias"
-                                                             value="#{lugarBean.horario.dia}"
+                                        <p:outputPanel id="panel" styleClass="d-flex flex-column">
+
+                                            <div>
+                                                <p:selectOneMenu styleClass="w-100" id="dias"
+                                                                 value="#{lugarBean.horario.dia}">
+                                                    <f:selectItem itemLabel="Seleccione un Dia"
+                                                                  noSelectionOption="true"/>
+                                                    <f:selectItems var="dia" itemLabel="#{dia}"
+                                                                   value="#{lugarBean.dias}"/>
+                                                </p:selectOneMenu>
+                                            </div>
+
+                                            <div>
+                                                <p>
+                                                    Abre
+                                                    <pe:timePicker
+                                                            value="#{lugarBean.horario.horaApertura}"
+                                                            mode="popup"
+                                                            widgetVar="popupTimeWidget2"
+                                                            label="Popup time picker"
+                                                            style="width:100%;"/>
+                                                </p>
+                                            </div>
 
 
-                                            >
-                                                <f:selectItem itemLabel="Seleccione un Dia"
-                                                              noSelectionOption="true"/>
-                                                <f:selectItems var="dia" itemLabel="#{dia}"
-                                                               value="#{lugarBean.dias}"/>
-                                            </p:selectOneMenu>
+                                            <div>
+                                                <p>
+                                                    Cierre
+                                                    <pe:timePicker value="#{lugarBean.horario.horaCierre}" mode="popup"
+                                                                   widgetVar="popupTimeWidget"
+                                                                   label="Popup time picker" style="width:100%;"/>
+                                                </p>
+                                            </div>
 
-                                            <p>
-                                                Abre
-                                                <pe:timePicker
-                                                        value="#{lugarBean.horario.horaApertura}"
-                                                        mode="popup"
-                                                        widgetVar="popupTimeWidget2"
-                                                        label="Popup time picker"/>
-                                            </p>
-
-
-                                            <p>
-                                                Cierre
-                                                <pe:timePicker value="#{lugarBean.horario.horaCierre}" mode="popup"
-                                                               widgetVar="popupTimeWidget"
-                                                               label="Popup time picker"/>
-                                            </p>
                                         </p:outputPanel>
                                         <f:facet name="footer">
                                             <p:commandButton
@@ -195,41 +203,59 @@
                                                     value="Guardar"
                                                     update="panel,dt-products"
                                                     process="panel,dt-products, @this"
-                                                    onclick="PF('Horarios').hide()"
-
                                                     action="#{lugarBean.crearHorario}">
-
                                             </p:commandButton>
                                         </f:facet>
-
                                     </p:dialog>
-
-
                                 </p:panel>
                             </p:tab>
 
                             <p:tab id="confirmacion" title="Confirmacion">
                                 <p:panel header="Confirmacion">
-                                    <h:panelGrid columns="2" columnClasses="label, value">
-                                        <h:outputText value="Nombre: "/>
-                                        <h:outputText value="#{lugarBean.lugar.nombre}" styleClass="outputLabel"/>
 
-                                        <h:outputText value="Ciudad: "/>
-                                        <h:outputText value="#{lugarBean.lugar.ciudadLugar.nombre}"
-                                                      styleClass="outputLabel"/>
+                                    <div class="container">
+                                        <div class="row">
+                                            <p><strong>Nombre: </strong> #{lugarBean.lugar.nombre}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p><strong>Ciudad: </strong> #{lugarBean.lugar.ciudadLugar.nombre}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p><strong>Descripcion: </strong> #{lugarBean.lugar.descripcion}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p><strong>Telefonos: </strong></p>
+                                            <p:repeat value="#{lugarBean.telefonos}" var="tel">
+                                                <p>#{tel}</p>
+                                            </p:repeat>
+                                        </div>
+                                        <div class="mt-4">
+                                            <label class="fs-5">Horarios</label>
+                                            <div class="row">
+                                                <p class="col ms-2 fw-bold"> Dia </p>
+                                                <p class="col ms-2 fw-bold">Abre </p>
+                                                <p class="col ms-2 fw-bold">Cierra</p>
+                                            </div>
+                                            <div class="row">
 
-                                        <h:outputText value="Tipo: "/>
-                                        <h:outputText value="#{lugarBean.lugar.tipo.nombre}" styleClass="outputLabel"/>
+                                                <p:repeat value="#{lugarBean.horarios}" var="horario">
+                                                    <div class="row">
+                                                        <p class="col text-center">#{horario.dia} </p>
+                                                        <p class="col text-center"> #{horario.horaApertura} </p>
+                                                        <p class="col text-center">#{horario.horaCierre}</p>
+                                                    </div>
+                                                </p:repeat>
+                                            </div>
 
-                                        <h:outputText value="Descripcion: "/>
-                                        <h:outputText value="#{lugarBean.lugar.descripcion}" styleClass="outputLabel"/>
-                                    </h:panelGrid>
+                                        </div>
+                                    </div>
 
 
                                     <p:commandButton styleClass="mt-3 ui-button-raised ui-button-warning fw-bold "
                                                      value="Crear lugar"
                                                      action="#{lugarBean.crearLugar}"
-                                                     update="@form"/>
+                                                     update="crear-lugar"/>
+
                                     <p:growl for="mensaje_bean" showDetail="true"/>
                                 </p:panel>
                             </p:tab>
