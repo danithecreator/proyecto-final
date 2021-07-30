@@ -2,3 +2,8 @@ body {
     height: 100vh;
     overflow: scroll;
 }
+
+.mapBusquedaContainer {
+    width: 100%;
+    height: 400px;
+}

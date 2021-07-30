@@ -25,21 +25,12 @@
                 <div id="mapaHome" class="mapaHome"></div>
                 <div id="lateralPanel" class="lateralPanel position-absolute top-0">
 
-                    <h:form styleClass="d-flex me-2 p-4 ">
-
-                        <p:inputText styleClass="input-search" placeholder="¿Qué está buscando?"
-                                     value="#{busquedaBean.busqueda}"/>
-                        <p:commandButton styleClass="btnSearch" icon="pi pi-search"
-                                         action="#{busquedaBean.buscar}"/>
-
-
-                    </h:form>
-
-                    <h:form>
+                    <h:form id="listaLugaresForm">
 
                         <p:dataScroller styleClass="listaLugares" value="#{inicioBean.lugares}" var="lugar"
                                         chunkSize="10"
                                         mode="inline"
+
                         >
                             <div class="itemList">
                                 <div class="detailsContainer">

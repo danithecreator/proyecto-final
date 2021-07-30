@@ -93,7 +93,8 @@
                                     <p:fileUpload listener="#{lugarBean.subirImagenes}" mode="advanced"
                                                   dragDropSupport="true"
                                                   multiple="true" update="messages" sizeLimit="1000000" fileLimit="5"
-                                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                    />
 
                                     <p:growl id="messages" showDetail="true" keepAlive="true"/>
                                 </p:panel>
@@ -104,7 +105,8 @@
 
                                     <h:outputText styleClass="fw-bold" for="telefonos_lugar" value="Telefonos "/>
                                     <p:chips styleClass="w-100 mb-0" id="telefonos_lugar" required="true"
-                                             requiredMessage="Ingrese al menos un telefono"/>
+                                             requiredMessage="Ingrese al menos un telefono"
+                                             value="#{lugarBean.telefonos}"/>
                                     <p:message for="telefonos_lugar"
                                                style="width: 100%; margin: 0;border: none;background: none"/>
 

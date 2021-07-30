@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
+import co.edu.uniquindio.proyecto.dto.LugarCalificacionDTO;
+import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Horario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
@@ -9,47 +11,44 @@ import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-
-public class LugarServicioImpl implements LugarServicio{
+public class LugarServicioImpl implements LugarServicio {
 
     private final LugarRepo lugarRepo;
     private final UsuarioRepo usuarioRepo;
 
-    public LugarServicioImpl(LugarRepo lugarRepo,UsuarioRepo usuarioRepo) {
+    public LugarServicioImpl(LugarRepo lugarRepo, UsuarioRepo usuarioRepo) {
 
         this.lugarRepo = lugarRepo;
-        this.usuarioRepo=usuarioRepo;
+        this.usuarioRepo = usuarioRepo;
     }
 
     /**
      * Metodo que permite crear un lugar en la bd
+     *
      * @param l
      * @return lugar guardado
      * @throws Exception
      */
 
     @Override
-    public Lugar crearLugar(Lugar l) throws Exception{
+    public Lugar crearLugar(Lugar l) throws Exception {
 
-        if(!estaLugar(l.getCodigo()))
-        {
+        if (!estaLugar(l.getCodigo())) {
             throw new Exception("El lugar ya existe");
         }
-        if(!existeNombreLugar(l.getNombre()))
-        {
+        if (!existeNombreLugar(l.getNombre())) {
             throw new Exception("El nombre del lugar ya está en uso");
         }
-        if(l.getDescripcion().length()>1000)
-        {
+        if (l.getDescripcion().length() > 1000) {
             throw new Exception("La descripcion debe ser menor de 1000 caracteres");
         }
-        if(l.getNombre().length()>200)
-        {
+        if (l.getNombre().length() > 200) {
             throw new Exception("El nombre debe ser menor de 200 caracteres");
         }
 
@@ -61,20 +60,22 @@ public class LugarServicioImpl implements LugarServicio{
 
     /**
      * Metodo que permite eliminar un lugar de la bd
+     *
      * @param l
      * @throws Exception
      */
 
     @Override
     public void eliminarLugar(Lugar l) throws Exception {
-        if(estaLugar(l.getCodigo())){
-            throw new Exception("El lugar no existe") ;
+        if (estaLugar(l.getCodigo())) {
+            throw new Exception("El lugar no existe");
         }
         lugarRepo.delete(l);
     }
 
     /**
      * Metodo que permite actualizar la info de un lugar de la bd
+     *
      * @param l
      * @return
      * @throws Exception
@@ -83,17 +84,14 @@ public class LugarServicioImpl implements LugarServicio{
     @Override
     public Lugar actualizarLugar(Lugar l) throws Exception {
 
-        if(estaLugar(l.getCodigo()))
-        {
+        if (estaLugar(l.getCodigo())) {
             throw new Exception("El lugar no existe");
         }
 
-        if(l.getDescripcion().length()>1000)
-        {
+        if (l.getDescripcion().length() > 1000) {
             throw new Exception("La descripcion debe ser menor de 1000 caracteres");
         }
-        if(l.getNombre().length()>200)
-        {
+        if (l.getNombre().length() > 200) {
             throw new Exception("El nombre debe ser menor de 200 caracteres");
         }
 
@@ -103,13 +101,14 @@ public class LugarServicioImpl implements LugarServicio{
 
     /**
      * Metodo que permite obtener un lugar
+     *
      * @param codigo
      * @return lugar
      */
     @Override
     public Lugar obtenerLugar(int codigo) throws Exception {
-        Optional<Lugar> lugar =obtenerLugarPorId(codigo);
-        if(lugar.isEmpty()){
+        Optional<Lugar> lugar = obtenerLugarPorId(codigo);
+        if (lugar.isEmpty()) {
             throw new Exception("No existe un lugar con el id dado");
         }
 
@@ -118,6 +117,7 @@ public class LugarServicioImpl implements LugarServicio{
 
     /**
      * Metodo que permite listar los lugares de la bd
+     *
      * @return lugares
      * @throws Exception
      */
@@ -129,6 +129,7 @@ public class LugarServicioImpl implements LugarServicio{
 
     @Override
     public List<Lugar> buscarLugares(String nombre) {
+
         return lugarRepo.buscarLugares(nombre);
     }
 
@@ -144,22 +145,20 @@ public class LugarServicioImpl implements LugarServicio{
 
     @Override
     public Integer obtenerCalificacionPromedio(int lugarId) throws Exception {
-       if(estaLugar(lugarId))
-       {
-           throw new Exception("El id no existe");
-       }
-       return  lugarRepo.obtenerCalificacionPromedio(lugarId);
+        if (estaLugar(lugarId)) {
+            throw new Exception("El id no existe");
+        }
+        return lugarRepo.obtenerCalificacionPromedio(lugarId);
     }
 
     @Override
     public void marcarFavorito(Lugar l, Usuario u) {
 
-        if(u.getLugaresFavoritos().contains(l))
-        {
+        if (u.getLugaresFavoritos().contains(l)) {
             u.getLugaresFavoritos().remove(l);
-        }else{
+        } else {
             u.getLugaresFavoritos().add(l);
-       }
+        }
 
         usuarioRepo.save(u);
 
@@ -168,45 +167,69 @@ public class LugarServicioImpl implements LugarServicio{
     @Override
     public boolean esFavorito(Lugar l, Usuario u) {
 
-        if(u.getLugaresFavoritos().contains(l))
-        {
+        if (u.getLugaresFavoritos().contains(l)) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
+    @Override
+    public List<NumeroLugaresPorCategoriaDTO> cantLugaresPorCategorias() {
+
+
+        return lugarRepo.obtenerCantidadLugaresPorCategoria();
+    }
+
+    @Override
+    public List<LugarCalificacionDTO> calificacionesLugarCiudad(int codigoCiudad) {
+        System.out.println("entre");
+        List<LugarCalificacionDTO> listaLugarCalificacionDTOS = new ArrayList<>();
+        List<Object[]> listObjetos = lugarRepo.obtenerLugaresCalificacionPorCiudad(codigoCiudad);
+        System.out.println("sigo adentro");
+        for (Object[] o : listObjetos) {
+            System.out.println("en el for");
+            LugarCalificacionDTO l = new LugarCalificacionDTO((Lugar) o[0], (Double) o[1]);
+
+            listaLugarCalificacionDTOS.add(l);
+        }
+        System.out.println("sali del for");
+        return listaLugarCalificacionDTOS;
+    }
+
     /**
      * Metodo que permite validar si un lugar se encuentra en la bd
+     *
      * @param id
      * @return true si el lugar no esta
      */
-    public boolean estaLugar(int id){
-        Optional<Lugar> lugar=lugarRepo.findByCodigo(id);
+    public boolean estaLugar(int id) {
+        Optional<Lugar> lugar = lugarRepo.findByCodigo(id);
         return lugar.isEmpty();
     }
 
     /**
      * Metodo que permite validar si ya existe un nombre de un lugar en la bd
+     *
      * @param nombre
      * @return true si el lugar no esta
      */
 
-    public boolean existeNombreLugar(String nombre){
-        Optional<Lugar> lugar=lugarRepo.findByNombre(nombre);
+    public boolean existeNombreLugar(String nombre) {
+        Optional<Lugar> lugar = lugarRepo.findByNombre(nombre);
         return lugar.isEmpty();
     }
 
     /**
      * Metodo que permite obtener un lugar dado su id
+     *
      * @param codigo
      * @return lugar
      */
 
-    public Optional<Lugar> obtenerLugarPorId(int codigo){
+    public Optional<Lugar> obtenerLugarPorId(int codigo) {
         return lugarRepo.findByCodigo(codigo);
     }
-
 
 
 }

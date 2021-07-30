@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.config;
 
+import co.edu.uniquindio.proyecto.dto.LugarCalificacionDTO;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.ElementCollection;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -32,11 +34,31 @@ public class InformacionPorDefecto implements CommandLineRunner {
     @Autowired
     private ComentarioServicio comentarioServicio;
 
+    @Autowired
+    private ModeradorServicio moderadorServicio;
+
     @Override
     public void run(String... args) throws Exception {
+        
+        if (adminService.listarAdmins().isEmpty()) {
+            Administrador ad1 = Administrador.builder().nombre("Daniel").password("123").email("danigiraldo410@gmail.com").nickname("daniAdmin").build();
+
+            adminService.registrarAdmin(ad1);
+
+        }
+        if (moderadorServicio.listarModeradores().isEmpty()) {
+            Moderador m1 = Moderador.builder().nombre("test").email("daniMod@test.com").nickname("daniMod").password("123").administrador(adminService.obtenerAdmin(23)).build();
+            Moderador m2 = Moderador.builder().nombre("Angy").email("angyMod@test.com").nickname("angyMod").password("123").administrador(adminService.obtenerAdmin(23)).build();
+            Moderador m3 = Moderador.builder().nombre("Pepe").email("pepeMod@test.com").nickname("pepeMod").password("123").administrador(adminService.obtenerAdmin(23)).build();
+            Moderador m4 = Moderador.builder().nombre("Juan").email("juanMod@test.com").nickname("juanMod").password("123").administrador(adminService.obtenerAdmin(23)).build();
+            moderadorServicio.registrarModerador(m1);
+            moderadorServicio.registrarModerador(m2);
+            moderadorServicio.registrarModerador(m3);
+            moderadorServicio.registrarModerador(m4);
+        }
 
 
-       if (usuarioServicio.listarUsuario().isEmpty()) {
+        if (usuarioServicio.listarUsuario().isEmpty()) {
             Usuario u1 = Usuario.builder().nombre("Daniel").email("daniel@test.com").nickname("dani").password("123").build();
             usuarioServicio.registrarUsuario(u1);
             Usuario u2 = Usuario.builder().nombre("Angy").email("angyl@test.com").nickname("pao").password("123").build();
@@ -46,6 +68,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
 
         }
+
 
         if (ciudadServicio.listarCiudades().isEmpty()) {
             Ciudad c1 = new Ciudad("Armenia");

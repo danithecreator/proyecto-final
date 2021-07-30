@@ -3,18 +3,20 @@ package co.edu.uniquindio.proyecto.test;
 import co.edu.uniquindio.proyecto.NegocioApplication;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
-import org.junit.Test;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
 
@@ -79,38 +81,33 @@ public class LugarServicioTest {
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
-    public void actualizarLugarTest(){
+    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
+    public void actualizarLugarTest() {
 
-        try{
-            Lugar lugar =lugarServicio.obtenerLugar(1);
+        try {
+            Lugar lugar = lugarServicio.obtenerLugar(1);
 
-            System.out.println("Lugar antes del update: "+ lugar);
+            System.out.println("Lugar antes del update: " + lugar);
             lugar.setDescripcion("come al lado de la mejor vista");
-            Lugar lugarActualizado= lugarServicio.actualizarLugar(lugar);
-            System.out.println("Lugar despues del update: "+ lugarActualizado );
+            Lugar lugarActualizado = lugarServicio.actualizarLugar(lugar);
+            System.out.println("Lugar despues del update: " + lugarActualizado);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-   }
+    }
 
     @Test
-    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
-    public void listarLugarTest(){
-        try
-        {
+    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
+    public void listarLugarTest() {
+        try {
             List<Lugar> lista = lugarServicio.listarLugares();
 
-            for (Lugar l: lista) {
+            for (Lugar l : lista) {
                 System.out.println(l);
             }
 
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

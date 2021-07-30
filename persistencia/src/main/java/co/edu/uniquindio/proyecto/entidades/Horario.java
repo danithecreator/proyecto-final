@@ -48,6 +48,7 @@ public class Horario implements Serializable {
     public String obtenerStringHoras(Date horas) {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
         return sdf.format(horas);
+        
     }
 
 
