@@ -7,6 +7,7 @@ import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.PersonaServicio;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -95,9 +96,12 @@ public class SeguridadBean implements Serializable {
             String subject = "Unilocal : Recuperar Contraseña";
             String to = this.emailRecuperacion;
             String from = "unilocal2021@gmail.com";
-            personaRecuperacion.setPassword("123456789");
-            Email.sendEmailPassword(usuario, subject, to, from);
+            String password = Email.randomPassword();
+            PrimeFaces.current().executeScript("PF('recuperar').hide()");
+            Email.sendEmailPassword(usuario, subject, to, from, password);
+            personaRecuperacion.setPassword(password);
             personaServicio.actualizarDatos(personaRecuperacion);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

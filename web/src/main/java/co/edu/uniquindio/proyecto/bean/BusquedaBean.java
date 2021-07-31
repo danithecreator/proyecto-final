@@ -72,6 +72,7 @@ public class BusquedaBean implements Serializable {
 
 
         if (!busqueda.isEmpty()) {
+            System.out.println("redireccionando");
             return "resultadoBusqueda?faces-redirect=true&amp;search=" + busqueda;
         }
         return "";

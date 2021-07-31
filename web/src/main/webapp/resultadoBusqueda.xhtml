@@ -59,8 +59,9 @@
                     <h:outputText value="#{lugar.tipo.nombre}"/>
                 </p:column>
 
-                <p:column headerText="Estado">
-                    <h:outputText value="#{busquedaBean.cadenaEstaAbierto(lugar)}"/>
+                <p:column headerText="Estado" sortBy="#{busquedaBean.cadenaEstaAbierto(lugar)}">
+                    <h:outputText styleClass="status-#{busquedaBean.cadenaEstaAbierto(lugar).toLowerCase()}"
+                                  value="#{busquedaBean.cadenaEstaAbierto(lugar)}"/>
                 </p:column>
 
             </p:dataTable>

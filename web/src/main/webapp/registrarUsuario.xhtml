@@ -13,7 +13,7 @@
     <ui:define name="head">
         <h:outputStylesheet library="css" name="formularioRegistro.css"/>
     </ui:define>
-    <ui:define name="titulo">Unilocal | Home</ui:define>
+    <ui:define name="titulo">Unilocal | Registro</ui:define>
 
     <ui:define name="contenido">
 
@@ -21,7 +21,7 @@
 
             <h:form styleClass="d-flex flex-column">
                 <div class="text-center">
-                    <a class="logoFormulario " href="/">Unilocal</a>
+                    <a class="logoFormulario" href="/">Unilocal</a>
                     <p>Registrate para acceder a lo mejor de Unilocal</p>
                 </div>
 
@@ -81,7 +81,9 @@
                 <p:commandButton styleClass="mt-3 ui-button-raised ui-button-warning fw-bold "
                                  value="Registrar Usuario"
                                  action="#{usuarioBean.registrarUsuario}"
-                                 update="@form"/>
+                                 update="@form">
+                    <p:resetInput target="@form"/>
+                </p:commandButton>
                 <p:growl for="mensaje-p" showDetail="true"/>
             </h:form>
 
