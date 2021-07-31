@@ -56,7 +56,9 @@
                                 <a class="nav-link" href="/usuario/crearLugar.xhtml">Crear Lugar</a>
                             </li>
 
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}"/>
+                            <li class="nav-item"
+                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                                 <a class="nav-link" href="/usuario/perfil.xhtml">Perfil</a>
                             </li>
 
@@ -72,6 +74,7 @@
                                 <a class="nav-link" href="/moderador/lugaresDenegados.xhtml">lugares Denegados</a>
                             </li>
 
+
                         </ul>
                         <div class="d-flex">
                 <!--           <p:commandLink value ="Login" onclick="PF('login').show()">
@@ -83,31 +86,91 @@
                                 </lord-icon>
                             </p:commandLink > -->
 
-                            <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-user" iconPos="left" value ="Login" onclick="PF('login').show()" rendered="#{!seguridadBean.autenticado}" />
-                            <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-sign-out" iconPos="left" value ="Logout" action="#{seguridadBean.cerrarSesion}" rendered="#{seguridadBean.autenticado}" />
+                            <h:form id="busquedaForm" styleClass="d-flex me-2">
+
+                                <p:inputText styleClass="input-search" placeholder="¿Qué está buscando?"
+                                             value="#{busquedaBean.busqueda}"
+                                             rendered="true"/>
+                                <p:commandButton styleClass="btnSearch" icon="pi pi-search"
+                                                 update="busquedaForm"
+                                                 action="#{busquedaBean.buscar}"/>
+
+
+                            </h:form>
+
+
+                            <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-user"
+                                             iconPos="left" value="Login" onclick="PF('login').show()"
+                                             rendered="#{!seguridadBean.autenticado}"/>
+                            <p:commandButton styleClass="ui-button-raised ui-button-warning" icon="pi pi-sign-out"
+                                             iconPos="left" value="Logout" action="#{seguridadBean.cerrarSesion}"
+                                             rendered="#{seguridadBean.autenticado}"/>
 
                         </div>
                     </div>
                 </div>
             </nav>
+            <h:form id="formDialog" styleClass="d-flex flex-column align-items-center justify-content-center">
+                <p:dialog id="loginDialog" header="Iniciar Sesión" showEffect="fade" widgetVar="login" modal="true"
+                          rendered="#{!seguridadBean.autenticado}" styleClass="dialogLogin formsInputs">
+                    <h:panelGrid columns="1" styleClass="w-100 ">
+                        <p:outputLabel styleClass="fw-bold" for="email_login" value="Email:"/>
+                        <p:inputText styleClass="w-100 mb-0" id="email_login" value="#{seguridadBean.email}"
+                                     required="true"
+                                     requiredMessage="El email es obligatorio"/>
+                        <p:message for="email_login" style="width: 100% ; margin: 0; border: none;background: none"/>
 
-            <p:dialog header="Iniciar Sesión" showEffect="fade" widgetVar="login" modal="true" rendered="#{!seguridadBean.autenticado}" >
-                <h:form>
-                    <h:panelGrid columns="3" cellpadding="5">
-                        <p:outputLabel for="email_login" value="Email:" />
-                        <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
-                        <p:message for="email_login" />
-                        <p:outputLabel for="password_login" value="Password:" />
-                        <p:password id="password_login" styleClass="mt-4" value="#{seguridadBean.password}" required="true" />
+                        <p:outputLabel styleClass="fw-bold" for="password_login" value="Password:"/>
+                        <p:password id="password_login" styleClass="w-100 mb-0" value="#{seguridadBean.password}"
+                                    required="true"
+                                    requiredMessage="La contraseña es obligatoria"/>
 
-                        <p:message for="password_login" />
+                        <p:message for="password_login" style="width: 100% ; margin: 0; border: none;background: none"/>
+
+                        <p:commandLink value="¿Has olvidado tu contraseña?"
+                                       onclick="PF('login').hide() ,PF('recuperar').show()"
+                                       id="linkRecuperarPassword"></p:commandLink>
                     </h:panelGrid>
-                    <br />
-                    <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}" styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left"/>
+                    <br/>
+                    <p:commandButton id="btnIniciarSesion" value="Iniciar Sesión"
+                                     action="#{seguridadBean.iniciarSesion}"
+                                     styleClass="w-100 ui-button-raised ui-button-warning fw-bold"
+                                     update="@form" icon="pi pi-sign-in" iconPos="left"/>
 
-                    <p:growl for="login-bean" showDetail="true" />
-                </h:form>
-            </p:dialog>
+                    <p:growl for="login-bean" showDetail="true"/>
+
+                </p:dialog>
+
+            </h:form>
+
+            <h:form id="formRecuperar">
+                <p:dialog id="recuperarDialog" header="Recuperar Contraseña" showEffect="fade" widgetVar="recuperar"
+                          modal="true" styleClass="dialogRecuperar"
+                >
+                    <p>
+                        Te enviaremos un correo con una contraseña temporal para que puedas iniciar sesion.
+                        Recuerda cambiarla desde el menu de configuraciones
+                    </p>
+
+
+                    <p:outputLabel styleClass="fw-bold" for="nick_recuperacion" value="NickName:"/>
+                    <p:inputText id="nick_recuperacion" styleClass="w-100 mb-0"
+                                 value="#{seguridadBean.nickRecuperacion}"
+                                 required="true"
+                                 requiredMessage="El Nickname es obligatorio"/>
+
+                    <p:message for="nick_recuperacion" style="width: 100% ; margin: 0; border: none;background: none"/>
+
+                    <p:outputLabel styleClass="fw-bold" for="emailRecuperacion" value="Email:"/>
+                    <p:inputText type="email" id="emailRecuperacion" styleClass="w-100 mb-0"
+                                 value="#{seguridadBean.emailRecuperacion}" required="true"
+                                 requiredMessage="El email es obligatorio"/>
+                    <p:message for="emailRecuperacion" style="width: 100% ; margin: 0; border: none;background: none"/>
+                    <p:commandButton id="btnRecuperacion" value="Enviar" action="#{seguridadBean.recuperarPassword}"
+                                     update="@form" styleClass="ui-button-raised ui-button-warning fw-bold"/>
+
+                </p:dialog>
+            </h:form>
         </ui:insert>
     </div>
     <div id="contenido" class="h-100">

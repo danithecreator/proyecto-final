@@ -68,7 +68,6 @@
 
                                     <p:repeat value="#{detalleLugarBean.lugar.horarios}" var="horario">
                                         <div class="row">
-
                                             <p class=" col ms-2">#{horario.dia} </p>
                                             <p class="col ms-2"> #{horario.horaApertura} </p>
                                             <p class="col ms-2">#{horario.horaCierre}</p>
@@ -80,7 +79,10 @@
 
                             <div class="mt-4">
                                 <label class="fs-5"> Telefonos</label>
-                                <p class="ms-2">No hay telefonos para mostrar.</p>
+                                <p:repeat value="#{detalleLugarBean.lugar.telefonos}" var="telefono">
+                                    <p class="ms-2">#{telefono}</p>
+                                </p:repeat>
+
                             </div>
                             <br/>
                             <div class="row">
@@ -89,9 +91,13 @@
                                 </div>
 
                                 <div class="col-sm">
-                                    <h:form id="favorito-lugar" rendered="#{seguridadBean.autenticado}" >
+                                    <h:form id="favorito-lugar" rendered="#{seguridadBean.autenticado}">
 
-                                        <p:commandButton icon="#{detalleLugarBean.icono}" alt="Marcar como favorito" title="Marcar como favorito" styleClass="rounded-button ui-button-warning ui-button-outlined"  action="#{detalleLugarBean.marcarFavorito}"  update="@form"> </p:commandButton>
+                                        <p:commandButton icon="#{detalleLugarBean.icono}" alt="Marcar como favorito"
+                                                         title="Marcar como favorito"
+                                                         styleClass="rounded-button ui-button-warning ui-button-outlined"
+                                                         action="#{detalleLugarBean.marcarFavorito}"
+                                                         update="@form"> </p:commandButton>
 
                                     </h:form>
                                 </div>
@@ -117,23 +123,26 @@
                         Hacer Comentario
                     </div>
                     <div class="card-body">
-                        <p:inputTextarea styleClass="w-100" id="comentario" value="#{detalleLugarBean.nuevoComentario.comentario}" required="true">  </p:inputTextarea>
+                        <p:inputTextarea styleClass="w-100" id="comentario"
+                                         value="#{detalleLugarBean.nuevoComentario.comentario}"
+                                         required="true"> </p:inputTextarea>
                         <p:rating value="#{detalleLugarBean.nuevoComentario.calificacion}" required="true"/>
                         <br></br>
 
-                        <p:commandButton  action="#{detalleLugarBean.crearComentario}" value="Comentar" update="@form"/>
+                        <p:commandButton action="#{detalleLugarBean.crearComentario}" value="Comentar"
+                                         update="@form,comentariosF"/>
                     </div>
                 </div>
             </h:form>
 
 
-            <h:form id="comentariosF" >
+            <h:form id="comentariosF">
 
                 <div class="row mt-4">
                     <p class="fs-2">Comentarios</p>
-                    <div class="mt-4 comentarios justify-content-center ">
+                    <div class="mt-4 comentarios justify-content-center " id="com">
 
-                        <p:repeat value="#{detalleLugarBean.comentarios}" var="comentario" >
+                        <p:repeat value="#{detalleLugarBean.comentarios}" var="comentario">
                             <div class="comentario col ">
                                 <div class="d-flex align-items-center align-content-center">
                                     <div class="d-flex align-items-center">

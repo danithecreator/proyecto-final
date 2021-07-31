@@ -124,6 +124,22 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
     }
 
     @Override
+    public Usuario actualizarUsuarioCompleto(Usuario usuario) throws Exception {
+
+        if(longitudValida(usuario.getNombre())){
+            throw new Exception("El nombre debe ser menor a 255 caracteres");
+        }
+        if(longitudValida(usuario.getEmail())){
+            throw new Exception("El email debe ser menor a 255 caracteres");
+        }
+        if(longitudValida(usuario.getNickname())){
+            throw new Exception("El nickname debe ser menor a 255 caracteres");
+        }
+
+        return  usuarioRepo.save(usuario);
+    }
+
+    @Override
     public Usuario obtenerUsuario(Integer id) throws Exception {
         Optional<Usuario> usuario =obtenerUsuarioPorId(id);
         if(usuario.isEmpty()){

@@ -3,11 +3,15 @@ package co.edu.uniquindio.proyecto.repositorios;
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
 import co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
-import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.entidades.Comentario;
+import co.edu.uniquindio.proyecto.entidades.Horario;
+import co.edu.uniquindio.proyecto.entidades.Lugar;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -28,11 +32,8 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select new co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO(l, c)  from Lugar  l  left join l.comentarios c ")
     List<ComentariosLugarDTO> obtenerComentariosLugares();
 
-    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=true ")
-    List<Lugar> obtenerLugaresAprobadosModerador(String emailModerador);
-
-    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=false ")
-    List<Lugar> obtenerLugaresDenegadosModerador(String emailModerador);
+    @Query("select l.nombre, l.descripcion, l.ciudadLugar.nombre, l.tipo.nombre from Lugar l where l.moderador.email= :emailModerador")
+    List<Object[]> obtenerLugaresModerador(String emailModerador);
 
     @Query("select count(c) from Lugar l join l.comentarios c where l.codigo= :codigo")
     int obtenerCantidadComentarios(Integer codigo);
@@ -58,6 +59,11 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
 
     @Query("select l.tipo.nombre,avg (c.calificacion) as total  from Lugar l join l.comentarios c where l.ciudadLugar.codigo= :codigo group by l order by total desc")
     List<Object[]> obtenerLugarCalificacionMasAltaPorCiudad(Integer codigo);
+
+
+    @Query("select l,avg (c.calificacion) as total  from Lugar l join l.comentarios c where l.ciudadLugar.codigo= :codigo group by l order by total desc")
+    List<Object[]> obtenerLugaresCalificacionPorCiudad(Integer codigo);
+
 
     @Query("select l.ciudadLugar.nombre ,count(l)  from Lugar l  where l.estado=false group by l.ciudadLugar")
     List<Object[]> obtenerCantidadLugaresNoAprobadosPorCiudad();
@@ -112,4 +118,13 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
 
     @Query("select l from Lugar l where  l.estado=true")
     List<Lugar> obtenerLugaresAprobados();
+
+    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=true ")
+    List<Lugar> obtenerLugaresAprobadosModerador(String emailModerador);
+
+    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=false ")
+    List<Lugar> obtenerLugaresDenegadosModerador(String emailModerador);
+
+
+
 }

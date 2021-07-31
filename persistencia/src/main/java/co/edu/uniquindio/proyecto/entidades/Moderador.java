@@ -39,5 +39,4 @@ public class Moderador extends Persona implements Serializable {
         this.administrador = administrador;
     }
 
-
 }

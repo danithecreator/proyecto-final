@@ -10,5 +10,5 @@ public interface UsuarioServicio {
     Usuario actualizarUsuario(String email) throws Exception;
     Usuario obtenerUsuario(Integer id) throws Exception;
     List<Usuario> listarUsuario() throws Exception;
-
+    Usuario actualizarUsuarioCompleto(Usuario u) throws Exception;
 }

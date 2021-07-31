@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,31 +29,34 @@ public class UsuarioBean implements Serializable {
 
     private Usuario usuario;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Ciudad ciudad;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Ciudad> ciudades;
 
+
     @PostConstruct
-    public void inicializar()
-    {
-        this.usuario= new Usuario();
+    public void inicializar() {
+
+        this.usuario = new Usuario();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
-    public void registrarUsuario()
-    {
+    public void registrarUsuario() {
         try {
             usuarioServicio.registrarUsuario(usuario);
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_INFO,"Alerta","El registro fue exitoso");
-            FacesContext.getCurrentInstance().addMessage("mensaje-p",msg);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El registro fue exitoso");
+            FacesContext.getCurrentInstance().addMessage("mensaje-p", msg);
 
         } catch (Exception e) {
-            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensaje-p",msg);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensaje-p", msg);
         }
     }
+
 
     public Usuario getUsuario() {
         return usuario;

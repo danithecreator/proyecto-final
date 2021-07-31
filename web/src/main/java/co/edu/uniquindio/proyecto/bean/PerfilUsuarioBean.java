@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.entidades.Comentario;
-import co.edu.uniquindio.proyecto.entidades.Horario;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
-import co.edu.uniquindio.proyecto.entidades.Persona;
+import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
@@ -14,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,6 +38,9 @@ public class PerfilUsuarioBean implements Serializable {
     private String nombre;
 
     @Getter @Setter
+    private String password;
+
+    @Getter @Setter
     private String nickname;
 
     @Getter @Setter
@@ -62,6 +64,7 @@ public class PerfilUsuarioBean implements Serializable {
 
                 this.nombre = personaLogin.getNombre();
                 this.nickname= personaLogin.getNickname();
+                this.password= personaLogin.getPassword();
                 this.email= personaLogin.getEmail();
                 this.lugares= lugarServicio.obtenerLugaresUsuario(this.email);
 
@@ -81,5 +84,20 @@ public class PerfilUsuarioBean implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public void editarUsuario()
+    {
+        personaLogin.setEmail(this.email);
+        personaLogin.setPassword(this.password);
+        personaLogin.setNickname(this.nickname);
+        personaLogin.setNombre(this.nombre);
+
+        try {
+            Usuario usuarioActualizado = usuarioServicio.actualizarUsuarioCompleto((Usuario) personaLogin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

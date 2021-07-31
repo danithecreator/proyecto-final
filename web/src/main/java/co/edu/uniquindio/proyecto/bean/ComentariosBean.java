@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
+import co.edu.uniquindio.proyecto.servicios.HorarioServicio;
 import co.edu.uniquindio.proyecto.servicios.LugarServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +33,17 @@ public class ComentariosBean implements Serializable {
     @Autowired
     private ComentarioServicio comentarioServicio;
 
+    @Autowired
+    private HorarioServicio horarioServicio;
+
     @Getter @Setter
     private Lugar lugar;
 
     @Getter @Setter
     private List<Horario> horarios;
+
+    @Getter @Setter
+    private Horario horario;
 
     private List<String> images;
 
@@ -48,6 +56,20 @@ public class ComentariosBean implements Serializable {
     @Getter @Setter
     private String respuesta;
 
+    @Getter @Setter
+    private LocalTime horaApertura;
+
+    @Getter @Setter
+    private LocalTime horaCierre;
+
+    @Getter @Setter
+    private String dia;
+
+    @Getter @Setter
+    private List<String> telefonos;
+
+    @Getter @Setter
+    private String telefono ;
 
     @PostConstruct
     public void inicializar() {
@@ -62,6 +84,8 @@ public class ComentariosBean implements Serializable {
             int id = Integer.parseInt(idLugar);
             this.lugar = lugarServicio.obtenerLugar(id);
             this.comentarios = lugarServicio.listarComentariosDeUnLugar(id);
+            this.horarios= lugarServicio.listarHorariosDeUnLugar(id);
+
 
 //            LugarDTO markerLugar = new LugarDTO(this.lugar.getCodigo(), this.lugar.getNombre(), this.lugar.getDescripcion(), this.lugar.getLatitud(), this.lugar.getLongitud(), this.lugar.getTipo().getNombre());
 
@@ -89,5 +113,29 @@ public class ComentariosBean implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public void editarHorario(int idHorario)
+    {
+        try {
+            this.horarios.get(idHorario).setDia(this.dia);
+            this.horarios.get(idHorario).setHoraApertura(this.horaApertura);
+            this.horarios.get(idHorario).setHoraCierre(this.horaCierre);
+            horarioServicio.actualizarHorario(this.horarios.get(idHorario));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String editarLugar()
+    {
+        try {
+            this.lugar.setHorarios(this.horarios);
+            lugarServicio.actualizarLugar(this.lugar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "/usuario/editarLugar?faces-redirect=true&amp;lugar=" + Integer.parseInt(idLugar);
     }
 }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
+import co.edu.uniquindio.proyecto.entidades.Administrador;
 import co.edu.uniquindio.proyecto.entidades.Horario;
 import co.edu.uniquindio.proyecto.repositorios.HorarioRepo;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,13 @@ public class HorarioServicioImpl implements HorarioServicio {
             throw new Exception("La hora de cierre es obligatoria");
         }
         
+        return horarioRepo.save(horario);
+    }
+
+    @Override
+    public Horario actualizarHorario(Horario horario) throws Exception {
+
+
         return horarioRepo.save(horario);
     }
 }

@@ -4,12 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.ZoneId;
+import java.util.*;
 
 /**
  * Esta clase define la entidad lugar de la base de datos
@@ -127,4 +125,6 @@ public class Lugar implements Serializable {
         return "defaultLugarImg.svg";
 
     }
+
+
 }

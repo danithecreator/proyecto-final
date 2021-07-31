@@ -63,4 +63,9 @@ public class InicioBean implements Serializable {
         return "/moderador/lugaresModerador?faces-redirect=true";
 
     }
+
+    public String irAEDitarLugar(int id) {
+        return "/usuario/editarLugar?faces-redirect=true&amp;lugar=" + id;
+
+    }
 }
