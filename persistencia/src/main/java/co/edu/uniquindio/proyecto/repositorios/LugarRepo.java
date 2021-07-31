@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
+import co.edu.uniquindio.proyecto.dto.LugarCalificacionDTO;
 import co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
@@ -18,10 +19,11 @@ import java.util.Optional;
 
 /**
  * Esta interface define el deposito de datos de lugar
+ *
  * @author: Daniel Ceballos, Angy Tabares
  */
 @Repository
-public interface LugarRepo extends JpaRepository<Lugar,Integer> {
+public interface LugarRepo extends JpaRepository<Lugar, Integer> {
 
     @Query("select l.tipo.nombre from Lugar l where l.codigo = :codigo")
     String obtenerTiposLugares(Integer codigo);
@@ -32,8 +34,11 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select new co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO(l, c)  from Lugar  l  left join l.comentarios c ")
     List<ComentariosLugarDTO> obtenerComentariosLugares();
 
-    @Query("select l.nombre, l.descripcion, l.ciudadLugar.nombre, l.tipo.nombre from Lugar l where l.moderador.email= :emailModerador")
-    List<Object[]> obtenerLugaresModerador(String emailModerador);
+    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=true ")
+    List<Lugar> obtenerLugaresAprobadosModerador(String emailModerador);
+
+    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=false ")
+    List<Lugar> obtenerLugaresDenegadosModerador(String emailModerador);
 
     @Query("select count(c) from Lugar l join l.comentarios c where l.codigo= :codigo")
     int obtenerCantidadComentarios(Integer codigo);
@@ -47,8 +52,8 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select l.ciudadLugar.nombre, count(l) from Lugar l group by l.ciudadLugar")
     List<Object[]> obtenerCantidadLugaresPorCiudad();
 
-  //  @Query("select l from Lugar l join l.horarios h where h.diaSemana and  :horaActual between h.horaApertura and h.horaCierre ")
-  //  List<Lugar> obtenerLugaresAbiertos(String diaSemana, Date horaActual);
+    //  @Query("select l from Lugar l join l.horarios h where h.diaSemana and  :horaActual between h.horaApertura and h.horaCierre ")
+    //  List<Lugar> obtenerLugaresAbiertos(String diaSemana, Date horaActual);
 
     @Query("select l.tipo.nombre,count(l) as total from Lugar l where l.estado=true group by l.tipo order by total desc ")
     List<Object[]> obtenerTipoLugarPopular();
@@ -69,7 +74,7 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     List<Object[]> obtenerCantidadLugaresNoAprobadosPorCiudad();
 
     @Query("select l.tipo.nombre,count(l)  from Lugar l join l.horarios h where h.dia= :diaSemana and  :horaActual between h.horaApertura and h.horaCierre group by l.tipo")
-    List<Object[]> obtenerCantidadLugaresAbiertosPorCategoria(String diaSemana, Date horaActual);
+    List<Object[]> obtenerCantidadLugaresAbiertosPorCategoria(String diaSemana, LocalDate horaActual);
 
     /**
      * Query que permite traer los lugares creados por un usuario especifico
@@ -83,11 +88,13 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select new co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO(u,l) from Usuario u left join u.lugares l")
     List<LugaresPorUsuarioDTO> obtenerListaLugaresEinformacionUsuarioCreador();
 
+
     /**
      * Query que permite traer un listado los comentarios de un lugar especifico
      */
     @Query("select c from Comentario c where c.lugarComentario.codigo = :id_lugar")
     List<Comentario> obtenerComentariosPorLugar(int id_lugar);
+
     /**
      * Query que permite traer un listado los comentarios sin respuesta de un usuario que ha creado lugares
      */
@@ -104,10 +111,11 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     List<Object[]> ensayo(int ciudad);
 
     Optional<Lugar> findByNombre(String nombre);
+
     Optional<Lugar> findByCodigo(int codigo);
 
-    //lugares que esten aprobados por algun moderador
-    @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') ")
+
+    @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') or l.tipo.nombre like concat('%', :nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
 
     @Query("select h from Horario h where h.horarioLugar.codigo  = :id_lugar")
@@ -118,13 +126,4 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
 
     @Query("select l from Lugar l where  l.estado=true")
     List<Lugar> obtenerLugaresAprobados();
-
-    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=true ")
-    List<Lugar> obtenerLugaresAprobadosModerador(String emailModerador);
-
-    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=false ")
-    List<Lugar> obtenerLugaresDenegadosModerador(String emailModerador);
-
-
-
 }

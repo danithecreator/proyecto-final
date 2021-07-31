@@ -35,7 +35,7 @@ public class PersonaServicioImpl implements PersonaServicio {
     @Override
     public Persona recuperarPassword(String email, String nickname) throws Exception {
         Optional<Persona> persona = personaRepo.findByEmailAndNickname(email, nickname);
-      
+
         if (persona.isEmpty()) {
             throw new Exception("Los datos de autenticación son incorrectos");
         }

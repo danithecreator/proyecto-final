@@ -25,17 +25,15 @@ public class InicioBean implements Serializable {
     @Autowired
     private LugarServicio lugarServicio;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Lugar> lugares;
-
-    @Getter @Setter
-    private List<Lugar> lugaresAprobados;
 
     @PostConstruct
     public void inicializar() {
         try {
-            this.lugaresAprobados = lugarServicio.obtenerLugaresAprobados();
-            List<LugarDTO> markerLugares = this.lugaresAprobados.stream().map(l -> new LugarDTO(l.getCodigo(), l.getNombre(), l.getDescripcion(), l.getLatitud(), l.getLongitud(), l.getTipo().getNombre())).collect(Collectors.toList());
+            this.lugares = lugarServicio.listarLugares();
+            List<LugarDTO> markerLugares = this.lugares.stream().map(l -> new LugarDTO(l.getCodigo(), l.getNombre(), l.getDescripcion(), l.getLatitud(), l.getLongitud(), l.getTipo().getNombre())).collect(Collectors.toList());
 
             PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(markerLugares) + ")");
         } catch (Exception e) {

@@ -46,14 +46,6 @@
     border-radius: 5px;
 }
 
-.dialogLogin {
-    width: 300px !important;
-}
-
-.dialogRecuperar {
-    max-width: 350px !important;
-}
-
 .mapboxgl-popup-content p, a {
     font-size: 14px;
 }

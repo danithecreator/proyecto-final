@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Persona;
-import org.aspectj.weaver.patterns.PerObject;
 
 public interface PersonaServicio {
 

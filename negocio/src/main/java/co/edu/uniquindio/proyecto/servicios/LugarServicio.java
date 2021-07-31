@@ -12,15 +12,25 @@ import java.util.List;
 public interface LugarServicio {
 
     Lugar obtenerLugar(int codigo) throws Exception;
+
     Lugar crearLugar(Lugar l) throws Exception;
-    void  eliminarLugar(Lugar l) throws Exception;
+
+    void eliminarLugar(Lugar l) throws Exception;
+
     Lugar actualizarLugar(Lugar l) throws Exception;
+
     List<Lugar> listarLugares() throws Exception;
-    List<Lugar> buscarLugares(String nombre)throws Exception;
+
+    List<Lugar> buscarLugares(String nombre) throws Exception;
+
     List<Comentario> listarComentariosDeUnLugar(int codigoLugar);
+
     List<Horario> listarHorariosDeUnLugar(int codigoLugar);
+
     Integer obtenerCalificacionPromedio(int lugarId) throws Exception;
-    void marcarFavorito(Lugar l, Usuario u) ;
+
+    void marcarFavorito(Lugar l, Usuario u);
+
     boolean esFavorito(Lugar l, Usuario u);
     List<Lugar> obtenerLugaresUsuario(String email)  throws Exception;
     List<Lugar> obtenerLugaresPendientes()  throws Exception;

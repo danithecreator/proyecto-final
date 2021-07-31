@@ -46,5 +46,10 @@ public class Horario implements Serializable {
     @ManyToOne
     private Lugar horarioLugar;
 
+    public String obtenerStringHoras(Date horas) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        return sdf.format(horas);
+    }
+
 
 }

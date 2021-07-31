@@ -39,6 +39,7 @@
                         </lord-icon>
                         Unilocal</a>
 
+
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarColor02"
                             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,39 +53,33 @@
                             <li class="nav-item" jsf:rendered="#{!seguridadBean.autenticado}">
                                 <a class="nav-link" href="/registrarUsuario.xhtml">Registrarse</a>
                             </li>
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                            <li class="nav-item"
+                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                                 <a class="nav-link" href="/usuario/crearLugar.xhtml">Crear Lugar</a>
                             </li>
 
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}"/>
                             <li class="nav-item"
                                 jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                                 <a class="nav-link" href="/usuario/perfil.xhtml">Perfil</a>
                             </li>
-
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
-                                <a class="nav-link" href="/administrador/crearModerador.xhtml">Crear Moderador</a>
-                            </li>
-
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='moderador'}">
-                                <a class="nav-link" href="/moderador/lugaresModerador.xhtml">lugares por Aprobar</a>
-                            </li>
-
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='moderador'}">
-                                <a class="nav-link" href="/moderador/lugaresDenegados.xhtml">lugares Denegados</a>
+                            <li class="nav-item"
+                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
+                                <a class="nav-link" href="/administrador/administrador.xhtml">Panel de control</a>
                             </li>
 
 
                         </ul>
+
+
                         <div class="d-flex">
-                <!--           <p:commandLink value ="Login" onclick="PF('login').show()">
-                                <lord-icon
-                                        src="https://cdn.lordicon.com/dxjqoygy.json"
-                                        trigger="hover"
-                                        colors="primary:#FFFFFF,secondary:#ffc107"
-                                        style="width:50px;height:50px">
-                                </lord-icon>
-                            </p:commandLink > -->
+                            <!--           <p:commandLink value ="Login" onclick="PF('login').show()">
+                                            <lord-icon
+                                                    src="https://cdn.lordicon.com/dxjqoygy.json"
+                                                    trigger="hover"
+                                                    colors="primary:#FFFFFF,secondary:#ffc107"
+                                                    style="width:50px;height:50px">
+                                            </lord-icon>
+                                        </p:commandLink > -->
 
                             <h:form id="busquedaForm" styleClass="d-flex me-2">
 
