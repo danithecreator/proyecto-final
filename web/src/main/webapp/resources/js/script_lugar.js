@@ -77,3 +77,4 @@ function setLtnLng(lat, lng) {
     document.getElementById("crear-lugar:latidudLugar").value = lat;
     document.getElementById("crear-lugar:longitudLugar").value = lng;
 }
+

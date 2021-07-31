@@ -22,7 +22,6 @@ import java.util.List;
 
 /**
  * Esta clase permite testear la entidad lugar
- *
  * @author: Daniel Ceballos, Angy Tabares
  */
 @DataJpaTest
@@ -36,10 +35,10 @@ public class LugarTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
-    public void registrarLugarTest() {
-        Lugar lugarNuevo = lugarRepo.getOne(1);
-        Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void registrarLugarTest(){
+        Lugar lugarNuevo=lugarRepo.getOne(1);
+        Lugar lugarGuardado=lugarRepo.save(lugarNuevo);
         Assertions.assertNotNull(lugarGuardado);
     }
 
@@ -48,10 +47,10 @@ public class LugarTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
-    public void eliminarLugarTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void eliminarLugarTest(){
         lugarRepo.delete(lugarRepo.getOne(2));
-        Lugar buscado = lugarRepo.findById(2).orElse(null);
+        Lugar buscado=lugarRepo.findById(2).orElse(null);
         Assertions.assertNull(buscado);
     }
 
@@ -60,15 +59,15 @@ public class LugarTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
-    public void actualizarLugarTest() {
-        Lugar registrado = lugarRepo.getOne(2);
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void actualizarLugarTest(){
+        Lugar registrado=lugarRepo.getOne(2);
 
         registrado.setNombre("Bar React");
 
         lugarRepo.save(registrado);
-        Lugar buscado = lugarRepo.findById(2).orElse(null);
-        Assertions.assertEquals("Bar React", buscado.getNombre());
+        Lugar buscado=lugarRepo.findById(2).orElse(null);
+        Assertions.assertEquals("Bar React",buscado.getNombre());
     }
 
     /**
@@ -76,28 +75,28 @@ public class LugarTest {
      * se añaden a la anotacion  sql los archivos necesarios para este test
      */
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
-    public void listarLugarTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void listarLugarTest(){
         List<Lugar> lista = lugarRepo.findAll();
 
-        System.out.println("Listado de lugares" + "\n" + lista);
+        System.out.println("Listado de lugares"+"\n"+lista);
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
-    public void obtenerTipoLugarTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void obtenerTipoLugarTest(){
 
-        String nombreTipoLugar = lugarRepo.obtenerTiposLugares(1);
+        String nombreTipoLugar= lugarRepo.obtenerTiposLugares(1);
         System.out.println(nombreTipoLugar);
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql"})
-    public void obtenerInfoTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql"})
+    public void obtenerInfoTest(){
 
-        List<Object[]> infoLugar = lugarRepo.obtenerInfo(1);
+        List<Object[]> infoLugar= lugarRepo.obtenerInfo(1);
 
-        for (int i = 0; i < infoLugar.get(0).length; i++) {
+        for (int i=0; i<infoLugar.get(0).length;i++) {
 
             System.out.println(infoLugar.get(0)[i]);
         }
@@ -105,43 +104,43 @@ public class LugarTest {
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql", "classpath:comentario.sql"})
-    public void obtenerComentariosLugaresTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerComentariosLugaresTest(){
 
-        List<ComentariosLugarDTO> lugaresComentarios = lugarRepo.obtenerComentariosLugares();
-        for (ComentariosLugarDTO l : lugaresComentarios) {
-            System.out.println(l.getLugar().getNombre() + " " + l.getComentario().getComentario());
+        List<ComentariosLugarDTO> lugaresComentarios= lugarRepo.obtenerComentariosLugares();
+        for (ComentariosLugarDTO l: lugaresComentarios) {
+            System.out.println(l.getLugar().getNombre()+" "+l.getComentario().getComentario());
         }
 
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql", "classpath:comentario.sql"})
-    public void obtenerCantidadComentariosLugarTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadComentariosLugarTest(){
 
-        int cantidad = lugarRepo.obtenerCantidadComentarios(1);
+        int cantidad= lugarRepo.obtenerCantidadComentarios(1);
 
-        System.out.println(cantidad);
-    }
+            System.out.println(cantidad);
+        }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql", "classpath:comentario.sql"})
-    public void obtenerCantidadLugaresPorCategoriaTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadLugaresPorCategoriaTest(){
 
-        List<NumeroLugaresPorCategoriaDTO> cantLugares = lugarRepo.obtenerCantidadLugaresPorCategoria();
+        List<NumeroLugaresPorCategoriaDTO> cantLugares= lugarRepo.obtenerCantidadLugaresPorCategoria();
 
-        for (NumeroLugaresPorCategoriaDTO l : cantLugares) {
+        for (NumeroLugaresPorCategoriaDTO l: cantLugares) {
             System.out.println(l);
         }
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql", "classpath:comentario.sql", "classpath:horario.sql"})
-    public void obtenerLugaresSinHorariosTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql","classpath:horario.sql"})
+    public void obtenerLugaresSinHorariosTest(){
 
-        List<Lugar> lugares = lugarRepo.obtenerLugaresSinHorarios();
+        List<Lugar> lugares= lugarRepo.obtenerLugaresSinHorarios();
 
-        for (Lugar l : lugares) {
+        for (Lugar l: lugares) {
             System.out.println(l);
         }
     }
@@ -157,53 +156,54 @@ public class LugarTest {
     }*/
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql", "classpath:comentario.sql"})
-    public void obtenerLugarCalificacionMasAltaPorCiudadTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerLugarCalificacionMasAltaPorCiudadTest(){
         List<Object[]> lista = lugarRepo.obtenerLugarCalificacionMasAltaPorCiudad(1);
 
-        for (Object[] l : lista) {
-            System.out.println(l[0] + "" + l[1]);
+        for (Object[] l: lista) {
+            System.out.println(l[0]+""+l[1]);
         }
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql", "classpath:comentario.sql"})
-    public void obtenerCalificacionPromedioTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCalificacionPromedioTest(){
         float promedio = lugarRepo.obtenerCalificacionPromedio(1);
 
         System.out.println(promedio);
     }
 
     @Test
-    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:lugar.sql", "classpath:comentario.sql"})
-    public void obtenerCantidadLugaresNoAprobadosPorCiudadTest() {
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadLugaresNoAprobadosPorCiudadTest(){
 
         List<Object[]> lista = lugarRepo.obtenerCantidadLugaresNoAprobadosPorCiudad();
-        for (Object[] l : lista) {
-            System.out.println(l[0] + " " + l[1]);
+        for (Object[] l: lista) {
+            System.out.println(l[0]+" "+l[1]);
         }
 
     }
 
-//    @Test
-//    @Sql({"classpath:ciudad.sql", "classpath:tipo.sql", "classpath:usuario.sql", "classpath:administrador.sql", "classpath:moderador.sql", "classpath:horario.sql", "classpath:lugar.sql", "classpath:comentario.sql"})
-//    public void obtenerCantidadLugaresAbiertosPorCategoriaTest() {
-//
-//        String horaNueva = "08:00:00";
-//
-//        try {
-//            Date hora = new SimpleDateFormat("HH:mm:ss").parse(horaNueva);
-//
-//            List<Object[]> lista = lugarRepo.obtenerCantidadLugaresAbiertosPorCategoria("martes", hora);
-//
-//            for (Object[] l : lista) {
-//                System.out.println(l[0] + " " + l[1]);
-//            }
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    @Test
+    @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
+    public void obtenerCantidadLugaresAbiertosPorCategoriaTest(){
+
+        String horaNueva = "08:00:00";
+
+        try {
+            Date hora = new SimpleDateFormat("HH:mm:ss").parse(horaNueva);
+
+            List<Object[]> lista = lugarRepo.obtenerCantidadLugaresAbiertosPorCategoria("martes", hora);
+
+            for (Object[] l: lista) {
+                System.out.println(l[0]+" "+l[1]);
+            }
+        }catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
  /*   @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void obtenerLugaresCreadosPorUsuarioTest(){
@@ -212,7 +212,7 @@ public class LugarTest {
             System.out.println(l);
             System.out.println();
         }
-    }
+    }*/
     @Test
     @Sql({"classpath:ciudad.sql","classpath:tipo.sql","classpath:usuario.sql","classpath:administrador.sql","classpath:moderador.sql","classpath:horario.sql","classpath:lugar.sql","classpath:comentario.sql"})
     public void  obtenerListaLugaresEinformacionUsuarioCreador(){
@@ -250,6 +250,6 @@ public class LugarTest {
                 System.out.println(c);
             }
         }
-    }*/
+    }
 
 }

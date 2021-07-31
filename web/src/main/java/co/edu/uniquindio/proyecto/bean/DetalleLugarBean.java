@@ -46,50 +46,51 @@ public class DetalleLugarBean implements Serializable {
 
     private List<String> images;
 
-    @Value(value = "#{seguridadBean.persona}")
+    @Value(value="#{seguridadBean.persona}")
     private Persona personaLogin;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private Integer calificacionPromedio;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private Comentario comentario;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private Comentario nuevoComentario;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private String icono;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private boolean esFavorito;
 
     @PostConstruct
     public void inicializar() {
 
         this.nuevoComentario = new Comentario();
-        // this.icono = "pi pi-star-o";
+       // this.icono = "pi pi-star-o";
         try {
             images = new ArrayList<String>();
+
+            images.add("https://www.eltiempo.com/files/image_640_428/uploads/2019/03/30/5ca02668e04df.jpeg");
+            images.add("https://www.revistalabarra.com/wp-content/uploads/2019/02/Potada-nota-enano-1500x800.jpg");
+            images.add("https://www.entornoturistico.com/wp-content/uploads/2016/06/clientes-en-un-bar-660x330.jpg");
 
             int id = Integer.parseInt(idLugar);
             this.lugar = lugarServicio.obtenerLugar(id);
             this.comentarios = lugarServicio.listarComentariosDeUnLugar(id);
-            this.calificacionPromedio = lugarServicio.obtenerCalificacionPromedio(id);
-            if (personaLogin != null) {
+            this.calificacionPromedio= lugarServicio.obtenerCalificacionPromedio(id);
+            if(personaLogin!=null) {
                 this.esFavorito = lugarServicio.esFavorito(this.lugar, (Usuario) personaLogin);
             }
-            if (esFavorito) {
-                this.icono = "pi pi-star";
-            } else {
+            if(esFavorito)
+            {
+                this.icono= "pi pi-star";
+            }
+            else {
                 this.icono = "pi pi-star-o";
             }
-
+//            LugarDTO markerLugar = new LugarDTO(this.lugar.getCodigo(), this.lugar.getNombre(), this.lugar.getDescripcion(), this.lugar.getLatitud(), this.lugar.getLongitud(), this.lugar.getTipo().getNombre());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,16 +98,15 @@ public class DetalleLugarBean implements Serializable {
 
     }
 
-    public void crearComentario() {
+    public void crearComentario()
+    {
         try {
 
-            if (personaLogin != null) {
+            if(personaLogin!=null) {
                 nuevoComentario.setLugarComentario(this.lugar);
                 nuevoComentario.setUsuarioComentario((Usuario) personaLogin);
                 comentarioServicio.crearComentario(nuevoComentario);
-                this.comentarios.add(nuevoComentario);
                 this.nuevoComentario = new Comentario();
-                //acá cuando se crea el nuevo comentario debe agregarlo al arraylist para que se pueda actualizar en el xhtml. Si
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,15 +114,18 @@ public class DetalleLugarBean implements Serializable {
 
     }
 
-    public void marcarFavorito() {
-        if (icono.equals("pi pi-star-o")) {
-            this.icono = "pi pi-star";
-        } else {
-            this.icono = "pi pi-star-o";
+    public void marcarFavorito()
+    {
+        if(icono.equals("pi pi-star-o"))
+        {
+            this.icono="pi pi-star";
+        }else{
+            this.icono="pi pi-star-o";
         }
 
-        if (personaLogin != null) {
-            lugarServicio.marcarFavorito(this.lugar, (Usuario) personaLogin);
+        if(personaLogin!=null)
+        {
+          lugarServicio.marcarFavorito(this.lugar, (Usuario) personaLogin);
         }
     }
 

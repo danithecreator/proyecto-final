@@ -43,3 +43,17 @@ function crearMarkerLugar(lng, lat, tipo, map) {
 
     let marker = new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(map)
 }
+
+function OcultarButton(btn)
+{
+    $(btn).style.display = "none";
+    document.getElementById("aprobado").style.display="block";
+    document.getElementById("denegar").style.display = "none";
+}
+
+function OcultarButtonD(btn)
+{
+    $(btn).style.display = "none";
+    document.getElementById("denegado").style.display="block";
+    document.getElementById("aprobar").style.display = "none";
+}

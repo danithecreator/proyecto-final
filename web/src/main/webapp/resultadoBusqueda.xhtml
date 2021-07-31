@@ -20,9 +20,8 @@
     <ui:define name="titulo">Unilocal | Resultado Busqueda</ui:define>
 
     <ui:define name="contenido">
-        <div class="mapBusquedaContainer">
-            <div id="mapaHome" class="mapaHome"></div>
-        </div>
+        <div id="mapaHome" class="mapaHome"></div>
+        <p>#{busquedaBean.lugares}</p>
 
         <h:form>
             <p:dataTable id="dt-lugares" widgetVar="dtLugares" var="lugar" value="#{busquedaBean.lugares}"

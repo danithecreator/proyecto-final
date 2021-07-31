@@ -10,8 +10,5 @@ import java.util.Optional;
 public interface PersonaRepo extends JpaRepository<Persona, Integer> {
 
     Optional<Persona> findByEmailAndPassword(String email, String password);
-
     Optional<Persona> findByEmailAndNickname(String email, String nickname);
-
-
 }

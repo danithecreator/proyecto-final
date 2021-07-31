@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -71,18 +70,13 @@ public class LugarBean implements Serializable {
     @Setter
     private ArrayList<String> dias;
 
-    @Getter
-    @Setter
-    private ArrayList<String> telefonos;
-
-
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
 
     public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio, TipoServicio tipoServicio, HorarioServicio horarioServicio) {
         this.lugarServicio = lugarServicio;
-
+        this.imagenes = new ArrayList<>();
         this.ciudadServicio = ciudadServicio;
         this.usuarioServicio = usuarioServicio;
         this.tipoServicio = tipoServicio;
@@ -97,8 +91,6 @@ public class LugarBean implements Serializable {
         this.lugar = new Lugar();
         this.ciudades = ciudadServicio.listarCiudades();
         this.tipoLugares = tipoServicio.listarTiposLugares();
-        this.imagenes = new ArrayList<>();
-        this.telefonos = new ArrayList<>();
     }
 
     public void crearLugar() {
@@ -109,7 +101,6 @@ public class LugarBean implements Serializable {
                 if (lugar.getLatitud() != null && lugar.getLongitud() != null && !imagenes.isEmpty()) {
                     lugar.setImagenes(imagenes);
                     lugar.setUsuario((Usuario) personaLogin);
-                    lugar.setTelefonos(this.telefonos);
                     lugarServicio.crearLugar(lugar);
 
                     for (Horario h : horarios) {
@@ -196,7 +187,9 @@ public class LugarBean implements Serializable {
 
             this.horarios.add(horario);
             nuevoHorario();
-            PrimeFaces.current().executeScript("PF('Horarios    ').hide()");
+            for (Horario h : this.horarios) {
+                System.out.println(h);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
