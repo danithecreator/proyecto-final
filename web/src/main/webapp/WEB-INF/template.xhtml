@@ -56,12 +56,20 @@
                                 <a class="nav-link" href="/usuario/crearLugar.xhtml">Crear Lugar</a>
                             </li>
 
-                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado}">
+                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                                 <a class="nav-link" href="/usuario/perfil.xhtml">Perfil</a>
                             </li>
 
                             <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
                                 <a class="nav-link" href="/administrador/crearModerador.xhtml">Crear Moderador</a>
+                            </li>
+
+                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='moderador'}">
+                                <a class="nav-link" href="/moderador/lugaresModerador.xhtml">lugares por Aprobar</a>
+                            </li>
+
+                            <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='moderador'}">
+                                <a class="nav-link" href="/moderador/lugaresDenegados.xhtml">lugares Denegados</a>
                             </li>
 
                         </ul>

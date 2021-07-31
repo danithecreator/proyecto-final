@@ -3,10 +3,7 @@ package co.edu.uniquindio.proyecto.repositorios;
 import co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO;
 import co.edu.uniquindio.proyecto.dto.LugaresPorUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.NumeroLugaresPorCategoriaDTO;
-import co.edu.uniquindio.proyecto.entidades.Comentario;
-import co.edu.uniquindio.proyecto.entidades.Horario;
-import co.edu.uniquindio.proyecto.entidades.Lugar;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -31,8 +28,11 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select new co.edu.uniquindio.proyecto.dto.ComentariosLugarDTO(l, c)  from Lugar  l  left join l.comentarios c ")
     List<ComentariosLugarDTO> obtenerComentariosLugares();
 
-    @Query("select l.nombre, l.descripcion, l.ciudadLugar.nombre, l.tipo.nombre from Lugar l where l.moderador.email= :emailModerador")
-    List<Object[]> obtenerLugaresModerador(String emailModerador);
+    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=true ")
+    List<Lugar> obtenerLugaresAprobadosModerador(String emailModerador);
+
+    @Query("select l from Lugar l where l.moderador.email= :emailModerador and l.estado=false ")
+    List<Lugar> obtenerLugaresDenegadosModerador(String emailModerador);
 
     @Query("select count(c) from Lugar l join l.comentarios c where l.codigo= :codigo")
     int obtenerCantidadComentarios(Integer codigo);
@@ -107,4 +107,9 @@ public interface LugarRepo extends JpaRepository<Lugar,Integer> {
     @Query("select h from Horario h where h.horarioLugar.codigo  = :id_lugar")
     List<Horario> obtenerHorariosPorLugar(int id_lugar);
 
+    @Query("select l from Lugar l where  l.moderador is null ")
+    List<Lugar> obtenerLugaresPendientes();
+
+    @Query("select l from Lugar l where  l.estado=true")
+    List<Lugar> obtenerLugaresAprobados();
 }

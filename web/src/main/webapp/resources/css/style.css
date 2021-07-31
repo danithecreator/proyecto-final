@@ -117,7 +117,10 @@ a {
     background: #212529 !important;
 
 }
+.btnVerDetalleD {
+    background: #212529 !important;
 
+}
 .btnVerComentarios {
     background: #212529 !important;
 
@@ -128,6 +131,10 @@ a {
     height: 600px !important;
 }
 
+.listaLugaresP {
+    padding: 0 !important;
+    height: 700px !important;
+}
 .ui-datascroller-content {
     height: 100% !important;
 }
@@ -142,6 +149,7 @@ a {
     box-shadow: 2px 2px 20px 1px rgba(0, 0, 0, 0.2);
 }
 
+
 .itemList p {
     margin-bottom: 0;
 }
@@ -151,6 +159,7 @@ a {
     width: 6em;
     height: 6em;
 }
+
 
 img {
     object-fit: cover;
@@ -163,7 +172,13 @@ img {
     flex-direction: row;
 }
 
+
 .itemDetails {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.itemDetailsD {
     display: flex;
     flex-direction: column;
     width: 70%;

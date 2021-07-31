@@ -21,4 +21,8 @@ public interface LugarServicio {
     void marcarFavorito(Lugar l, Usuario u) ;
     boolean esFavorito(Lugar l, Usuario u);
     List<Lugar> obtenerLugaresUsuario(String email)  throws Exception;
+    List<Lugar> obtenerLugaresPendientes()  throws Exception;
+    List<Lugar> obtenerLugaresAprobadorModerador(String email)  throws Exception;
+    List<Lugar> obtenerLugaresDenegadosModerador(String email)  throws Exception;
+    List<Lugar> obtenerLugaresAprobados()  throws Exception;
 }

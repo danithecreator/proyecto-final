@@ -181,6 +181,26 @@ public class LugarServicioImpl implements LugarServicio{
         return lugarRepo.obtenerLugaresCreadosPorUsuario(email);
     }
 
+    @Override
+    public List<Lugar> obtenerLugaresPendientes() throws Exception {
+        return lugarRepo.obtenerLugaresPendientes();
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresAprobadorModerador(String email) throws Exception {
+        return lugarRepo.obtenerLugaresAprobadosModerador(email);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresDenegadosModerador(String email) throws Exception {
+        return lugarRepo.obtenerLugaresDenegadosModerador(email);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresAprobados() throws Exception {
+        return lugarRepo.obtenerLugaresAprobados();
+    }
+
     /**
      * Metodo que permite validar si un lugar se encuentra en la bd
      * @param id
