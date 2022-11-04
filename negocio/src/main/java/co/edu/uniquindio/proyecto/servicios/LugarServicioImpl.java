@@ -6,6 +6,8 @@ import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Horario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
+import co.edu.uniquindio.proyecto.repositorios.HorarioRepo;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
@@ -22,11 +24,15 @@ public class LugarServicioImpl implements LugarServicio {
 
     private final LugarRepo lugarRepo;
     private final UsuarioRepo usuarioRepo;
+    private final HorarioRepo horarioRepo;
+    private final ComentarioRepo comentarioRepo;
 
-    public LugarServicioImpl(LugarRepo lugarRepo, UsuarioRepo usuarioRepo) {
+    public LugarServicioImpl(LugarRepo lugarRepo, UsuarioRepo usuarioRepo, HorarioRepo horarioRepo, ComentarioRepo comentarioRepo) {
 
         this.lugarRepo = lugarRepo;
         this.usuarioRepo = usuarioRepo;
+        this.horarioRepo = horarioRepo;
+        this.comentarioRepo = comentarioRepo;
     }
 
     /**
@@ -72,6 +78,17 @@ public class LugarServicioImpl implements LugarServicio {
             throw new Exception("El lugar no existe");
         }
         lugarRepo.delete(l);
+    }
+
+    @Override
+    public void eliminarLugarPorId(int id) throws Exception {
+        Optional<Lugar> lugar = lugarRepo.findByCodigo(id);
+        if (lugar.isEmpty()) {
+            throw new Exception("El lugar no existe");
+        }
+//        horarioRepo.eliminarHorariosLugar(id);
+//        comentarioRepo.eliminarComentariosLugar(id);
+        lugarRepo.delete(lugar.get());
     }
 
     /**
@@ -138,6 +155,17 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
+    public Lugar buscarLugarPorNombre(String nombre) throws Exception {
+        Optional<Lugar> lugar = lugarRepo.findByNombre(nombre);
+        if (lugar.isEmpty()) {
+            throw new Exception("El lugar con el nombre dado no existe");
+        }
+
+        return lugar.get();
+    }
+
+
+    @Override
     public List<Comentario> listarComentariosDeUnLugar(int codigoLugar) {
         return lugarRepo.obtenerComentariosPorLugar(codigoLugar);
     }
@@ -202,6 +230,18 @@ public class LugarServicioImpl implements LugarServicio {
     }
 
     @Override
+    public String tipoLugar(int codigo) throws Exception {
+
+
+        Optional<Lugar> lugar = lugarRepo.findByCodigo(codigo);
+        if (lugar.isEmpty()) {
+            throw new Exception("El lugar con el codigo dado no existe");
+        }
+
+        return lugarRepo.obtenerTipoLugar(codigo);
+    }
+
+    @Override
     public List<Lugar> obtenerLugaresUsuario(String email) throws Exception {
         return lugarRepo.obtenerLugaresCreadosPorUsuario(email);
     }
@@ -226,6 +266,14 @@ public class LugarServicioImpl implements LugarServicio {
         return lugarRepo.obtenerLugaresAprobados();
     }
 
+    @Override
+    public List<Lugar> obtenerLugaresAprobadosPorNombreOTipo(String nombre) throws Exception {
+        List<Lugar> lista = lugarRepo.obtenerLugaresAprobadosPorNombreOTipo(nombre);
+        if (lista.isEmpty()) {
+            throw new Exception("No hay lugares aun");
+        }
+        return lista;
+    }
 
 
     /**

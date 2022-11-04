@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Usuario extends Persona implements Serializable {
     @Column(name = "longitud")
     private float longitud;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
     private List<Lugar> lugares;
@@ -37,6 +39,7 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Lugar> lugaresFavoritos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuarioComentario")
     @ToString.Exclude
     private List<Comentario> comentarios;
@@ -48,5 +51,5 @@ public class Usuario extends Persona implements Serializable {
         this.ciudadUsuario = ciudadUsuario;
     }
 
-    
+
 }

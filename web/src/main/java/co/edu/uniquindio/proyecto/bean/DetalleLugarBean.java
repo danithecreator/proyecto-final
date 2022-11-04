@@ -18,6 +18,8 @@ import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 @ViewScoped
@@ -69,6 +71,9 @@ public class DetalleLugarBean implements Serializable {
     @Setter
     private boolean esFavorito;
 
+    @Getter @Setter
+    private Comentario comentarioEmail;
+
     @PostConstruct
     public void inicializar() {
 
@@ -105,6 +110,15 @@ public class DetalleLugarBean implements Serializable {
                 nuevoComentario.setUsuarioComentario((Usuario) personaLogin);
                 comentarioServicio.crearComentario(nuevoComentario);
                 this.comentarios.add(nuevoComentario);
+                this.comentarioEmail = nuevoComentario;
+                ExecutorService executor = Executors.newFixedThreadPool(10);
+                executor.execute(new Runnable() {
+                    public void run() {
+
+                        enviarEmailComentarioHecho();
+                    }
+                });
+                executor.shutdown();
                 this.nuevoComentario = new Comentario();
                 //acá cuando se crea el nuevo comentario debe agregarlo al arraylist para que se pueda actualizar en el xhtml. Si
             }
@@ -112,7 +126,9 @@ public class DetalleLugarBean implements Serializable {
             e.printStackTrace();
         }
 
+
     }
+
 
     public void marcarFavorito() {
         if (icono.equals("pi pi-star-o")) {
@@ -130,5 +146,19 @@ public class DetalleLugarBean implements Serializable {
         return images;
     }
 
+    public void enviarEmailComentarioHecho() {
+        try {
 
+            Usuario creador = this.lugar.getUsuario();
+            String usuarioComentario = personaLogin.getNombre();
+            String subject = "Unilocal : Comentario nuevo";
+            String to = creador.getEmail();
+            String from = "unilocal2021@gmail.com";
+            Email.sendEmailComentario(creador.getNombre(), subject, to, from, usuarioComentario, this.lugar.getNombre(), this.comentarioEmail.getComentario());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

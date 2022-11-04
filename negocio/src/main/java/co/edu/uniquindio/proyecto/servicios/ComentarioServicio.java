@@ -9,11 +9,16 @@ import java.util.List;
 
 public interface ComentarioServicio {
     Comentario obtenerComentario(int codigo) throws Exception;
+
     Comentario crearComentario(Comentario comentario) throws Exception;
+
     void eliminarComentario(Comentario comentario) throws Exception;
+
     List<Comentario> listarComentarios() throws Exception;
+
     Comentario actualizarComentario(Comentario comentario) throws Exception;
 
+    void eliminarComentariosLugar(int codigo) throws Exception;
 
 }
 

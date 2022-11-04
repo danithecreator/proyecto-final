@@ -16,6 +16,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 @Scope("session")
@@ -98,7 +100,16 @@ public class SeguridadBean implements Serializable {
             String from = "unilocal2021@gmail.com";
             String password = Email.randomPassword();
             PrimeFaces.current().executeScript("PF('recuperar').hide()");
-            Email.sendEmailPassword(usuario, subject, to, from, password);
+            ExecutorService executor = Executors.newFixedThreadPool(10);
+            executor.execute(new Runnable() {
+                public void run() {
+
+                    Email.sendEmailPassword(usuario, subject, to, from, password);
+
+                }
+            });
+            executor.shutdown();
+
             personaRecuperacion.setPassword(password);
             personaServicio.actualizarDatos(personaRecuperacion);
 

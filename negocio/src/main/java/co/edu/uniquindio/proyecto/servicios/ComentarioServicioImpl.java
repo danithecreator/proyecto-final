@@ -2,12 +2,10 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
+import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +15,11 @@ import java.util.Optional;
 public class ComentarioServicioImpl implements ComentarioServicio {
 
     private final ComentarioRepo comentarioRepo;
+    private final LugarRepo lugarRepo;
 
-    public ComentarioServicioImpl(ComentarioRepo comentarioRepo) {
+    public ComentarioServicioImpl(ComentarioRepo comentarioRepo, LugarRepo lugarRepo) {
         this.comentarioRepo = comentarioRepo;
+        this.lugarRepo = lugarRepo;
     }
 
     public boolean estaComentario(int id) {
@@ -130,6 +130,16 @@ public class ComentarioServicioImpl implements ComentarioServicio {
 
 
         return comentarioRepo.save(comentario);
+    }
+
+    @Override
+    public void eliminarComentariosLugar(int codigo) throws Exception {
+        Optional<Lugar> lugar = lugarRepo.findByCodigo(codigo);
+        if (lugar.isEmpty()) {
+            throw new Exception("El lugar no existe");
+        }
+
+        comentarioRepo.eliminarComentariosLugar(codigo);
     }
 
 

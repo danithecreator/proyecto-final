@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -64,7 +65,7 @@ public class Lugar implements Serializable {
     @JoinColumn(nullable = false)
     private Ciudad ciudadLugar;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(nullable = false)
     private Usuario usuario;
 
@@ -74,6 +75,7 @@ public class Lugar implements Serializable {
 
     @OneToMany(mappedBy = "eventoLugar")
     @ToString.Exclude
+    @JsonIgnore
     private List<Evento> eventos;
 
     @ElementCollection
@@ -83,10 +85,12 @@ public class Lugar implements Serializable {
     private List<String> telefonos;
 
     @OneToMany(mappedBy = "horarioLugar")
+    @JsonIgnore
     private List<Horario> horarios;
 
     @ManyToMany(mappedBy = "lugaresFavoritos")
     @ToString.Exclude
+    @JsonIgnore
     private List<Usuario> usuariosFavoritos;
 
     @ManyToOne
@@ -94,6 +98,7 @@ public class Lugar implements Serializable {
 
     @OneToMany(mappedBy = "lugarComentario")
     @ToString.Exclude
+    @JsonIgnore
     private List<Comentario> comentarios;
 
 

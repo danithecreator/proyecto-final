@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Tipo implements Serializable {
 
     @OneToMany(mappedBy = "tipo")
     @ToString.Exclude
+    @JsonIgnore
     private List<Lugar> lugares;
 
 

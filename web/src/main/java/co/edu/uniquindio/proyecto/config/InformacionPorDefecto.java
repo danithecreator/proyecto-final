@@ -46,28 +46,6 @@ public class InformacionPorDefecto implements CommandLineRunner {
             adminService.registrarAdmin(ad1);
 
         }
-        if (moderadorServicio.listarModeradores().isEmpty()) {
-            Moderador m1 = Moderador.builder().nombre("test").email("daniMod@test.com").nickname("daniMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
-            Moderador m2 = Moderador.builder().nombre("Angy").email("angyMod@test.com").nickname("angyMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
-            Moderador m3 = Moderador.builder().nombre("Pepe").email("pepeMod@test.com").nickname("pepeMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
-            Moderador m4 = Moderador.builder().nombre("Juan").email("juanMod@test.com").nickname("juanMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
-            moderadorServicio.registrarModerador(m1);
-            moderadorServicio.registrarModerador(m2);
-            moderadorServicio.registrarModerador(m3);
-            moderadorServicio.registrarModerador(m4);
-        }
-
-
-        if (usuarioServicio.listarUsuario().isEmpty()) {
-            Usuario u1 = Usuario.builder().nombre("Daniel").email("daniel@test.com").nickname("dani").password("123").build();
-            usuarioServicio.registrarUsuario(u1);
-            Usuario u2 = Usuario.builder().nombre("Angy").email("angyl@test.com").nickname("pao").password("123").build();
-            usuarioServicio.registrarUsuario(u2);
-            Usuario u3 = Usuario.builder().nombre("Pepe").email("pepe@test.com").nickname("pep").password("123").build();
-            usuarioServicio.registrarUsuario(u3);
-
-
-        }
 
 
         if (ciudadServicio.listarCiudades().isEmpty()) {
@@ -94,6 +72,33 @@ public class InformacionPorDefecto implements CommandLineRunner {
             tipoServicio.registrarTipoLugar(t4);
 
         }
+
+
+//        if (moderadorServicio.listarModeradores().isEmpty()) {
+//            Moderador m1 = Moderador.builder().nombre("test").email("daniMod@test.com").nickname("daniMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
+//            Moderador m2 = Moderador.builder().nombre("Angy").email("angyMod@test.com").nickname("angyMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
+//            Moderador m3 = Moderador.builder().nombre("Pepe").email("pepeMod@test.com").nickname("pepeMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
+//            Moderador m4 = Moderador.builder().nombre("Juan").email("juanMod@test.com").nickname("juanMod").password("123").administrador(adminService.obtenerAdmin(1)).build();
+//            moderadorServicio.registrarModerador(m1);
+//            moderadorServicio.registrarModerador(m2);
+//            moderadorServicio.registrarModerador(m3);
+//            moderadorServicio.registrarModerador(m4);
+//        }
+//
+//
+//        if (usuarioServicio.listarUsuario().isEmpty()) {
+//            Usuario u1 = Usuario.builder().nombre("Daniel").email("daniel@test.com").nickname("dani").password("123").build();
+//            usuarioServicio.registrarUsuario(u1);
+//            Usuario u2 = Usuario.builder().nombre("Angy").email("angyl@test.com").nickname("pao").password("123").build();
+//            usuarioServicio.registrarUsuario(u2);
+//            Usuario u3 = Usuario.builder().nombre("Pepe").email("pepe@test.com").nickname("pep").password("123").build();
+//            usuarioServicio.registrarUsuario(u3);
+//
+//
+//        }
+//
+//
+
 //
 //        if (lugarServicio.listarLugares().isEmpty()) {
 //            Lugar l1 = Lugar.builder().nombre("Cafe de la 25").ciudadLugar(ciudadServicio.obtenerCiudad(1)).descripcion("Es un café muy rico").latitud(1.22F).longitud(1.33F).usuario(usuarioServicio.obtenerUsuario(2)).imagenes(new ArrayList<>()).tipo(tipoServicio.obtenerTipoLugar(3)).horarios(new ArrayList<>()).build();

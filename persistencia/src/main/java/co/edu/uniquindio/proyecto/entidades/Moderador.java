@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -29,7 +30,9 @@ public class Moderador extends Persona implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Administrador administrador;
+
     @OneToMany(mappedBy = "moderador")
+    @JsonIgnore
     private List<Lugar> lugaresAutorizados;
 
 

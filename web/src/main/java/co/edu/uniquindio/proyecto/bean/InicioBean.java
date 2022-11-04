@@ -25,10 +25,12 @@ public class InicioBean implements Serializable {
     @Autowired
     private LugarServicio lugarServicio;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Lugar> lugares;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Lugar> lugaresAprobados;
 
     @PostConstruct
@@ -42,6 +44,11 @@ public class InicioBean implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public void mostrarLugaresPorDistancia() {
+        PrimeFaces.current().executeScript("test()");
+    }
+
 
     public String irADetalle(int id) {
         return "/detalleLugar?faces-redirect=true&amp;lugar=" + id;

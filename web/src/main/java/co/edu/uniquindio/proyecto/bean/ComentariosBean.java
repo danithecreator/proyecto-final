@@ -16,6 +16,8 @@ import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 @ViewScoped
@@ -24,7 +26,7 @@ public class ComentariosBean implements Serializable {
     @Value("#{param['lugar']}")
     private String idLugar;
 
-    @Value(value="#{seguridadBean.persona}")
+    @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
     @Autowired
@@ -36,40 +38,55 @@ public class ComentariosBean implements Serializable {
     @Autowired
     private HorarioServicio horarioServicio;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Lugar lugar;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Horario> horarios;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Horario horario;
 
     private List<String> images;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Comentario> comentarios;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Comentario comentario;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String respuesta;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private LocalTime horaApertura;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private LocalTime horaCierre;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String dia;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<String> telefonos;
 
-    @Getter @Setter
-    private String telefono ;
+    @Getter
+    @Setter
+    private String telefono;
+
+    @Getter
+    @Setter
+    private Comentario comentarioEmail;
 
     @PostConstruct
     public void inicializar() {
@@ -84,7 +101,7 @@ public class ComentariosBean implements Serializable {
             int id = Integer.parseInt(idLugar);
             this.lugar = lugarServicio.obtenerLugar(id);
             this.comentarios = lugarServicio.listarComentariosDeUnLugar(id);
-            this.horarios= lugarServicio.listarHorariosDeUnLugar(id);
+            this.horarios = lugarServicio.listarHorariosDeUnLugar(id);
 
 
 //            LugarDTO markerLugar = new LugarDTO(this.lugar.getCodigo(), this.lugar.getNombre(), this.lugar.getDescripcion(), this.lugar.getLatitud(), this.lugar.getLongitud(), this.lugar.getTipo().getNombre());
@@ -95,28 +112,51 @@ public class ComentariosBean implements Serializable {
 
     }
 
-    public void responderComentario(Comentario comentario)
-    {
+    public void responderComentario(Comentario comentario) {
         try {
             comentario.setRespuesta(this.respuesta);
+            this.comentarioEmail = comentario;
             comentarioServicio.actualizarComentario(comentario);
+            ExecutorService executor = Executors.newFixedThreadPool(10);
+            executor.execute(new Runnable() {
+                public void run() {
+
+                    enviarEmailRespuesta();
+                }
+            });
+            executor.shutdown();
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean hayRespuesta(Comentario comentario)
-    {
-        if(comentario.getRespuesta()==null)
-        {
+
+    public void enviarEmailRespuesta() {
+        try {
+            String usuarioPropietario = personaLogin.getNombre();
+            String usuarioRespuesta = this.comentarioEmail.getUsuarioComentario().getNombre();
+            String respuesta = this.comentarioEmail.getRespuesta();
+            String lugar = this.comentarioEmail.getLugarComentario().getNombre();
+            String subject = "Unilocal : Respuesta Comentario";
+            String from = "unilocal2021@gmail.com";
+            String to = this.comentarioEmail.getUsuarioComentario().getEmail();
+            Email.sendEmailRespuesta(usuarioPropietario, subject, to, from, usuarioRespuesta, lugar, respuesta);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean hayRespuesta(Comentario comentario) {
+        System.out.println(comentario.getRespuesta());
+        if (comentario.getRespuesta() == null) {
             return false;
         }
         return true;
     }
 
-    public void editarHorario(int idHorario)
-    {
+    public void editarHorario(int idHorario) {
         try {
             this.horarios.get(idHorario).setDia(this.dia);
             this.horarios.get(idHorario).setHoraApertura(this.horaApertura);
@@ -127,8 +167,7 @@ public class ComentariosBean implements Serializable {
         }
     }
 
-    public String editarLugar()
-    {
+    public String editarLugar() {
         try {
             this.lugar.setHorarios(this.horarios);
             lugarServicio.actualizarLugar(this.lugar);
@@ -136,6 +175,6 @@ public class ComentariosBean implements Serializable {
             e.printStackTrace();
         }
 
-        return "/usuario/editarLugar?faces-redirect=true&amp;lugar=" + Integer.parseInt(idLugar);
+        return "/usuario/comentarios?faces-redirect=true&amp;lugar=" + Integer.parseInt(idLugar);
     }
 }

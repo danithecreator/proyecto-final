@@ -53,13 +53,13 @@ public class BusquedaBean implements Serializable {
             System.out.println(busquedaParam);
 
             try {
-                lugares = lugarServicio.buscarLugares(busquedaParam);
+                lugares = lugarServicio.obtenerLugaresAprobadosPorNombreOTipo(busquedaParam);
                 System.out.println(lugares.get(0).getNombre());
                 List<LugarDTO> markerLugares = this.lugares.stream().map(l -> new LugarDTO(l.getCodigo(), l.getNombre(), l.getDescripcion(), l.getLatitud(), l.getLongitud(), l.getTipo().getNombre())).collect(Collectors.toList());
 
                 PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(markerLugares) + ")");
             } catch (Exception e) {
-                e.printStackTrace();
+
                 System.out.println("No hay lugares aun");
             }
 
@@ -79,7 +79,9 @@ public class BusquedaBean implements Serializable {
     }
 
     public String cadenaEstaAbierto(Lugar lugar) {
+
         if (isAbierto(lugar)) {
+
             return "Abierto";
         } else {
             return "Cerrado";
@@ -92,6 +94,7 @@ public class BusquedaBean implements Serializable {
 
         for (Horario h : horarios) {
             if (h.getDia().equalsIgnoreCase(obtenerDiaActual())) {
+                System.out.println(h.getDia());
                 LocalTime horaActual = LocalTime.now(ZoneId.of("America/Bogota"));
                 if (h.getHoraApertura().compareTo(horaActual) < 0 && h.getHoraCierre().compareTo(horaActual) > 0) {
                     return true;
@@ -104,7 +107,7 @@ public class BusquedaBean implements Serializable {
     public String obtenerDiaActual() {
         String[] dias = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
         Calendar c = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.of("America/Bogota")));
-        return dias[c.get(Calendar.DAY_OF_WEEK) - 1];
+        return dias[c.get(Calendar.DAY_OF_WEEK)];
     }
 
 

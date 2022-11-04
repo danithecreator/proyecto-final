@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import java.util.List;
 public class Administrador extends Persona implements Serializable {
     //Campos o atributos de la clase
     @OneToMany(mappedBy = "administrador")
+    @JsonIgnore
     private List<Moderador> moderadoresCreados;
 
 

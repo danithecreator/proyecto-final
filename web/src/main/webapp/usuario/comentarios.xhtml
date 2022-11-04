@@ -20,9 +20,9 @@
 
     <ui:define name="titulo">Unilocal | Comentarios</ui:define>
 
-    <ui:define name="contenido" >
+    <ui:define name="contenido">
 
-        <div class="container " >
+        <div class="container ">
             <div class="row detalleNombre ">
                 <h1 class="fs-1"><strong>#{comentariosBean.lugar.nombre}</strong></h1>
                 <p>#{detalleLugarBean.lugar.tipo.nombre}</p>
@@ -93,15 +93,13 @@
             <br></br>
 
 
-
-
-            <h:form id="comentariosF"  >
+            <h:form id="comentariosF">
 
                 <div class="row mt-4">
                     <p class="fs-2">Comentarios</p>
                     <div class="mt-4 comentarios justify-content-center ">
 
-                        <p:repeat value="#{comentariosBean.comentarios}" var="comentario" >
+                        <p:repeat value="#{comentariosBean.comentarios}" var="comentario">
                             <div class="comentario col ">
                                 <div class="d-flex align-items-center align-content-center">
                                     <div class="d-flex align-items-center">
@@ -118,18 +116,24 @@
                                 </div>
 
 
-                                    <p:inputText  id="respuesta" value="#{comentariosBean.respuesta}"  placeholder="Respuesta" rendered="#{!comentariosBean.hayRespuesta(comentario)}">  </p:inputText>
-                                    <br/>
-                                    <br/>
-                                    <p:commandButton  action="#{comentariosBean.responderComentario(comentario)}"  rendered="#{!comentariosBean.hayRespuesta(comentario)}" value="Responder" update="@form"/>
+                                <p:inputText id="respuesta" value="#{comentariosBean.respuesta}"
+                                             placeholder="Respuesta"
+                                             rendered="#{!comentariosBean.hayRespuesta(comentario)}"> </p:inputText>
+                                <br/>
+                                <br/>
+                                <p:commandButton action="#{comentariosBean.responderComentario(comentario)}"
+                                                 rendered="#{!comentariosBean.hayRespuesta(comentario)}"
+                                                 value="Responder" update="@form"/>
 
-                                <h:form rendered="#{comentariosBean.hayRespuesta(comentario)}">
+
+                                <h:form rendered="#{comentariosBean.hayRespuesta(comentario)}"
+                                        id="respuesta-${comentario.id}">
                                     <div class="card">
                                         <div class="card-header">
                                             Respuesta de: #{comentariosBean.lugar.usuario.nickname}
                                         </div>
                                         <div class="card-body">
-                                           #{comentario.respuesta}
+                                            #{comentario.respuesta}
                                         </div>
                                     </div>
                                 </h:form>

@@ -12,11 +12,19 @@
 <ui:composition template="/WEB-INF/template.xhtml">
 
     <ui:define name="head">
+        <h:outputStylesheet library="css" name="busqueda.css"/>
         <h:outputStylesheet library="css" name="mapbox-gl.css"/>
+        <h:outputStylesheet library="css" name="mapbox-gl-directions.css"/>
         <h:outputStylesheet library="css" name="home.css"/>
         <h:outputScript library="js" name="mapbox-gl.js"/>
+
+        <h:outputScript library="js" name="mapbox-gl-directions.js"/>
+        <h:outputScript library="js" name="turf.min.js"/>
         <h:outputScript library="js" name="script_home.js"/>
+
         <script src="./resources/js/animations.js"></script>
+
+        <div id="map"></div>
     </ui:define>
     <ui:define name="titulo">Unilocal | Home</ui:define>
 
@@ -25,8 +33,8 @@
             <div class="mapContainer h-100 position-relative">
                 <div id="mapaHome" class="mapaHome"></div>
                 <div id="lateralPanel" class="lateralPanel position-absolute top-0">
-
-                    <h:form styleClass="d-flex me-2 p-4 " rendered="#{!seguridadBean.autenticado or ( seguridadBean.autenticado and seguridadBean.rol=='usuario')}">
+                    <h:form styleClass="d-flex me-2 p-4 "
+                            rendered="#{!seguridadBean.autenticado or ( seguridadBean.autenticado and seguridadBean.rol=='usuario')}">
 
                         <p:inputText styleClass="input-search" placeholder="¿Qué está buscando?"
                                      value="#{busquedaBean.busqueda}"/>
@@ -75,9 +83,11 @@
 
                     </h:form>
                 </div>
-                <button id="btnLateralPanel" class="btn btn-warning position-absolute btnLateralPanel" jsf:rendered="#{!seguridadBean.autenticado or ( seguridadBean.autenticado and seguridadBean.rol=='usuario')}">
+                <button id="btnLateralPanel" class="btn btn-warning position-absolute btnLateralPanel"
+                        jsf:rendered="#{!seguridadBean.autenticado or ( seguridadBean.autenticado and seguridadBean.rol=='usuario')}">
                     <i id="iconBtnLateralPanel" class="pi pi-caret-right"></i>
                 </button>
+
 
             </div>
         </div>

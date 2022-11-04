@@ -19,9 +19,9 @@
 
     <ui:define name="titulo">Unilocal | Aprobacion</ui:define>
 
-    <ui:define name="contenido" >
+    <ui:define name="contenido">
 
-        <div class="container " >
+        <div class="container ">
             <div class="row detalleNombre ">
                 <h1 class="fs-1"><strong>#{aprobarLugarBean.lugar.nombre}</strong></h1>
                 <p>#{aprobarLugarBean.lugar.tipo.nombre}</p>
@@ -75,13 +75,17 @@
 
                             <div class="mt-4">
                                 <label class="fs-5"> Telefonos</label>
-                                <p class="ms-2">No hay telefonos para mostrar.</p>
+                                <p:repeat value="#{aprobarLugarBean.lugar.telefonos}" var="telefono">
+                                    <p class="ms-2">#{telefono}</p>
+                                </p:repeat>
                             </div>
                             <br/>
 
                             <h:form>
-                                <p:commandButton  value="Aprobar" styleClass="ui-button-success" action="#{aprobarLugarBean.aprobarLugar}"/>
-                                <p:commandButton   id="denegar" value="Denegar" styleClass="ui-button-danger m-lg-2" action="#{aprobarLugarBean.denegarLugar}"/>
+                                <p:commandButton value="Aprobar" styleClass="ui-button-success"
+                                                 action="#{aprobarLugarBean.aprobarLugar}"/>
+                                <p:commandButton id="denegar" value="Denegar" styleClass="ui-button-danger m-lg-2"
+                                                 action="#{aprobarLugarBean.denegarLugar}"/>
                             </h:form>
 
                         </div>

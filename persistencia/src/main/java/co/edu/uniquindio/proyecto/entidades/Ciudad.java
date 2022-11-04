@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,10 +30,12 @@ public class Ciudad implements Serializable {
     @Column(name = "nombre", length = 200, nullable = false)
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ciudadUsuario")
     @ToString.Exclude
     private List<Usuario> usuarios;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ciudadLugar")
     @ToString.Exclude
     private List<Lugar> lugares;
